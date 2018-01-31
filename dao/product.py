@@ -151,6 +151,80 @@ class ProductDAO:
             result.append(row)
         return result
 
+
+    def insert_new_product(self, ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit):
+        cursor = self.conn.cursor()
+        query = "insert into Product(ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit) values (%s, %s, %s, %s, %s, %s) returning p_id;"
+        cursor.execute(query, (ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit,))
+        p_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return p_id
+
+    def update_product(self, p_id, ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit):
+        cursor = self.conn.cursor()
+        query = "update product set ct_id = %s, s_id = %s, p_name = %s, p_qty = %s, p_unit = %s, p_priceperunit = %s where p_id = %s;"
+        cursor.execute(query, (ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit, p_id,))
+        self.conn.commit()
+        return p_id
+
+    def getAllProductsA(self):
+        cursor = self.conn.cursor()
+        query = "select * from product where p_qty > 0 order by p_name;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getPurchasableProduct(self):
+        cursor = self.conn.cursor()
+        query = "select * from product where p_priceperunit >= 0.01 AND p_qty > 0;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getFreeProduct(self):
+        cursor = self.conn.cursor()
+        query = "select * from product where p_priceperunit = 0 AND p_qty > 0;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+
+    def GetPricePerProductID(self, p_id):
+        cursor = self.conn.cursor()
+        query = "select p_priceperunit from product where p_id = %s;"
+        cursor.execute(query, (p_id,))
+        p_priceperunit = cursor.fetchone()[0]
+        return p_priceperunit
+
+    def getSupplierID_by_ProductID(self, p_id):
+        cursor = self.conn.cursor()
+        query = "Select s_id " \
+                "from product " \
+                "where p_id = %s ;"
+        cursor.execute(query, (p_id,))
+        p_id = cursor.fetchone()[0]
+        return p_id
+
+    def getPqty_by_PID(self, p_id):
+        cursor = self.conn.cursor()
+        query = "select p_qty from product where p_id = %s;"
+        cursor.execute(query, (p_id,))
+        p_qty = cursor.fetchone()[0]
+        return p_qty
+
+
+    def update_product_quantity(self, p_id, p_qty):
+        cursor = self.conn.cursor()
+        query = "update product set p_qty = %s where p_id = %s;"
+        cursor.execute(query, (p_qty, p_id,))
+        self.conn.commit()
+
     #NOT YET
 
     # def insert(self, pname, pcolor, pmaterial, pprice):

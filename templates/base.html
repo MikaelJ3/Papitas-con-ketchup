@@ -1,0 +1,56 @@
+<html>
+<style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+        }
+    th, td {
+        text-align: center;
+        }
+    table{
+        margin-left: auto;
+        margin-right: auto;
+        }
+    div {
+        background-color: LightGrey;
+        }
+</style>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        {% if title %}
+        <title>{{ title }} - Ayuda Pal Jibaro</title>
+        {% else %}
+        <title>Ayuda Pal Jibaro</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            Ayuda Pal Jibaro:
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('home') }}">Home</a>
+            {% else %}
+            <a href="{{ url_for('user_home') }}">Home</a>
+            {% endif %}
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+              <a href="{{ url_for('signup') }}">Sign Up</a>
+            {% else %}
+            You are logged in as {{current_user.id}} <a href="{{ url_for('logout') }}">(Logout)</a>
+            {% endif %}
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>

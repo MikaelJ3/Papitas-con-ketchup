@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <title>Welcome to Ayuda Pal Jibaro</title>
+</head>
+<body>
+    <h1>Hello, Welcome to Ayuda Pal Jibaro! A Center for Disaster Site Resources Locator</h1>
+        <p>
+            {% if current_user.is_anonymous %}
+            <a href="/login">Sign in</a> or <a href="/SignUp"> Sign Up </a>
+            {% else %}
+            Welcome back {{current_user.id}}, please <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </p>
+</body>
+</html>

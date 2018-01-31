@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+        }
+    th, td {
+        text-align: center;
+        }
+    table{
+        margin-left: auto;
+        margin-right: auto;
+        }
+    div {
+        background-color: LightGrey;
+        }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Buy a Product:</title>
+</head>
+<body>
+
+<form name="Buy_Product" method="post">
+    <b><font size="6">Buy a Product:</font></b>
+    <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    <br><br>
+    <fieldset><legend></legend>
+        <button name="Button" type="submit" value="view cart">View Cart</button>
+        <button name="Button" type="submit" value="Cancel Order">Cancel Order</button>
+    </fieldset>
+    <fieldset><legend><b>Products Available for Purchase:</b></legend>
+        <table style="width:50%">
+          <!-- table header -->
+          {% if result_list %}
+          <tr>
+             {% for key in result_list[0] %}
+             <th> {{ key }} </th>
+             {% endfor %}
+          </tr>
+          {% endif %}
+
+          <!-- table rows -->
+          {% for dict_item in result_list %}
+          <tr>
+             {% if not dict_item['Left in Stock'] == 0 %}
+                  {% for value in dict_item.values() %}
+                 <td> {{ value }} </td>
+                 {% endfor %}
+                  <!-- NUMBER INPUT FOR PRODUCT QUANTITY AND BUTTON TO ADDTOCART THAT WILL HAVE PRODUCT ID -->
+                  <!-- EL NOMBRE DE QUANTITY INPUT ESTA ESCRITO ASI PORQUE ES NECESARIO DIFERENCIAR INPUT NAMES PARA PODER OBTENER EL QUANTIITY CORRECTO -->
+                  <!-- TAMBIEN GRACIAS A MIN Y MAX EL RANGO DE CANTIDAD VA SER DE UNO HASTA LA CANTIDAD DISPONIBLE, NO NEED TO CHECK THAT IN PYTHON -->
+                  <td>Quantity:<input type="number" name="product_quantity{{dict_item['Product Id']}}" placeholder="1" min="1" max="{{dict_item['Left in Stock']}}" style="width: 4em">
+                      <button name="Button" type="submit" value="{{dict_item['Product Id']}}"><b>Add to Cart</b></button></td>
+              {% endif %}
+          </tr>
+          {% endfor %}
+       </table>
+    </fieldset>
+    <br>
+</form>
+</body>
+</html>

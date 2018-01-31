@@ -199,6 +199,201 @@ class peopledao:
             result.append(row)
         return result
 
+    def checkusername(self, us):
+        cursor = self.conn.cursor()
+        query = "select a_password from account where a_username = %s"
+        cursor.execute(query, (us,))
+        result = cursor.fetchone()
+        return result
+
+    def getUserProfile(self, personid):
+        cursor = self.conn.cursor()
+        query = "Select s_fname, s_lname, s_phone, addressline1, city, country, district, zipcode " \
+                "from account as ac natural inner join supplier as sup natural inner join addresses as ad "\
+                "where ac.a_id = sup.sa_id "\
+                "AND sup.saddress_id = ad.address_id "\
+                "AND sup.s_id = %s;"
+        cursor.execute(query, (personid,))
+        result = cursor.fetchone()
+        return result
+
+    def getUserKeys(self, username):
+        cursor = self.conn.cursor()
+        query = "Select s_id, address_id, a_id, a_username, a_password " \
+                "from account natural inner join supplier natural inner join addresses "\
+                "where account.a_id = supplier.sa_id "\
+                "AND supplier.saddress_id = addresses.address_id "\
+                "AND account.a_username = %s;"
+        cursor.execute(query, (username,))
+        result = cursor.fetchone()
+        account_type = "supplier"
+        if result:
+            result = result + (account_type,)
+            return result
+        cursor = self.conn.cursor()
+        query = "Select pin_id, address_id, a_id, a_username, a_password " \
+                "from account natural inner join pin natural inner join addresses " \
+                "where account.a_id = pin.pina_id " \
+                "AND pin.pinaddress_id = addresses.address_id " \
+                "AND account.a_username = %s;"
+        cursor.execute(query, (username,))
+        result = cursor.fetchone()
+        account_type = "pin"
+        if result:
+            result = result + (account_type,)
+            return result
+        cursor = self.conn.cursor()
+        query = "Select ad_id, address_id, a_id, a_username, a_password " \
+                "from account natural inner join admins natural inner join addresses " \
+                "where account.a_id = admins.ada_id " \
+                "AND admins.adaddress_id = addresses.address_id " \
+                "AND account.a_username = %s;"
+        cursor.execute(query, (username,))
+        result = cursor.fetchone()
+        account_type = "admin"
+        result = result + (account_type,)
+        return result
+
+    def get_account_id(self,us):
+        cursor=self.conn.cursor()
+        query = "select a_id from account where a_username = %s;"
+        cursor.execute(query, (us,))
+        result = cursor.fetchone()
+        return result
+
+    def get_person_id(self, a_id):
+        cursor = self.conn.cursor()
+        query="select pin_id from pin where pina_id = %s;"
+        cursor.execute(query, (a_id,))
+        result = cursor.fetchone()
+        if not result[0] ==None:
+            return result[0]
+        query="select s_id from supplier where sa_id = %s;"
+        cursor.execute(query, (a_id,))
+        result = cursor.fetchone()
+        if not result[0] == None:
+            return result[0]
+        query = "select ad_id from admins where ada_id = %s;"
+        cursor.execute(query, (a_id,))
+        result = cursor.fetchone()
+        if not result[0] == None:
+            return result[0]
+        return None
+
+    def create_account(self, us, pw):
+        cursor=self.conn.cursor()
+        query="insert into account(a_username, a_password)values(%s, %s);"
+        cursor.execute(query, (us, pw,))
+        self.conn.commit()
+        query = "select a_id from account where a_username= %s AND a_password= %s;"
+        cursor.execute(query, (us, pw,))
+        result = cursor.fetchone()
+        self.conn.commit()
+        if not result[0]==None:
+            return result[0]
+        return None
+
+    def create_address(self, address, city, country, district, zipcode):
+        cursor = self.conn.cursor()
+        query = "insert into addresses(addressline1, city, country, district, zipcode)values(%s, %s, %s, %s, %s);"
+        cursor.execute(query, (address, city, country, district, zipcode,))
+        self.conn.commit()
+        query = "select address_id from addresses where addressline1= %s AND city= %s AND country= %s " \
+                "AND district = %s AND zipcode = %s;"
+        cursor.execute(query, (address, city, country, district, zipcode,))
+        result = cursor.fetchone()
+        self.conn.commit()
+        if not result[0] == None:
+            return result[0]
+        return None
+
+    def create_supplier(self, fname, lname, phone, ac_id, address_id):
+        cursor = self.conn.cursor()
+        query = "INSERT INTO supplier(s_fname, s_lname, sa_id, saddress_id, s_phone)VALUES(%s, %s, %s, %s, %s);"
+        cursor.execute(query,(fname, lname, ac_id, address_id, phone,))
+        self.conn.commit()
+        query = "select max(s_id) from supplier where s_phone = %s;"
+        cursor.execute(query, (phone,))
+        result = cursor.fetchone()
+        self.conn.commit()
+        if not result[0] == None:
+            return result[0]
+        return None
+
+    def create_pin(self, fname, lname, phone, ac_id, address_id):
+        cursor = self.conn.cursor()
+        query = "INSERT INTO pin(pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone)VALUES(%s, %s, %s, %s, %s);"
+        cursor.execute(query,(fname, lname, ac_id, address_id, phone,))
+        self.conn.commit()
+        query = "select max(pin_id) from pin where pin_phone = %s;"
+        cursor.execute(query, (phone,))
+        result = cursor.fetchone()
+        self.conn.commit()
+        if not result[0] == None:
+            return result[0]
+        return None
+
+    def insert_new_cc(self, c_cardtype, c_cardname, pin_id, address_id, c_cardnumber):
+        cursor = self.conn.cursor()
+        query = "insert into creditcard(c_cardtype, c_cardname, pin_id, address_id, c_cardnumber) values (%s, %s, %s, %s, %s) returning c_id;"
+        cursor.execute(query, (c_cardtype, c_cardname, pin_id, address_id, c_cardnumber,))
+        c_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return c_id
+
+    def getCreditCardByPinID(self, pin_id):
+
+        cursor = self.conn.cursor()
+        query = "Select * " \
+                "from creditcard " \
+                "where creditcard.pin_id = %s ;"
+        cursor.execute(query, (pin_id,))
+        result = cursor.fetchone()
+        return result
+
+    def update_cc(self, c_id, c_cardtype, c_cardname, pin_id, address_id, c_cardnumber):
+        cursor = self.conn.cursor()
+        query = "update creditcard set c_cardtype = %s, c_cardname = %s, pin_id = %s, address_id = %s, c_cardnumber = %s where c_id = %s;"
+        cursor.execute(query, (c_cardtype, c_cardname, pin_id, address_id, c_cardnumber, c_id,))
+        self.conn.commit()
+        return c_id
+
+    def getCreditCardByPinIDandC_ID(self, pin_id):
+        cursor = self.conn.cursor()
+        query = "Select * " \
+                "from creditcard " \
+                "where creditcard.pin_id = %s;"
+        cursor.execute(query, (pin_id,))
+        result = cursor.fetchone()
+        return result
+
+
+    # def create_order(self, cid, date):
+    #     cursor = self.conn.cursor()
+    #     query = "insert into orders(c_id, o_date)values(%s, %s) returning o_id;"
+    #     cursor.execute(query, (cid, date,))
+    #     self.conn.commit()
+    #     result = cursor.fetchone()[0]
+    #     return result
+
+    def getBankIDBy_SupplierID(self, s_id):
+        cursor = self.conn.cursor()
+        query = "Select ba_id " \
+                "from bankinfo "\
+                "where s_id = %s ;"
+        cursor.execute(query, (s_id,))
+        ba_id = cursor.fetchone()[0]
+        return ba_id
+
+    def insert_product_to_OrderDetails(self, od_qty, od_price, o_id, pin_id, s_id, ba_id, p_id):
+        cursor = self.conn.cursor()
+        query = "insert into orderdetails(od_qty, od_pprice, o_id, s_id, ba_id, p_id, pin_id) values (%s, %s, %s, %s, %s, %s, %s) returning od_id;"
+        cursor.execute(query, (od_qty, od_price, o_id, s_id, ba_id, p_id, pin_id,))
+        od_id = cursor.fetchone()[0]
+        self.conn.commit()
+
+        return od_id
+
     ''' not specified in phase 2 specs'''
     '''def getRequestsbypersoninneed(self, pin_id):
         cursor = self.conn.cursor()
