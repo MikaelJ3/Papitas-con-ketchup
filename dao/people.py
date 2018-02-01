@@ -399,9 +399,7 @@ class peopledao:
 ###################NEW###################################
     def getPINByFirstName(self, pin_fname):
         cursor = self.conn.cursor()
-        query = "Select * " \
-                "from pin "\
-                "where pin_fname = %s ;"
+        query = "select * from pin where pin_fname = %s;" \
         cursor.execute(query, (pin_fname,))
         result = cursor.fetchone()
         return result
