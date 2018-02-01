@@ -73,15 +73,6 @@ class peopleHandler:
 
     '''return everyone registered as supplier'''
 
-    def getPINByFirstName(self, pin_fname):
-        dao = peopledao()
-        list = dao.getPINByFirstName()
-        result_list = []
-        for row in list:
-            result = self.build_pin_dict(row)
-            result_list.append(result)
-        return jsonify(PeopleInNeed=result_list)
-
     def getAllSuppliers(self):
         dao = peopledao()
         suppliers_list = dao.getAllSuppliers()
@@ -114,6 +105,20 @@ class peopleHandler:
         return jsonify(Orders=result_list)
 
     '''encontrar productos por supplidor '''
+
+    def getPINByFirstName(self, args):
+        pin_fname = args
+        dao = peopledao()
+        pin_list = []
+        if pin_fname:
+            pin_list = dao.getPINByFirstName(pin_fname)
+        else:
+            return jsonify(error="malformed query string"), 400
+        result_list = []
+        for row in pin_list:
+            result = self.build_pin_dict(row)
+            result_list.append(result)
+        return result_list
 
     def getProductsBySupplier(self, args):
         s_id = args
