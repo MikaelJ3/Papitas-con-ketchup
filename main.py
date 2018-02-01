@@ -495,7 +495,7 @@ def getOrdersBySupplier():
 
 '''GET Person in need BY First Name'''
 
-@app.route('/AyudaPalJibaro/PIN/FirstName')
+@app.route('/AyudaPalJibaro/PIN/FirstName/')
 def getPINByFirstName():
     if not request.args:
         return peopleHandler().getAllPeopleInNeed()

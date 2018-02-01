@@ -118,7 +118,7 @@ class peopleHandler:
         for row in pin_list:
             result = self.build_pin_dict(row)
             result_list.append(result)
-        return result_list
+        return jsonify(SupplierByProduct=result_list)
 
     def getProductsBySupplier(self, args):
         s_id = args
