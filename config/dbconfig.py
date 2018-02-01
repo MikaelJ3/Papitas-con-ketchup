@@ -3,5 +3,5 @@
 pg_config = {
     'user' : 'appusr',
     'passwd' : 'passwordd',
-    'dbname' : 'appdb'
+    'dbname' : 'postgresql-regular-97704'
 }
