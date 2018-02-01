@@ -110,7 +110,7 @@ class peopleHandler:
         pin_fname = args.get("pin_fname")
         dao = peopledao()
         pin_list = []
-        if pin_fname:
+        if (len(args)) == 1 and pin_fname:
             pin_list = dao.getPINByFirstName(pin_fname)
         else:
             return jsonify(error="malformed query string"), 400
@@ -121,7 +121,7 @@ class peopleHandler:
         return jsonify(SupplierByProduct=result_list)
 
     def getProductsBySupplier(self, args):
-        s_id = args
+        s_id = args.get("s_id")
         dao = peopledao()
         product_list = []
         if s_id:
