@@ -110,7 +110,7 @@ class peopleHandler:
         pin_fname = args.get("pin_fname")
         dao = peopledao()
         pin_list = []
-        if (len(args)) == 1 and pin_fname:
+        if ((len(args)) == 1) and pin_fname:
             pin_list = dao.getPINByFirstName(pin_fname)
         else:
             return jsonify(error="malformed query string"), 400
