@@ -203,7 +203,9 @@ def view_cart():
                 order_id = OrdersHandler().create_new_order(credit_card_id)
                 order_details_ids = []
                 for dict_items in temp_Dicts.cart:
-                    ordering_result = producthandler().insert_new_OrderDetails(dict_items['p_qty'], order_id, current_user.person_id, dict_items['p_id'])
+                    ordering_result = producthandler().insert_new_OrderDetails(dict_items['p_qty'], order_id,
+                                                                               current_user.person_id,
+                                                                               dict_items['p_id'])
                     order_details_ids.append(ordering_result)
                 if not order_details_ids:
                     flash('something went wrong.')
@@ -493,7 +495,9 @@ def getOrdersBySupplier():
     else:
         return peopleHandler().getOrdersBySupplier(request.args)
 
+
 '''GET Person in need BY First Name'''
+
 
 @app.route('/AyudaPalJibaro/PIN/FirstName')
 def getPINByFirstName():
@@ -501,6 +505,7 @@ def getPINByFirstName():
         return peopleHandler().getAllPeopleInNeed()
     else:
         return peopleHandler().getPINByFirstName(request.args)
+
 
 if __name__ == '__main__':
     app.run()
