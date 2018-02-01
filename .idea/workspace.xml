@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e0150894-958a-4602-8658-d1551553d034" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/dao/people.py" afterPath="$PROJECT_DIR$/dao/people.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -83,8 +82,8 @@
       <file leaf-file-name="people.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dao/people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="406" column="21" lean-forward="false" selection-start-line="406" selection-start-column="21" selection-end-line="406" selection-end-column="21" />
+            <state relative-caret-position="287">
+              <caret line="405" column="30" lean-forward="true" selection-start-line="405" selection-start-column="30" selection-end-line="405" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -461,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517528150189</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Testing getPINByFirstName 2.2">
+      <created>1517528870076</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1517528870076</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -811,8 +817,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dao/people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="406" column="21" lean-forward="false" selection-start-line="406" selection-start-column="21" selection-end-line="406" selection-end-column="21" />
+        <state relative-caret-position="287">
+          <caret line="405" column="30" lean-forward="true" selection-start-line="405" selection-start-column="30" selection-end-line="405" selection-end-column="30" />
           <folding />
         </state>
       </provider>
