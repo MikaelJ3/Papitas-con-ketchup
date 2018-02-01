@@ -107,7 +107,7 @@ class peopleHandler:
     '''encontrar productos por supplidor '''
 
     def getPINByFirstName(self, args):
-        pin_fname = args
+        pin_fname = args.get("pin_fname")
         dao = peopledao()
         pin_list = []
         if pin_fname:
