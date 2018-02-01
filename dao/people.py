@@ -395,6 +395,17 @@ class peopledao:
 
         return od_id
 
+
+###################NEW###################################
+    def getPINByFirstName(self, pin_fname):
+        cursor = self.conn.cursor()
+        query = "Select * " \
+                "from pin "\
+                "where pin_fname = %s ;"
+        cursor.execute(query, (pin_fname,))
+        result = cursor.fetchone()
+        return result
+
     ''' not specified in phase 2 specs'''
     '''def getRequestsbypersoninneed(self, pin_id):
         cursor = self.conn.cursor()

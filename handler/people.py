@@ -73,6 +73,15 @@ class peopleHandler:
 
     '''return everyone registered as supplier'''
 
+    def getPINByFirstName(self, pin_fname):
+        dao = peopledao()
+        list = dao.getPINByFirstName()
+        result_list = []
+        for row in list:
+            result = self.build_pin_dict(row)
+            result_list.append(result)
+        return jsonify(PeopleInNeed=result_list)
+
     def getAllSuppliers(self):
         dao = peopledao()
         suppliers_list = dao.getAllSuppliers()
@@ -219,6 +228,7 @@ class peopleHandler:
            return True
         else:
             return False
+####################NEW###################
 
     def insert_new_cc(self, c_cardtype, c_number, c_name, pin_id, addressid):
         dao = peopledao()
