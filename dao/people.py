@@ -401,7 +401,9 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select * from pin where pin_fname = %s;"
         cursor.execute(query, (pin_fname,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     ''' not specified in phase 2 specs'''
