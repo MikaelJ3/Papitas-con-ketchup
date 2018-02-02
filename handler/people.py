@@ -314,8 +314,8 @@ class peopleHandler:
 
     ########## NEW #####################################################################################################
 
-    def insert_admin(self, form):
-        if len(form) != 10:
+    def insert_request(self, form):
+        if len(form) != 11:
             return jsonify(Error="Malformed post request"), 400
         else:
             ad_fname = form['ad_fname']
@@ -333,8 +333,9 @@ class peopleHandler:
                 dao = peopledao()
                 adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
                 ada_id = dao.insert_new_user(a_username, a_password)
-                ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
-                result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
+                ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id)
+                result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,
+                                                  addressline1, city, zipcode, country, district)
                 return jsonify(NewRequest=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

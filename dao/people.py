@@ -445,7 +445,7 @@ class peopledao:
 
     def insert_new_admin(self, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone):
         cursor = self.conn.cursor()
-        query = "insert into addresses(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone) values (%s, %s, %s, %s, " \
+        query = "insert into admins(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone) values (%s, %s, %s, %s, " \
                 "%s) returning ad_id;"
         cursor.execute(query, (ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,))
         ad_id = cursor.fetchone()[0]
