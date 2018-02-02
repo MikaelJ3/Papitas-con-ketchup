@@ -80,6 +80,7 @@ def getAllAdmin():
         else:
             return peopleHandler().searchADMINByRequests(request.args)
 
+
 # # #  R E Q U E S T S # # #
 
 @app.route('/AyudaPalJibaro/request', methods=['GET', 'POST'])
@@ -131,9 +132,7 @@ def getAllSuppliers():
 '''GET ALL ADMIN'''
 
 
-@app.route('/AyudaPalJibaro/ShowAllAdmin')
-def getAllAdmin():
-    return peopleHandler().getAllAdminstrators()
+
 
 
 '''GET PRODUCTS BY SUPPLIER'''
