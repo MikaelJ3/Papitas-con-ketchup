@@ -84,7 +84,7 @@ class peopleHandler:
 
     '''return everyone registered as administrator'''
 
-    def getAllAdminstrators(self):
+    def getAllAdmin(self):
         dao = peopledao()
         suppliers_list = dao.getAllAdmin()
         result_list = []
