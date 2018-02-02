@@ -65,15 +65,26 @@ def getPINByFirstName():
     else:
         return peopleHandler().getPINByFirstName(request.args)
 
+##################### N E W ############################################################################################
 
+# # #  R E Q U E S T S # # #
 
-
-@app.route('/AyudaPalJibaro/request')
+@app.route('/AyudaPalJibaro/request', methods=['GET', 'POST'])
 def getAllRequest():
-    if not request.args:
-        return RequestHandler().getAllRequest()
+    if request.method == 'POST':
+        return RequestHandler().insert_request(request.form)
     else:
-        return RequestHandler().searchProductByRequests(request.args)
+        if not request.args:
+            return RequestHandler().getAllRequest()
+        else:
+            return RequestHandler().searchProductByRequests(request.args)
+
+@app.route('/AyudaPalJibaro/request/change/<int:r_id>', methods=['PUT', 'DELETE'])
+def requestChange(r_id):
+    if request.method == 'PUT':
+        return RequestHandler().updateRequest(r_id, request.form)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 
 # OK
