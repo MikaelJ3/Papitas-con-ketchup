@@ -330,8 +330,8 @@ class peopledao:
     ### A D M I N I S T R A T O R S ####################################################################################
     def getAllAdmin(self):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
-                "district " \
+        query = "select ad_id, ad_fname, ad_lname, ada_id, ad_phone, adaddressid, addressline1, city, zipcode," \
+                " country, district " \
                 "from admin natural inner join addresses;"
         cursor.execute(query)
         result = []

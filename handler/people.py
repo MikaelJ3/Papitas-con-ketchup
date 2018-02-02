@@ -300,9 +300,9 @@ class peopleHandler:
     ########## NEW #####################################################################################################
     def getAllAdmin(self):
         dao = peopledao()
-        suppliers_list = dao.getAllAdmin()
+        admin_list = dao.getAllAdmin()
         result_list = []
-        for row in suppliers_list:
+        for row in admin_list:
             result = self.build_admin_dict(row)
             result_list.append(result)
         return jsonify(Admins=result_list)
@@ -316,7 +316,6 @@ class peopleHandler:
         city = args.get("city")
         country = args.get("country")
         district = args.get("district")
-
         dao = peopledao()
         request_list = []
 
