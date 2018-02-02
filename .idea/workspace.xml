@@ -41,8 +41,8 @@
       <file leaf-file-name="people.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dao/people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1615">
-              <caret line="117" column="17" lean-forward="false" selection-start-line="117" selection-start-column="17" selection-end-line="117" selection-end-column="17" />
+            <state relative-caret-position="425">
+              <caret line="128" column="28" lean-forward="true" selection-start-line="128" selection-start-column="28" selection-end-line="128" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -553,7 +553,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517592202250</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Testing getPINByFirstName 2.2">
+      <created>1517592410962</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1517592410962</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -901,8 +908,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dao/people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1615">
-          <caret line="117" column="17" lean-forward="false" selection-start-line="117" selection-start-column="17" selection-end-line="117" selection-end-column="17" />
+        <state relative-caret-position="425">
+          <caret line="128" column="28" lean-forward="true" selection-start-line="128" selection-start-column="28" selection-end-line="128" selection-end-column="28" />
           <folding />
         </state>
       </provider>

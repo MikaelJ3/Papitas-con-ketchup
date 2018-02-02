@@ -37,7 +37,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses;"
+                "from admins natural inner join addresses;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -48,7 +48,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses" \
                 "where ad_id = %s;"
         cursor.execute(query, (ad_id,))
         result = cursor.fetchone()
@@ -58,7 +58,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses" \
                 "where ad_fname = %s;"
         cursor.execute(query, (ad_fname,))
         result = cursor.fetchone()
@@ -70,7 +70,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses" \
                 "where ad_phone = %s;"
         cursor.execute(query, (ad_phone,))
         result = cursor.fetchone()
@@ -80,7 +80,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses" \
                 "where city = %s;"
         cursor.execute(query, (city,))
         result = cursor.fetchone()
@@ -92,7 +92,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses" \
                 "where country = %s;"
         cursor.execute(query, (country,))
         result = cursor.fetchone()
@@ -104,7 +104,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses" \
                 "where district = %s;"
         cursor.execute(query, (district,))
         result = cursor.fetchone()
@@ -116,7 +116,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses" \
                 "where ad_fname = %s and ad_lname = %s;"
         cursor.execute(query, (ad_fname, ad_lname,))
         result = cursor.fetchone()
