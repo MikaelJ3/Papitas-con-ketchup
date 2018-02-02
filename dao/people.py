@@ -468,7 +468,7 @@ class peopledao:
 
     def GetPINByID(self, pin_id):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
                 " country, district " \
                 "from pin natural inner join addresses " \
                 "where addresses.address_id = pin.pinaddress_id and pin_id = %s;"
@@ -480,7 +480,7 @@ class peopledao:
 
     def GetPINByFNAME(self, pin_fname):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
                 " country, district " \
                 "from pin natural inner join addresses " \
                 "where addresses.address_id = pin.pinaddress_id and pin_fname = %s;"
@@ -492,7 +492,7 @@ class peopledao:
 
     def GetPINByPHONE(self, pin_phone):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
                 " country, district " \
                 "from pin natural inner join addresses " \
                 "where addresses.address_id = pin.pinaddress_id and pin_phone = %s;"
@@ -504,7 +504,7 @@ class peopledao:
 
     def GetPINByCITY(self, city):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
                 " country, district " \
                 "from pin natural inner join addresses " \
                 "where addresses.address_id = pin.pinaddress_id and city = %s;"
@@ -516,7 +516,7 @@ class peopledao:
 
     def GetPINByCOUNTRY(self, country):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
                 " country, district " \
                 "from pin natural inner join addresses " \
                 "where addresses.address_id = pin.pinaddress_id and country = %s;"
@@ -528,7 +528,7 @@ class peopledao:
 
     def GetPINByDISTRICT(self, district):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
                 " country, district " \
                 "from pin natural inner join addresses " \
                 "where addresses.address_id = pin.pinaddress_id and district = %s;"
@@ -540,7 +540,7 @@ class peopledao:
 
     def GetPINByFULLNAME(self, pin_fname, pin_lname):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
                 " country, district " \
                 "from pin natural inner join addresses " \
                 "where addresses.address_id = pin.pinaddress_id and pin_fname = %s and pin_lname = %s;"
