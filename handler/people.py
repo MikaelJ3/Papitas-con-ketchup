@@ -314,7 +314,7 @@ class peopleHandler:
 
     ########## NEW #####################################################################################################
 
-    def insert_request(self, form):
+    def insert_admin(self, form):
         if len(form) != 11:
             return jsonify(Error="Malformed post request"), 400
         else:
