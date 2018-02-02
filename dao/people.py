@@ -349,7 +349,9 @@ class peopledao:
                 "from admins natural inner join addresses " \
                 "where addresses.address_id = admins.adaddress_id and ad_id = %s;"
         cursor.execute(query, (ad_id,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def GetADMINByFNAME(self, ad_fname):
@@ -371,7 +373,9 @@ class peopledao:
                 "from admins natural inner join addresses " \
                 "where addresses.address_id = admins.adaddress_id and ad_phone = %s;"
         cursor.execute(query, (ad_phone,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
     def GetADMINByCITY(self, city):
