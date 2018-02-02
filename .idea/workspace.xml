@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0150894-958a-4602-8658-d1551553d034" name="Default" comment="Testing getPINByFirstName 2.2">
+    <list default="true" id="e0150894-958a-4602-8658-d1551553d034" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/handler/product.py" afterPath="$PROJECT_DIR$/handler/product.py" />
-      <change beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change beforePath="$PROJECT_DIR$/dao/request.py" afterPath="$PROJECT_DIR$/dao/request.py" />
+      <change beforePath="$PROJECT_DIR$/handler/request.py" afterPath="$PROJECT_DIR$/handler/request.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,82 +30,18 @@
       <file leaf-file-name="request.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/handler/request.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="46" column="16" lean-forward="false" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
+            <state relative-caret-position="561">
+              <caret line="105" column="22" lean-forward="true" selection-start-line="105" selection-start-column="22" selection-end-line="105" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="people.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/handler/people.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1462">
-              <caret line="87" column="25" lean-forward="false" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dbconfig.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/dbconfig.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="orders.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/handler/orders.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="product.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/handler/product.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="72" column="43" lean-forward="true" selection-start-line="72" selection-start-column="43" selection-end-line="72" selection-end-column="43" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="product.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dao/product.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="29" column="21" lean-forward="true" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="people.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dao/people.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="request.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="request.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dao/request.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="16" column="29" lean-forward="false" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+            <state relative-caret-position="-496">
+              <caret line="45" column="8" lean-forward="false" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -140,9 +76,9 @@
       <find>getproductby</find>
       <find>getproduct</find>
       <find>getall</find>
-      <find>get</find>
       <find>getallproducts</find>
       <find>firstname</find>
+      <find>get</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -188,7 +124,6 @@
         <option value="$PROJECT_DIR$/../phase2/handler/product.py" />
         <option value="$PROJECT_DIR$/templates/Verify_ID.html" />
         <option value="$PROJECT_DIR$/templates/Added_Product_Result.html" />
-        <option value="$PROJECT_DIR$/handler/request.py" />
         <option value="$PROJECT_DIR$/templates/Added_Request_Result.html" />
         <option value="$PROJECT_DIR$/templates/View_Transactions.html" />
         <option value="$PROJECT_DIR$/templates/Add_Product_Result.html" />
@@ -214,12 +149,13 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/dao/orders.py" />
         <option value="$PROJECT_DIR$/dao/product.py" />
-        <option value="$PROJECT_DIR$/dao/request.py" />
         <option value="$PROJECT_DIR$/config/dbconfig.py" />
         <option value="$PROJECT_DIR$/handler/people.py" />
         <option value="$PROJECT_DIR$/dao/people.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/handler/product.py" />
+        <option value="$PROJECT_DIR$/handler/request.py" />
+        <option value="$PROJECT_DIR$/dao/request.py" />
       </list>
     </option>
   </component>
@@ -496,7 +432,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517536688569</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Testing getPINByFirstName 2.2">
+      <created>1517537364093</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1517537364093</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -773,14 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="16" column="29" lean-forward="false" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dao/orders.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -803,14 +738,6 @@
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handler/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="46" column="16" lean-forward="false" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -847,6 +774,22 @@
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/handler/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="105" column="22" lean-forward="true" selection-start-line="105" selection-start-column="22" selection-end-line="105" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-496">
+          <caret line="45" column="8" lean-forward="false" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>

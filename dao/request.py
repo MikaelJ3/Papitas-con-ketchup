@@ -30,19 +30,10 @@ class RequestDAO:
         return result
 
     # ######################SEARCH BY REQUESTED######################
-    def browseResourcesRequestedBypin(self, p_id):
+    def GetRequestsByID(self, r_id):
         cursor = self.conn.cursor()
-        query = "select pin_fname, pin_lname, r_pname, r_qty, r_date from request natural inner join pin " \
-                "where pin_id = %s order by r_pname;"
-        cursor.execute(query, (p_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
-
-    def browseResourcesRequestedByr_id(self, r_id):
-        cursor = self.conn.cursor()
-        query = "select pin_fname, pin_lname, r_pname, r_qty, r_date from request natural inner join pin " \
+        query = "select r_id, r_pname, r_qty, r_date, pin_id, pin_fname, pin_lname " \
+                "from request natural inner join pin " \
                 "where r_id = %s order by r_pname;"
         cursor.execute(query, (r_id,))
         result = []
@@ -50,21 +41,21 @@ class RequestDAO:
             result.append(row)
         return result
 
-    def browseResourcesRequestedByr_pname(self, r_pname):
+    def GetRequestsByPNAME(self, r_pname):
         cursor = self.conn.cursor()
-        query = "select pin_fname, pin_lname, r_pname, r_qty, r_date from request natural inner join pin " \
+        query = "select r_id, r_pname, r_qty, r_date, pin_id, pin_fname, pin_lname " \
+                "from request natural inner join pin " \
                 "where r_pname = %s order by r_pname;"
         cursor.execute(query, (r_pname,))
         result = []
-
         for row in cursor:
             result.append(row)
         return result
 
-
-    def browseResourcesRequestedByDate(self, r_date):
+    def GetRequestsByDATE(self, r_date):
         cursor = self.conn.cursor()
-        query = "select pin_fname, pin_lname, r_pname, r_qty, r_date from request natural inner join pin " \
+        query = "select r_id, r_pname, r_qty, r_date, pin_id, pin_fname, pin_lname " \
+                "from request natural inner join pin " \
                 "where r_date = %s order by r_pname;"
         cursor.execute(query, (r_date,))
         result = []
@@ -72,9 +63,10 @@ class RequestDAO:
             result.append(row)
         return result
 
-    def browseResourcesRequestedByQty(self, r_qty):
+    def GetRequestsByQTY(self, r_qty):
         cursor = self.conn.cursor()
-        query = "select pin_fname, pin_lname, r_pname, r_qty, r_date from request natural inner join pin " \
+        query = "select r_id, r_pname, r_qty, r_date, pin_id, pin_fname, pin_lname " \
+                "from request natural inner join pin " \
                 "where r_qty = %s order by r_pname;"
         cursor.execute(query, (r_qty,))
         result = []
@@ -82,11 +74,34 @@ class RequestDAO:
             result.append(row)
         return result
 
-    def browseResourcesRequestedByNameAndDate(self, r_pname, r_date):
+    def GetRequestsByPINID(self, pin_id):
         cursor = self.conn.cursor()
-        query = "select * from request natural inner join pin " \
-                "where r_pname = %s and r_date = %s order by r_pname;"
-        cursor.execute(query, (r_pname, r_date,))
+        query = "select r_id, r_pname, r_qty, r_date, pin_id, pin_fname, pin_lname " \
+                "from request natural inner join pin " \
+                "where pin_id = %s order by r_pname;"
+        cursor.execute(query, (pin_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def GetRequestsByPINFNAME(self, pin_fname):
+        cursor = self.conn.cursor()
+        query = "select r_id, r_pname, r_qty, r_date, pin_id, pin_fname, pin_lname " \
+                "from request natural inner join pin " \
+                "where pin_fname = %s order by r_pname;"
+        cursor.execute(query, (pin_fname,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def GetRequestsByPINFULLNAME(self, pin_fname, pin_lname):
+        cursor = self.conn.cursor()
+        query = "select r_id, r_pname, r_qty, r_date, pin_id, pin_fname, pin_lname " \
+                "from request natural inner join pin " \
+                "where pin_fname = %s and pin_lname = %s order by r_pname;"
+        cursor.execute(query, (pin_fname, pin_lname,))
         result = []
         for row in cursor:
             result.append(row)

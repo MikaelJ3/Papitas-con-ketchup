@@ -6,10 +6,12 @@ class RequestHandler:
     def build_request_dict(self, row):
         result = {}
         result['r_id'] = row[0]
-        result['pin_id'] = row[1]
-        result['r_name'] = row[2]
-        result['r_qty'] = row[3]
-        result['r_date'] = row[4]
+        result['r_pname'] = row[1]
+        result['r_qty'] = row[2]
+        result['r_date'] = row[3]
+        result['pin_id'] = row[4]
+        result['pin_fname'] = row[5]
+        result['pin_lname'] = row[6]
         return result
 
 
@@ -76,24 +78,29 @@ class RequestHandler:
         r_pname = args.get("r_pname")
         r_date = args.get("r_date")
         r_qty = args.get("r_qty")
+        pin_id = args.get("pin_id")
+        pin_fname = args.get("pin_fname")
+        pin_lname = args.get("pin_lname")
         dao = RequestDAO()
-        product_list = []
-        if(len(args) == 1) and r_id:
-            product_list = dao.browseResourcesRequestedByr_id(r_id)
-            print("Entre aqui")
+        request_list = []
+        if (len(args) == 1) and r_id:
+            request_list = dao.GetRequestsByID(r_id)
         elif (len(args) == 1) and r_pname:
-            product_list = dao.browseResourcesRequestedByr_pname(r_pname)
-            print("word")
-
+            request_list = dao.GetRequestsByPNAME(r_pname)
         elif (len(args) == 1) and r_date:
-            product_list = dao.browseResourcesRequestedByDate(r_date)
-
+            request_list = dao.GetRequestsByDATE(r_date)
         elif (len(args) == 1) and r_qty:
-            product_list = dao.browseResourcesRequestedByQty(r_qty)
+            request_list = dao.GetRequestsByQTY(r_qty)
+        elif (len(args) == 1) and pin_id:
+            request_list = dao.GetRequestsByPINID(pin_id)
+        elif (len(args) == 1) and pin_id:
+            request_list = dao.GetRequestsByPINFNAME(pin_fname)
+        elif (len(args) == 2) and pin_fname and pin_lname:
+            request_list = dao.GetRequestsByPINFULLNAME(pin_fname, pin_lname)
         else:
             return jsonify(error="malformed query string"), 400
         result_list = []
-        for row in product_list:
+        for row in request_list:
             result = self.build_dict(row)
             result_list.append(result)
             print(row)
