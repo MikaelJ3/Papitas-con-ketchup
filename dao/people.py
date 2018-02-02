@@ -361,7 +361,7 @@ class peopledao:
                 "from admins natural inner join addresses " \
                 "where addresses.address_id = admins.adaddress_id and ad_fname = %s;"
         cursor.execute(query, (ad_fname,))
-        result = cursor.fetchone()
+        result = []
         for row in cursor:
             result.append(row)
         return result
@@ -385,7 +385,7 @@ class peopledao:
                 "from admins natural inner join addresses " \
                 "where addresses.address_id = admins.adaddress_id and city = %s;"
         cursor.execute(query, (city,))
-        result = cursor.fetchone()
+        result = []
         for row in cursor:
             result.append(row)
         return result
@@ -397,7 +397,7 @@ class peopledao:
                 "from admins natural inner join addresses " \
                 "where addresses.address_id = admins.adaddress_id and country = %s;"
         cursor.execute(query, (country,))
-        result = cursor.fetchone()
+        result = []
         for row in cursor:
             result.append(row)
         return result
@@ -409,7 +409,7 @@ class peopledao:
                 "from admins natural inner join addresses " \
                 "where addresses.address_id = admins.adaddress_id and district = %s;"
         cursor.execute(query, (district,))
-        result = cursor.fetchone()
+        result = []
         for row in cursor:
             result.append(row)
         return result
@@ -421,7 +421,7 @@ class peopledao:
                 "from admins natural inner join addresses " \
                 "where addresses.address_id = admins.adaddress_id and ad_fname = %s and ad_lname = %s;"
         cursor.execute(query, (ad_fname, ad_lname,))
-        result = cursor.fetchone()
+        result = []
         for row in cursor:
             result.append(row)
         return result
