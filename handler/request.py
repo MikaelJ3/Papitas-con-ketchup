@@ -79,8 +79,8 @@ class RequestHandler:
             if pin_id and r_pname and r_date and r_qty:
                 dao = RequestDAO()
                 r_id = dao.insert_new_request(pin_id, r_pname, r_qty, r_date)
-                result = self.build_request2_dict(r_id, r_pname, r_qty, r_date, pin_id)
-                return jsonify(result=result), 201
+                result = self.build_request_dict(r_id, r_pname, r_qty, r_date, pin_id)
+                return jsonify(NewRequest=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
