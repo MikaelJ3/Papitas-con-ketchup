@@ -18,6 +18,21 @@ class peopleHandler:
         result['district'] = row[10]
         return result
 
+    def build_adminINS_dict(self, ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode, country, district):
+        result = {}
+        result['ad_id'] = ad_id
+        result['ad_fname'] = ad_fname
+        result['ad_lname'] = ad_lname
+        result['ada_id'] = ada_id
+        result['adaddress_id'] = adaddress_id
+        result['ad_phone'] = ad_phone
+        result['addressline1'] = addressline1
+        result['city'] = city
+        result['zipcode'] = zipcode
+        result['country'] = country
+        result['district'] = district
+        return result
+
     def build_pin_dict(self, row):
         result = {}
         result['pin_id'] = row[0]
@@ -298,6 +313,34 @@ class peopleHandler:
         return jsonify(SupplierByProduct=result_list)
 
     ########## NEW #####################################################################################################
+
+    def insert_admin(self, form):
+        if len(form) != 11:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            ad_fname = form['ad_fname']
+            ad_lname = form['ad_lname']
+            a_username = form['a_username']
+            a_password = form['a_password']
+            ad_phone = form['ad_phone']
+            addressline1 = form['addressline1']
+            city = form['city']
+            zipcode = form['zipcode']
+            country = form['country']
+            district = form['district']
+            if ad_fname and ad_lname and ad_phone and addressline1 and city and zipcode and country \
+                    and district and a_username and a_password:
+                dao = peopledao()
+                adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
+                ada_id = dao.insert_new_user(a_username, a_password)
+                ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
+                result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
+                return jsonify(NewRequest=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
+
     def getAllAdmin(self):
         dao = peopledao()
         admin_list = dao.getAllAdmin()

@@ -426,6 +426,30 @@ class peopledao:
             result.append(row)
         return result
 
+    def insert_new_address(self, addressline1, city, zipcode, country, district):
+        cursor = self.conn.cursor()
+        query = "insert into addresses(addressline1, city, zipcode, country, district) values (%s, %s, %s, %s, %s) returning address_id;"
+        cursor.execute(query, (addressline1, city, zipcode, country, district,))
+        address_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return address_id
+
+    def insert_new_user(self, a_username, a_password):
+        cursor = self.conn.cursor()
+        query = "insert into account(a_username, a_password) values (%s, %s) returning a_id;"
+        cursor.execute(query, (a_username, a_password,))
+        a_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return a_id
+
+    def insert_new_admin(self, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone):
+        cursor = self.conn.cursor()
+        query = "insert into addresses(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone) values (%s, %s, %s, %s, %s) returning ad_id;"
+        cursor.execute(query, (ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,))
+        ad_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return ad_id
+
 
     ''' not specified in phase 2 specs'''
     '''def getRequestsbypersoninneed(self, pin_id):

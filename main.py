@@ -72,10 +72,13 @@ def getPINByFirstName():
 
 @app.route('/AyudaPalJibaro/admins', methods=['GET', 'POST'])
 def getAllAdmin():
-    if not request.args:
-        return peopleHandler().getAllAdmin()
+    if request.method == 'POST':
+        return peopleHandler().insert_admin(request.form)
     else:
-        return peopleHandler().searchADMINByRequests(request.args)
+        if not request.args:
+            return peopleHandler().getAllAdmin()
+        else:
+            return peopleHandler().searchADMINByRequests(request.args)
 
 
 # # #  R E Q U E S T S # # #
