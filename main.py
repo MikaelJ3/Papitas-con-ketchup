@@ -82,13 +82,10 @@ def getAllAdmin():
 
 @app.route('/AyudaPalJibaro/request', methods=['GET', 'POST'])
 def getAllRequest():
-    if request.method == 'POST':
-        return RequestHandler().insert_request(request.form)
+    if not request.args:
+        return RequestHandler().getAllRequest()
     else:
-        if not request.args:
-            return RequestHandler().getAllRequest()
-        else:
-            return RequestHandler().searchProductByRequests(request.args)
+        return RequestHandler().searchProductByRequests(request.args)
 
 @app.route('/AyudaPalJibaro/request/change/<int:r_id>', methods=['PUT', 'DELETE'])
 def requestChange(r_id):
