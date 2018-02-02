@@ -239,88 +239,78 @@ class peopleHandler:
 
 
 ### U N S E D  O R  O B S O L E T E ###
-#    '''Get All Orders'''
-#
-#    def getAllOrders(self):
-#        dao = peopledao()
-#       orders_list = dao.getAllOrders()
-#        result_list = []
-#        for row in orders_list:
-#            result = self.build_orderinfo_dict(row)
-#            result_list.append(result)
-#        return jsonify(Orders=result_list)
-#
-#
-#    def signup(self, username, password, fname, lname, phone, address, city, country,
-#                                          district, zipcode, user_type):
-#        dao = peopledao()
-#        ac_id = dao.create_account(username, password)
-#        address_id = dao.create_address(address, city, country, district, zipcode)
-#        if user_type=="supplier":
-#            sup = dao.create_supplier(fname, lname, phone, ac_id, address_id)
-#            print("sup sign up", sup)
-#            return sup
-#        pin = dao.create_pin(fname, lname, phone, ac_id, address_id)
-#        print("pin sign up", pin)
-#        return pin
-#
-#    def signin(self, us, pw):
-#        username = us
-#        password = pw
-#        dao = peopledao()
-#        result = dao.checkusername(username)
-#       if result == None:
-#            return jsonify(error="Username does not exist.")
-#        if password== result[0]:
-#            return render_template('signinsuccess.html', title='Home', user=us)
-#        else:
-#            return jsonify(error="Incorrect Password.")
-#
-#    def login(self, us):
-#        return peopledao().checkusername(us)
-#    def getOrdersByPersonInNeed(self, args):
-#        pin_id = args
-#        dao = peopledao()
-#        order_list = []
-#        if pin_id:
-#            order_list = dao.getOrdersByPersonInNeedById(pin_id)
-#        else:
-#            return jsonify(error="malformed query string"), 400
-#        result_list = []
-#        for row in order_list:
-#            result = self.build_orderinfo_dict(row)
-#            result_list.append(result)
-#        return result_list
 
- #   '''Encontrar las ordenes de una supplier'''
+    def signup(self, username, password, fname, lname, phone, address, city, country, district, zipcode, user_type):
+       dao = peopledao()
+       ac_id = dao.create_account(username, password)
+       address_id = dao.create_address(address, city, country, district, zipcode)
+       if user_type=="supplier":
+           sup = dao.create_supplier(fname, lname, phone, ac_id, address_id)
+           print("sup sign up", sup)
+           return sup
+       pin = dao.create_pin(fname, lname, phone, ac_id, address_id)
+       print("pin sign up", pin)
+       return pin
 
-#    def getOrdersBySupplier(self, args):
-#        s_id = args
-#        dao = peopledao()
-#        order_list = []
-#        if s_id:
-#            order_list = dao.getOrdersBySupplierById(s_id)
-#        else:
-#            return order_list
-#        result_list = []
-#        for row in order_list:
-#            print(row)
-#            result = self.build_orderinfo_dict(row)
-#            result_list.append(result)
-#        return result_list
-#    def build_orderinfo_dict(self, row):
-#        result = {}
-#        result['o_id'] = row[0]
-#        result['od_id'] = row[1]
-#        result['od_qty'] = row[2]
-#        result['od_pprice'] = row[3]
-#        result['s_id'] = row[4]
-#        result['ba_id'] = row[5]
-#        result['p_id'] = row[6]
-#        result['p_name'] = row[7]
-#        result['pin_id'] = row[8]
-#        result['pin_fname']= row[9]
-#        result['pin_lname']= row[10]
-#        result['c_id'] = row[11]
-#        result['o_date'] = row[12]
-#        return result
+    def signin(self, us, pw):
+       username = us
+       password = pw
+       dao = peopledao()
+       result = dao.checkusername(username)
+       if result == None:
+           return jsonify(error="Username does not exist.")
+       if password== result[0]:
+           return render_template('signinsuccess.html', title='Home', user=us)
+       else:
+           return jsonify(error="Incorrect Password.")
+
+def login(self, us):
+   return peopledao().checkusername(us)
+
+def getOrdersByPersonInNeed(self, args):
+   pin_id = args
+   dao = peopledao()
+   order_list = []
+   if pin_id:
+       order_list = dao.getOrdersByPersonInNeedById(pin_id)
+   else:
+       return jsonify(error="malformed query string"), 400
+   result_list = []
+   for row in order_list:
+       result = self.build_orderinfo_dict(row)
+       result_list.append(result)
+   return result_list
+
+   '''Encontrar las ordenes de una supplier'''
+
+   def getOrdersBySupplier(self, args):
+       s_id = args
+       dao = peopledao()
+       order_list = []
+       if s_id:
+           order_list = dao.getOrdersBySupplierById(s_id)
+       else:
+           return order_list
+       result_list = []
+       for row in order_list:
+           print(row)
+           result = self.build_orderinfo_dict(row)
+           result_list.append(result)
+       return result_list
+
+   def build_orderinfo_dict(self, row):
+       result = {}
+       result['o_id'] = row[0]
+       result['od_id'] = row[1]
+       result['od_qty'] = row[2]
+       result['od_pprice'] = row[3]
+       result['s_id'] = row[4]
+       result['ba_id'] = row[5]
+       result['p_id'] = row[6]
+       result['p_name'] = row[7]
+       result['pin_id'] = row[8]
+       result['pin_fname']= row[9]
+       result['pin_lname']= row[10]
+       result['c_id'] = row[11]
+       result['o_date'] = row[12]
+       return result

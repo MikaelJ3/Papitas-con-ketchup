@@ -276,265 +276,265 @@ class peopledao:
         return ba_id
 
 
-#### U N U S E D  O R  O B S O L E T E ####
-    # def getPINByFirstName(self, pin_fname):
+#### U N U S E D  O R  O B S O L E T E #################################################################################
+    def getPINByFirstName(self, pin_fname):
+        cursor = self.conn.cursor()
+        query = "select * from pin where pin_fname = %s;"
+        cursor.execute(query, (pin_fname,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    ''' not specified in phase 2 specs'''
+    '''def getRequestsbypersoninneed(self, pin_id):
+        cursor = self.conn.cursor()
+        query = "select R_id, R_pname, R_qty, R_date, pin_id, pin_fname, pin_lname from Request natural inner join pin where pin_id = %s;"
+        cursor.execute(query, (pin_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getbankacccountbysupplierid(self, s_id):
+            cursor = self.conn.cursor()
+            query = "select * from bankinfo where s_id = %s;"
+            cursor.execute(query, (s_id,))
+            result = cursor.fetchone()
+            return result
+
+    def getcreditcardinformationbypersoninneedid(self, pin_id):
+        cursor = self.conn.cursor()
+        query = "select pin_id, pin_fname, pin_lname, c_id, c_cardtype, c_cardnumber, c_cardname, from pin natural inner join creditcard natural inner join ownscreditcard where pin_id = %s;"
+        cursor.execute(query, (pin_id,))
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getsuppliersbycity(self, city):
+        cursor = self.conn.cursor()
+        query = "select s_id, s_fname, s_lname, s_phone from supplier natural inner join addresses where city = %s;"
+        cursor.execute(query, (city,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getpersoninneedbycity(self, city):
+        cursor = self.conn.cursor()
+        query = "select pin_id, pin_fname, pin_lname, pin_phone from pin natural inner join addresses where city = %s;"
+        cursor.execute(query, (city,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getpersoninneedbyid(self, pin_id):
+            cursor = self.conn.cursor()
+            query = "select * from pin where pin_id = %s;"
+            cursor.execute(query, (pin_id,))
+            result = cursor.fetchone()
+            return result'''
+
+    '''Encontrar todas las ordenes de una Persona'''
+
+    def getOrdersByPersonInNeedById(self, pin_id):
+        cursor = self.conn.cursor()
+        query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
+                "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
+                "where pin.pin_id = %s;"
+        cursor.execute(query, (pin_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    '''Encontrar todas las ordenes de una Persona'''
+
+    def getOrdersByPersonInNeedByFirstName(self, pin_fname):
+        cursor = self.conn.cursor()
+        query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
+                "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
+                "where pin.pin_fname = %s;"
+        cursor.execute(query, (pin_fname,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    '''Encontrar todas las ordenes de una Persona'''
+
+    def getOrdersByPersonInNeedByFullName(self, pin_fname, pin_lname):
+        cursor = self.conn.cursor()
+        query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
+                "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
+                "where pin.pin_fname = %s and pin.pin_lname = %s;"
+        cursor.execute(query, (pin_fname, pin_lname))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    '''Encontrar todas las ordenes de un suplidor'''
+
+    def getOrdersBySupplierById(self, s_id):
+        cursor = self.conn.cursor()
+        query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
+                "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
+                "where supplier.s_id = %s;"
+        cursor.execute(query, (s_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    '''Encontrar todas las ordenes de un suplidor'''
+
+    def getOrdersBySuppplierByFirstName(self, s_fname):
+        cursor = self.conn.cursor()
+        query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
+                "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
+                "where supplier.s_fname = %s;"
+
+        cursor.execute(query, (s_fname,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    '''Encontrar todas las ordenes de un suplidor'''
+
+    def getOrdersBySupplierByFullName(self, s_fname, s_lname):
+
+        cursor = self.conn.cursor()
+        query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
+                "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
+                "where supplier.s_fname = %s and supplier.s_lname = %s;"
+        cursor.execute(query, (s_fname, s_lname))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def checkusername(self, us):
+        cursor = self.conn.cursor()
+        query = "select a_password from account where a_username = %s"
+        cursor.execute(query, (us,))
+        result = cursor.fetchone()
+        return result
+
+    def getUserProfile(self, personid):
+        cursor = self.conn.cursor()
+        query = "Select s_fname, s_lname, s_phone, addressline1, city, country, district, zipcode " \
+                "from account as ac natural inner join supplier as sup natural inner join addresses as ad " \
+                "where ac.a_id = sup.sa_id " \
+                "AND sup.saddress_id = ad.address_id " \
+                "AND sup.s_id = %s;"
+        cursor.execute(query, (personid,))
+        result = cursor.fetchone()
+        return result
+
+    def getUserKeys(self, username):
+        cursor = self.conn.cursor()
+        query = "Select s_id, address_id, a_id, a_username, a_password " \
+                "from account natural inner join supplier natural inner join addresses " \
+                "where account.a_id = supplier.sa_id " \
+                "AND supplier.saddress_id = addresses.address_id " \
+                "AND account.a_username = %s;"
+        cursor.execute(query, (username,))
+        result = cursor.fetchone()
+        account_type = "supplier"
+        if result:
+            result = result + (account_type,)
+            return result
+        cursor = self.conn.cursor()
+        query = "Select pin_id, address_id, a_id, a_username, a_password " \
+                "from account natural inner join pin natural inner join addresses " \
+                "where account.a_id = pin.pina_id " \
+                "AND pin.pinaddress_id = addresses.address_id " \
+                "AND account.a_username = %s;"
+        cursor.execute(query, (username,))
+        result = cursor.fetchone()
+        account_type = "pin"
+        if result:
+            result = result + (account_type,)
+            return result
+        cursor = self.conn.cursor()
+        query = "Select ad_id, address_id, a_id, a_username, a_password " \
+                "from account natural inner join admins natural inner join addresses " \
+                "where account.a_id = admins.ada_id " \
+                "AND admins.adaddress_id = addresses.address_id " \
+                "AND account.a_username = %s;"
+        cursor.execute(query, (username,))
+        result = cursor.fetchone()
+        account_type = "admin"
+        result = result + (account_type,)
+        return result
+
+    def get_account_id(self, us):
+        cursor = self.conn.cursor()
+        query = "select a_id from account where a_username = %s;"
+        cursor.execute(query, (us,))
+        result = cursor.fetchone()
+        return result
+
+    def get_person_id(self, a_id):
+        cursor = self.conn.cursor()
+        query = "select pin_id from pin where pina_id = %s;"
+        cursor.execute(query, (a_id,))
+        result = cursor.fetchone()
+        if not result[0] == None:
+            return result[0]
+        query = "select s_id from supplier where sa_id = %s;"
+        cursor.execute(query, (a_id,))
+        result = cursor.fetchone()
+        if not result[0] == None:
+            return result[0]
+        query = "select ad_id from admins where ada_id = %s;"
+        cursor.execute(query, (a_id,))
+        result = cursor.fetchone()
+        if not result[0] == None:
+            return result[0]
+        return None
+
+    def create_account(self, us, pw):
+        cursor = self.conn.cursor()
+        query = "insert into account(a_username, a_password)values(%s, %s);"
+        cursor.execute(query, (us, pw,))
+        self.conn.commit()
+        query = "select a_id from account where a_username= %s AND a_password= %s;"
+        cursor.execute(query, (us, pw,))
+        result = cursor.fetchone()
+        self.conn.commit()
+        if not result[0] == None:
+            return result[0]
+        return None
+
+    def insert_product_to_OrderDetails(self, od_qty, od_price, o_id, pin_id, s_id, ba_id, p_id):
+        cursor = self.conn.cursor()
+        query = "insert into orderdetails(od_qty, od_pprice, o_id, s_id, ba_id, p_id, pin_id) values (%s, %s, %s, %s, %s, %s, %s) returning od_id;"
+        cursor.execute(query, (od_qty, od_price, o_id, s_id, ba_id, p_id, pin_id,))
+        od_id = cursor.fetchone()[0]
+        self.conn.commit()
+
+        return od_id
+
+    # def create_order(self, cid, date):
     #     cursor = self.conn.cursor()
-    #     query = "select * from pin where pin_fname = %s;"
-    #     cursor.execute(query, (pin_fname,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # ''' not specified in phase 2 specs'''
-    # '''def getRequestsbypersoninneed(self, pin_id):
-    #     cursor = self.conn.cursor()
-    #     query = "select R_id, R_pname, R_qty, R_date, pin_id, pin_fname, pin_lname from Request natural inner join pin where pin_id = %s;"
-    #     cursor.execute(query, (pin_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getbankacccountbysupplierid(self, s_id):
-    #         cursor = self.conn.cursor()
-    #         query = "select * from bankinfo where s_id = %s;"
-    #         cursor.execute(query, (s_id,))
-    #         result = cursor.fetchone()
-    #         return result
-    #
-    # def getcreditcardinformationbypersoninneedid(self, pin_id):
-    #     cursor = self.conn.cursor()
-    #     query = "select pin_id, pin_fname, pin_lname, c_id, c_cardtype, c_cardnumber, c_cardname, from pin natural inner join creditcard natural inner join ownscreditcard where pin_id = %s;"
-    #     cursor.execute(query, (pin_id,))
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getsuppliersbycity(self, city):
-    #     cursor = self.conn.cursor()
-    #     query = "select s_id, s_fname, s_lname, s_phone from supplier natural inner join addresses where city = %s;"
-    #     cursor.execute(query, (city,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getpersoninneedbycity(self, city):
-    #     cursor = self.conn.cursor()
-    #     query = "select pin_id, pin_fname, pin_lname, pin_phone from pin natural inner join addresses where city = %s;"
-    #     cursor.execute(query, (city,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def getpersoninneedbyid(self, pin_id):
-    #         cursor = self.conn.cursor()
-    #         query = "select * from pin where pin_id = %s;"
-    #         cursor.execute(query, (pin_id,))
-    #         result = cursor.fetchone()
-    #         return result'''
-    #
-    # '''Encontrar todas las ordenes de una Persona'''
-    #
-    # def getOrdersByPersonInNeedById(self, pin_id):
-    #     cursor = self.conn.cursor()
-    #     query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
-    #             "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
-    #             "where pin.pin_id = %s;"
-    #     cursor.execute(query, (pin_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # '''Encontrar todas las ordenes de una Persona'''
-    #
-    # def getOrdersByPersonInNeedByFirstName(self, pin_fname):
-    #     cursor = self.conn.cursor()
-    #     query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
-    #             "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
-    #             "where pin.pin_fname = %s;"
-    #     cursor.execute(query, (pin_fname,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # '''Encontrar todas las ordenes de una Persona'''
-    #
-    # def getOrdersByPersonInNeedByFullName(self, pin_fname, pin_lname):
-    #     cursor = self.conn.cursor()
-    #     query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
-    #             "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
-    #             "where pin.pin_fname = %s and pin.pin_lname = %s;"
-    #     cursor.execute(query, (pin_fname, pin_lname))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # '''Encontrar todas las ordenes de un suplidor'''
-    #
-    # def getOrdersBySupplierById(self, s_id):
-    #     cursor = self.conn.cursor()
-    #     query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
-    #             "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
-    #             "where supplier.s_id = %s;"
-    #     cursor.execute(query, (s_id,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # '''Encontrar todas las ordenes de un suplidor'''
-    #
-    # def getOrdersBySuppplierByFirstName(self, s_fname):
-    #     cursor = self.conn.cursor()
-    #     query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
-    #             "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
-    #             "where supplier.s_fname = %s;"
-    #
-    #     cursor.execute(query, (s_fname,))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # '''Encontrar todas las ordenes de un suplidor'''
-    #
-    # def getOrdersBySupplierByFullName(self, s_fname, s_lname):
-    #
-    #     cursor = self.conn.cursor()
-    #     query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
-    #             "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier " \
-    #             "where supplier.s_fname = %s and supplier.s_lname = %s;"
-    #     cursor.execute(query, (s_fname, s_lname))
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
-    #     return result
-    #
-    # def checkusername(self, us):
-    #     cursor = self.conn.cursor()
-    #     query = "select a_password from account where a_username = %s"
-    #     cursor.execute(query, (us,))
-    #     result = cursor.fetchone()
-    #     return result
-    #
-    # def getUserProfile(self, personid):
-    #     cursor = self.conn.cursor()
-    #     query = "Select s_fname, s_lname, s_phone, addressline1, city, country, district, zipcode " \
-    #             "from account as ac natural inner join supplier as sup natural inner join addresses as ad " \
-    #             "where ac.a_id = sup.sa_id " \
-    #             "AND sup.saddress_id = ad.address_id " \
-    #             "AND sup.s_id = %s;"
-    #     cursor.execute(query, (personid,))
-    #     result = cursor.fetchone()
-    #     return result
-    #
-    # def getUserKeys(self, username):
-    #     cursor = self.conn.cursor()
-    #     query = "Select s_id, address_id, a_id, a_username, a_password " \
-    #             "from account natural inner join supplier natural inner join addresses " \
-    #             "where account.a_id = supplier.sa_id " \
-    #             "AND supplier.saddress_id = addresses.address_id " \
-    #             "AND account.a_username = %s;"
-    #     cursor.execute(query, (username,))
-    #     result = cursor.fetchone()
-    #     account_type = "supplier"
-    #     if result:
-    #         result = result + (account_type,)
-    #         return result
-    #     cursor = self.conn.cursor()
-    #     query = "Select pin_id, address_id, a_id, a_username, a_password " \
-    #             "from account natural inner join pin natural inner join addresses " \
-    #             "where account.a_id = pin.pina_id " \
-    #             "AND pin.pinaddress_id = addresses.address_id " \
-    #             "AND account.a_username = %s;"
-    #     cursor.execute(query, (username,))
-    #     result = cursor.fetchone()
-    #     account_type = "pin"
-    #     if result:
-    #         result = result + (account_type,)
-    #         return result
-    #     cursor = self.conn.cursor()
-    #     query = "Select ad_id, address_id, a_id, a_username, a_password " \
-    #             "from account natural inner join admins natural inner join addresses " \
-    #             "where account.a_id = admins.ada_id " \
-    #             "AND admins.adaddress_id = addresses.address_id " \
-    #             "AND account.a_username = %s;"
-    #     cursor.execute(query, (username,))
-    #     result = cursor.fetchone()
-    #     account_type = "admin"
-    #     result = result + (account_type,)
-    #     return result
-    #
-    # def get_account_id(self, us):
-    #     cursor = self.conn.cursor()
-    #     query = "select a_id from account where a_username = %s;"
-    #     cursor.execute(query, (us,))
-    #     result = cursor.fetchone()
-    #     return result
-    #
-    # def get_person_id(self, a_id):
-    #     cursor = self.conn.cursor()
-    #     query = "select pin_id from pin where pina_id = %s;"
-    #     cursor.execute(query, (a_id,))
-    #     result = cursor.fetchone()
-    #     if not result[0] == None:
-    #         return result[0]
-    #     query = "select s_id from supplier where sa_id = %s;"
-    #     cursor.execute(query, (a_id,))
-    #     result = cursor.fetchone()
-    #     if not result[0] == None:
-    #         return result[0]
-    #     query = "select ad_id from admins where ada_id = %s;"
-    #     cursor.execute(query, (a_id,))
-    #     result = cursor.fetchone()
-    #     if not result[0] == None:
-    #         return result[0]
-    #     return None
-    #
-    # def create_account(self, us, pw):
-    #     cursor = self.conn.cursor()
-    #     query = "insert into account(a_username, a_password)values(%s, %s);"
-    #     cursor.execute(query, (us, pw,))
+    #     query = "insert into orders(c_id, o_date)values(%s, %s) returning o_id;"
+    #     cursor.execute(query, (cid, date,))
     #     self.conn.commit()
-    #     query = "select a_id from account where a_username= %s AND a_password= %s;"
-    #     cursor.execute(query, (us, pw,))
-    #     result = cursor.fetchone()
-    #     self.conn.commit()
-    #     if not result[0] == None:
-    #         return result[0]
-    #     return None
-    #
-    # def insert_product_to_OrderDetails(self, od_qty, od_price, o_id, pin_id, s_id, ba_id, p_id):
-    #     cursor = self.conn.cursor()
-    #     query = "insert into orderdetails(od_qty, od_pprice, o_id, s_id, ba_id, p_id, pin_id) values (%s, %s, %s, %s, %s, %s, %s) returning od_id;"
-    #     cursor.execute(query, (od_qty, od_price, o_id, s_id, ba_id, p_id, pin_id,))
-    #     od_id = cursor.fetchone()[0]
-    #     self.conn.commit()
-    #
-    #     return od_id
-    #
-    # # def create_order(self, cid, date):
-    # #     cursor = self.conn.cursor()
-    # #     query = "insert into orders(c_id, o_date)values(%s, %s) returning o_id;"
-    # #     cursor.execute(query, (cid, date,))
-    # #     self.conn.commit()
-    # #     result = cursor.fetchone()[0]
-    # #     return result
-    # '''Return all order info'''
-    #
-    # def getAllOrders(self):
-    #     cursor = self.conn.cursor()
-    #     query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
-    #             "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier;"
-    #
-    #     cursor.execute(query)
-    #     result = []
-    #     for row in cursor:
-    #         result.append(row)
+    #     result = cursor.fetchone()[0]
     #     return result
+    '''Return all order info'''
+
+    def getAllOrders(self):
+        cursor = self.conn.cursor()
+        query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date " \
+                "from orders natural inner join orderdetails natural inner join product natural inner join pin natural inner join supplier;"
+
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
