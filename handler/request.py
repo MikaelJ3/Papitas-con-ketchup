@@ -14,6 +14,15 @@ class RequestHandler:
         result['pin_lname'] = row[6]
         return result
 
+    def build_request2_dict(self, row):
+        result = {}
+        result['r_id'] = row[0]
+        result['r_pname'] = row[1]
+        result['r_qty'] = row[2]
+        result['r_date'] = row[3]
+        result['pin_id'] = row[4]
+        return result
+
     def getAllRequest(self):
         dao = RequestDAO()
         request_list = dao.getAllRequest()
@@ -70,12 +79,8 @@ class RequestHandler:
             if r_pname and r_date and r_qty:
                 dao = RequestDAO()
                 r_id = dao.insert_new_request(pin_id, r_pname, r_qty, r_date)
-                result_list = dao.GetRequestsByID(r_id)
-                result_list = []
-                for row in result_list:
-                    result = self.build_request_dict(row)
-                    result_list.append(result)
-                return jsonify(Result_list = result_list), 201
+                result = self.build_request2_dict(r_id, r_pname, r_qty, r_date, pin_id)
+                return jsonify(Request = result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
