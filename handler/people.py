@@ -8,8 +8,13 @@ class peopleHandler:
         result['ad_fname'] = row[1]
         result['ad_lname'] = row[2]
         result['a_id'] = row[3]
-        result['adressid'] = row[4]
-        result['ad_phone'] = row[5]
+        result['ad_phone'] = row[4]
+        result['adressid'] = row[5]
+        result['addressline1'] = row[6]
+        result['city'] = row[7]
+        result['zipcode'] = row[8]
+        result['country'] = row[9]
+        result['district'] = row[10]
         return result
 
     def build_pin_dict(self, row):
@@ -18,18 +23,28 @@ class peopleHandler:
         result['pin_fname'] = row[1]
         result['pin_lname'] = row[2]
         result['a_id'] = row[3]
-        result['adressid'] = row[4]
-        result['pin_phone'] = row[5]
+        result['pin_phone'] = row[4]
+        result['adressid'] = row[5]
+        result['addressline1'] = row[6]
+        result['city'] = row[7]
+        result['zipcode'] = row[8]
+        result['country'] = row[9]
+        result['district'] = row[10]
         return result
 
     def build_supplier_dict(self, row):
         result = {}
-        result['ad_id'] = row[0]
-        result['ad_fname'] = row[1]
-        result['ad_lname'] = row[2]
+        result['s_id'] = row[0]
+        result['s_fname'] = row[1]
+        result['s_lname'] = row[2]
         result['a_id'] = row[3]
-        result['adressid'] = row[4]
-        result['s_phone'] = row[5]
+        result['a_phone'] = row[4]
+        result['adressid'] = row[5]
+        result['addressline1'] = row[6]
+        result['city'] = row[7]
+        result['zipcode'] = row[8]
+        result['country'] = row[9]
+        result['district'] = row[10]
         return result
 
     def build_product_dict(self, row):
@@ -43,22 +58,7 @@ class peopleHandler:
         result['p_priceperunit'] = row[6]
         return result
 
-    def build_orderinfo_dict(self, row):
-        result = {}
-        result['o_id'] = row[0]
-        result['od_id'] = row[1]
-        result['od_qty'] = row[2]
-        result['od_pprice'] = row[3]
-        result['s_id'] = row[4]
-        result['ba_id'] = row[5]
-        result['p_id'] = row[6]
-        result['p_name'] = row[7]
-        result['pin_id'] = row[8]
-        result['pin_fname']= row[9]
-        result['pin_lname']= row[10]
-        result['c_id'] = row[11]
-        result['o_date'] = row[12]
-        return result
+
 
     '''return everyone registered as person in need'''
 
@@ -93,16 +93,43 @@ class peopleHandler:
             result_list.append(result)
         return jsonify(Admins=result_list)
 
-    '''Get All Orders'''
 
-    def getAllOrders(self):
+    ##SEARCH ADMIN BY REQUESTS##
+    def searchADMINByRequests(self, args):
+        ad_id = args.get("ad_id")
+        ad_fname = args.get("ad_fname")
+        ad_lname = args.get("ad_lname")
+        ad_phone = args.get("ad_phone")
+        city = args.get("city")
+        country = args.get("country")
+        district = args.get("district")
+
         dao = peopledao()
-        orders_list = dao.getAllOrders()
+        request_list = []
+
+        if (len(args) == 1) and ad_id:
+            request_list = dao.GetADMINByID(ad_id)
+        elif (len(args) == 1) and ad_fname:
+            request_list = dao.GetADMINByFNAME(ad_fname)
+        elif (len(args) == 1) and ad_phone:
+            request_list = dao.GetADMINByPHONE(ad_phone)
+        elif (len(args) == 1) and city:
+            request_list = dao.GetADMINByCITY(city)
+        elif (len(args) == 1) and country:
+            request_list = dao.GetADMINByCOUNTRY(country)
+        elif (len(args) == 1) and district:
+            request_list = dao.GetADMINByDISTRICT(district)
+        elif (len(args) == 2) and ad_fname and ad_lname:
+            request_list = dao.GeADMINByFULLNAME(ad_fname, ad_lname)
+        else:
+            return jsonify(error="malformed query string"), 400
         result_list = []
-        for row in orders_list:
-            result = self.build_orderinfo_dict(row)
+        for row in request_list:
+            result = self.build_admin_dict(row)
             result_list.append(result)
-        return jsonify(Orders=result_list)
+            print(row)
+
+        return jsonify(Request=result_list)
 
     '''encontrar productos por supplidor '''
 
@@ -153,53 +180,6 @@ class peopleHandler:
             result_list.append(result)
         return jsonify(SupplierByProduct=result_list)
 
-    '''Encontrar las ordenes de una persona'''
-
-    def getOrdersByPersonInNeed(self, args):
-        pin_id = args
-        dao = peopledao()
-        order_list = []
-        if pin_id:
-            order_list = dao.getOrdersByPersonInNeedById(pin_id)
-        else:
-            return jsonify(error="malformed query string"), 400
-        result_list = []
-        for row in order_list:
-            result = self.build_orderinfo_dict(row)
-            result_list.append(result)
-        return result_list
-
-    '''Encontrar las ordenes de una supplier'''
-
-    def getOrdersBySupplier(self, args):
-        s_id = args
-        dao = peopledao()
-        order_list = []
-        if s_id:
-            order_list = dao.getOrdersBySupplierById(s_id)
-        else:
-            return order_list
-        result_list = []
-        for row in order_list:
-            print(row)
-            result = self.build_orderinfo_dict(row)
-            result_list.append(result)
-        return result_list
-
-    def signin(self, us, pw):
-        username = us
-        password = pw
-        dao = peopledao()
-        result = dao.checkusername(username)
-        if result == None:
-            return jsonify(error="Username does not exist.")
-        if password== result[0]:
-            return render_template('signinsuccess.html', title='Home', user=us)
-        else:
-            return jsonify(error="Incorrect Password.")
-
-    def login(self, us):
-        return peopledao().checkusername(us)
 
     def get_person_id(self, username):
         dao = peopledao()
@@ -213,19 +193,6 @@ class peopleHandler:
             return False
         return result[0]
 
-    def signup(self, username, password, fname, lname, phone, address, city, country,
-                                          district, zipcode, user_type):
-        dao = peopledao()
-        ac_id = dao.create_account(username, password)
-        address_id = dao.create_address(address, city, country, district, zipcode)
-        if user_type=="supplier":
-            sup = dao.create_supplier(fname, lname, phone, ac_id, address_id)
-            print("sup sign up", sup)
-            return sup
-        pin = dao.create_pin(fname, lname, phone, ac_id, address_id)
-        print("pin sign up", pin)
-        return pin
-
     def Verify_PaymentMethod(self, pin_id):
         dao = peopledao()
         row = dao.getCreditCardByPinID(pin_id)
@@ -233,7 +200,6 @@ class peopleHandler:
            return True
         else:
             return False
-####################NEW###################
 
     def insert_new_cc(self, c_cardtype, c_number, c_name, pin_id, addressid):
         dao = peopledao()
@@ -272,7 +238,89 @@ class peopleHandler:
         return result
 
 
-    # def create_order(self, cid, date):
-    #     dao = peopledao()
-    #     row = dao.create_order(cid, date)
-    #     return row
+### U N S E D  O R  O B S O L E T E ###
+#    '''Get All Orders'''
+#
+#    def getAllOrders(self):
+#        dao = peopledao()
+#       orders_list = dao.getAllOrders()
+#        result_list = []
+#        for row in orders_list:
+#            result = self.build_orderinfo_dict(row)
+#            result_list.append(result)
+#        return jsonify(Orders=result_list)
+#
+#
+#    def signup(self, username, password, fname, lname, phone, address, city, country,
+#                                          district, zipcode, user_type):
+#        dao = peopledao()
+#        ac_id = dao.create_account(username, password)
+#        address_id = dao.create_address(address, city, country, district, zipcode)
+#        if user_type=="supplier":
+#            sup = dao.create_supplier(fname, lname, phone, ac_id, address_id)
+#            print("sup sign up", sup)
+#            return sup
+#        pin = dao.create_pin(fname, lname, phone, ac_id, address_id)
+#        print("pin sign up", pin)
+#        return pin
+#
+#    def signin(self, us, pw):
+#        username = us
+#        password = pw
+#        dao = peopledao()
+#        result = dao.checkusername(username)
+#       if result == None:
+#            return jsonify(error="Username does not exist.")
+#        if password== result[0]:
+#            return render_template('signinsuccess.html', title='Home', user=us)
+#        else:
+#            return jsonify(error="Incorrect Password.")
+#
+#    def login(self, us):
+#        return peopledao().checkusername(us)
+#    def getOrdersByPersonInNeed(self, args):
+#        pin_id = args
+#        dao = peopledao()
+#        order_list = []
+#        if pin_id:
+#            order_list = dao.getOrdersByPersonInNeedById(pin_id)
+#        else:
+#            return jsonify(error="malformed query string"), 400
+#        result_list = []
+#        for row in order_list:
+#            result = self.build_orderinfo_dict(row)
+#            result_list.append(result)
+#        return result_list
+
+ #   '''Encontrar las ordenes de una supplier'''
+
+#    def getOrdersBySupplier(self, args):
+#        s_id = args
+#        dao = peopledao()
+#        order_list = []
+#        if s_id:
+#            order_list = dao.getOrdersBySupplierById(s_id)
+#        else:
+#            return order_list
+#        result_list = []
+#        for row in order_list:
+#            print(row)
+#            result = self.build_orderinfo_dict(row)
+#            result_list.append(result)
+#        return result_list
+#    def build_orderinfo_dict(self, row):
+#        result = {}
+#        result['o_id'] = row[0]
+#        result['od_id'] = row[1]
+#        result['od_qty'] = row[2]
+#        result['od_pprice'] = row[3]
+#        result['s_id'] = row[4]
+#        result['ba_id'] = row[5]
+#        result['p_id'] = row[6]
+#        result['p_name'] = row[7]
+#        result['pin_id'] = row[8]
+#        result['pin_fname']= row[9]
+#        result['pin_lname']= row[10]
+#        result['c_id'] = row[11]
+#        result['o_date'] = row[12]
+#        return result
