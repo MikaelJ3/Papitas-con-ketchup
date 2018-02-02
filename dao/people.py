@@ -4,9 +4,11 @@ import psycopg2
 
 class peopledao:
     def __init__(self):
-        connection_url = "dbname=%s user=%s password=%s" % (pg_config['dbname'],
-                                                            pg_config['user'],
-                                                            pg_config['passwd'])
+
+        connection_url = "host=%s dbname=%s user=%s password=%s" % (pg_config['host'],
+                                                                    pg_config['dbname'],
+                                                                    pg_config['user'],
+                                                                    pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
 
     '''Return everyone registered as person in need'''
@@ -332,7 +334,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
                 " country, district " \
-                "from admins natural inner join addresses" \
+                "from admins natural inner join addresses " \
                 "where addresses.address_id = admins.adaddress_id;"
         cursor.execute(query)
         result = []
@@ -344,7 +346,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses " \
                 "where ad_id = %s;"
         cursor.execute(query, (ad_id,))
         result = cursor.fetchone()
@@ -354,7 +356,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses " \
                 "where ad_fname = %s;"
         cursor.execute(query, (ad_fname,))
         result = cursor.fetchone()
@@ -366,7 +368,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses " \
                 "where ad_phone = %s;"
         cursor.execute(query, (ad_phone,))
         result = cursor.fetchone()
@@ -376,7 +378,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
                 "district " \
-                "from admin natural inner join addresses" \
+                "from admins natural inner join addresses " \
                 "where city = %s;"
         cursor.execute(query, (city,))
         result = cursor.fetchone()
