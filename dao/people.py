@@ -452,6 +452,103 @@ class peopledao:
         self.conn.commit()
         return ad_id
 
+    ### P I N ######################################################################################################
+    def getAllpin(self):
+        cursor = self.conn.cursor()
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, " \
+                "zipcode," \
+                " country, district " \
+                "from pin natural inner join addresses " \
+                "where addresses.address_id = pin.pinaddress_id;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def GetADMINByID(self, ad_id):
+        cursor = self.conn.cursor()
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id and ad_id = %s;"
+        cursor.execute(query, (ad_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def GetADMINByFNAME(self, ad_fname):
+        cursor = self.conn.cursor()
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id and ad_fname = %s;"
+        cursor.execute(query, (ad_fname,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def GetADMINByPHONE(self, ad_phone):
+        cursor = self.conn.cursor()
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id and ad_phone = %s;"
+        cursor.execute(query, (ad_phone,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def GetADMINByCITY(self, city):
+        cursor = self.conn.cursor()
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id and city = %s;"
+        cursor.execute(query, (city,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def GetADMINByCOUNTRY(self, country):
+        cursor = self.conn.cursor()
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id and country = %s;"
+        cursor.execute(query, (country,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def GetADMINByDISTRICT(self, district):
+        cursor = self.conn.cursor()
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id and district = %s;"
+        cursor.execute(query, (district,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def GeADMINByFULLNAME(self, ad_fname, ad_lname):
+        cursor = self.conn.cursor()
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id and ad_fname = %s and ad_lname = %s;"
+        cursor.execute(query, (ad_fname, ad_lname,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     ''' not specified in phase 2 specs'''
     '''def getRequestsbypersoninneed(self, pin_id):

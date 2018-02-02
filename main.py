@@ -80,7 +80,7 @@ def getPINByFirstName():
 
 # # #  A D M I N I S T R A T O R  # # #
 
-@app.route('/AyudaPalJibaro/admins', methods=['GET', 'POST'])
+@app.route('/admins', methods=['GET', 'POST'])
 def getAllAdmin():
     if request.method == 'POST':
         return peopleHandler().insert_admin(request.form)
@@ -89,6 +89,18 @@ def getAllAdmin():
             return peopleHandler().getAllAdmin()
         else:
             return peopleHandler().searchADMINByRequests(request.args)
+
+# # #  P E O P L E  I N  N E E D  # # #
+
+@app.route('/pin', methods=['GET', 'POST'])
+def getAllpin():
+    if request.method == 'POST':
+        return peopleHandler().insert_pin(request.form)
+    else:
+        if not request.args:
+            return peopleHandler().getAllpin()
+        else:
+            return peopleHandler().searchPINByRequests(request.args)
 
 
 # # #  R E Q U E S T S # # #
