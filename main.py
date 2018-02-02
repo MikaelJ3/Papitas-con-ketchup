@@ -17,8 +17,78 @@ lm.init_app(app)
 lm.login_view = 'SignIn'
 temp_Dicts = temp_DB_and_cart.Create()
 
+@lm.user_loader
+def load_user(user_id):
+    return User().get_user(user_id)
 
 
+@app.route('/')
+def home():
+    if current_user.is_anonymous:
+        return render_template('home.html')
+    else:
+        return redirect(url_for('user_home'))
+
+
+@app.route('/UserHome')
+def user_home():
+    return render_template('user_home.html', account=current_user.user_type)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+   if current_user.is_authenticated:
+       return redirect(url_for('home'))
+   form = LoginForm()
+   username = form.username.data
+   if form.validate_on_submit():
+       password = peopleHandler().login(username)
+       if password is None or not password[0] == form.password.data:
+           flash('Invalid username or password', category='error')
+           return redirect(url_for('login'))
+       user = User()
+       user.set_user(username)
+       login_user(user, remember=False)
+       return render_template('user_home.html', title='logged in')
+   return render_template('login.html', title='Sign In', form=form)
+
+
+@app.route('/SignUp', methods=['GET', 'POST'])
+def signup():
+   form = SignupForm()
+   if form.validate_on_submit():
+       username = form.username.data
+       password = form.password.data
+       fname = form.fname.data
+       lname = form.lname.data
+       phone = form.phone.data
+       address = form.address.data
+       city = form.city.data
+       country = form.country.data
+       district = form.district.data
+       zipcode = form.zipcode.data
+       user_type = form.user_type.data
+       check_if_taken = peopleHandler().login(username)
+       if check_if_taken:
+           flash('That username is already taken', category='error')
+           return redirect(url_for('signup'))
+       signed_up = peopleHandler().signup(username, password, fname, lname, phone, address, city, district,
+                                          country, zipcode, user_type)
+       if not signed_up:
+           flash('Signed Up Failed')
+           return redirect(url_for('signup'))
+       user = User()
+       user.set_user(username)
+       login_user(user, remember=False)
+       return render_template('base.html', title='signed up')
+   return render_template('signup.html', title='Sign Up', form=form)
+
+
+@app.route('/logout')
+def logout():
+   logout_user()
+   return redirect(url_for('home'))
+
+########################################################################################################################
 
 # # #  A D M I N I S T R A T O R  # # #
 
@@ -138,77 +208,7 @@ if __name__ == '__main__':
     app.run()
 
 ### U N U S E D  O R  O B S O L E T E
-#@lm.user_loader
-#def load_user(user_id):
-#    return User().get_user(user_id)
 
-
-#@app.route('/')
-#def home():
-#    if current_user.is_anonymous:
-#        return render_template('home.html')
-#    else:
-#        return redirect(url_for('user_home'))
-
-
-#@app.route('/UserHome')
-#def user_home():
-#    return render_template('user_home.html', account=current_user.user_type)
-
-
-#@app.route('/login', methods=['GET', 'POST'])
-#def login():
-#    if current_user.is_authenticated:
-#        return redirect(url_for('home'))
-#    form = LoginForm()
-#    username = form.username.data
-#    if form.validate_on_submit():
-#        password = peopleHandler().login(username)
-#        if password is None or not password[0] == form.password.data:
-#            flash('Invalid username or password', category='error')
-#            return redirect(url_for('login'))
-#        user = User()
-#        user.set_user(username)
-#        login_user(user, remember=False)
-#        return render_template('user_home.html', title='logged in')
-#    return render_template('login.html', title='Sign In', form=form)
-
-
-#@app.route('/SignUp', methods=['GET', 'POST'])
-#def signup():
-#    form = SignupForm()
-#    if form.validate_on_submit():
-#        username = form.username.data
-#        password = form.password.data
-#        fname = form.fname.data
-#        lname = form.lname.data
-#        phone = form.phone.data
-#        address = form.address.data
-#        city = form.city.data
-#        country = form.country.data
-#        district = form.district.data
-#        zipcode = form.zipcode.data
-#        user_type = form.user_type.data
-#        check_if_taken = peopleHandler().login(username)
-#        if check_if_taken:
-#            flash('That username is already taken', category='error')
-#            return redirect(url_for('signup'))
-#        signed_up = peopleHandler().signup(username, password, fname, lname, phone, address, city, district,
-#                                           country, zipcode, user_type)
-#        if not signed_up:
-#            flash('Signed Up Failed')
-#            return redirect(url_for('signup'))
-#        user = User()
-#        user.set_user(username)
-#        login_user(user, remember=False)
-#        return render_template('base.html', title='signed up')
-#    return render_template('signup.html', title='Sign Up', form=form)
-
-
-#@app.route('/logout')
-#def logout():
-#    logout_user()
-#    return redirect(url_for('home'))
 
 #'''GET ORDERS BY PERSON IN NEED'''
 #@app.route('/AyudaPalJibaro/GetOrdersByPersonInNeed')
