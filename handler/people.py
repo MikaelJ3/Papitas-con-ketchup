@@ -333,7 +333,7 @@ class peopleHandler:
                 dao = peopledao()
                 adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
                 ada_id = dao.insert_new_user(a_username, a_password)
-                ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id)
+                ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
                 result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,
                                                   addressline1, city, zipcode, country, district)
                 return jsonify(NewRequest=result), 201
