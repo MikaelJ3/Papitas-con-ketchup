@@ -556,8 +556,8 @@ class peopledao:
         query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, " \
                 "zipcode," \
                 " country, district " \
-                "from pin natural inner join addresses " \
-                "where addresses.address_id = pin.pinaddress_id;"
+                "from supplier natural inner join addresses " \
+                "where addresses.address_id = supplier.saddress_id;"
         cursor.execute(query)
         result = []
         for row in cursor:

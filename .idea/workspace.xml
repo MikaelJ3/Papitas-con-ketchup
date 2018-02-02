@@ -41,8 +41,8 @@
       <file leaf-file-name="people.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dao/people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="565" column="0" lean-forward="true" selection-start-line="565" selection-start-column="0" selection-end-line="565" selection-end-column="0" />
+            <state relative-caret-position="323">
+              <caret line="559" column="56" lean-forward="false" selection-start-line="559" selection-start-column="56" selection-end-line="559" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -303,13 +303,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516814862194</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Testing getPINByFirstName 2.2">
-      <created>1517541510150</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1517541510150</updated>
     </task>
     <task id="LOCAL-00023" summary="Testing getPINByFirstName 2.2">
       <created>1517541691512</created>
@@ -647,7 +640,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517609004388</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Testing getPINByFirstName 2.2">
+      <created>1517614952776</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1517614952776</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -987,8 +987,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dao/people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="565" column="0" lean-forward="true" selection-start-line="565" selection-start-column="0" selection-end-line="565" selection-end-column="0" />
+        <state relative-caret-position="323">
+          <caret line="559" column="56" lean-forward="false" selection-start-line="559" selection-start-column="56" selection-end-line="559" selection-end-column="56" />
           <folding />
         </state>
       </provider>
