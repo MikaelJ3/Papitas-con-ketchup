@@ -435,7 +435,7 @@ class peopleHandler:
 
     def getAllsup(self):
         dao = peopledao()
-        sup_list = dao.getAllsup()
+        sup_list = dao.getAllSUP()
         result_list = []
         for row in sup_list:
             result = self.build_supplier_dict(row)
