@@ -398,31 +398,31 @@ class peopleHandler:
         return jsonify(PIN=result_list)
 
     ##SEARCH PIN BY REQUESTS##
-    def searchADMINByRequests(self, args):
-        ad_id = args.get("ad_id")
-        ad_fname = args.get("ad_fname")
-        ad_lname = args.get("ad_lname")
-        ad_phone = args.get("ad_phone")
+    def searchPINByRequests(self, args):
+        pin_id = args.get("pin_id")
+        pin_fname = args.get("pin_fname")
+        pin_lname = args.get("pin_lname")
+        pin_phone = args.get("pin_phone")
         city = args.get("city")
         country = args.get("country")
         district = args.get("district")
         dao = peopledao()
         request_list = []
 
-        if (len(args) == 1) and ad_id:
-            request_list = dao.GetADMINByID(ad_id)
-        elif (len(args) == 1) and ad_fname:
-            request_list = dao.GetADMINByFNAME(ad_fname)
-        elif (len(args) == 1) and ad_phone:
-            request_list = dao.GetADMINByPHONE(ad_phone)
+        if (len(args) == 1) and pin_id:
+            request_list = dao.GetPINByID(pin_id)
+        elif (len(args) == 1) and pin_fname:
+            request_list = dao.GetPINByFNAME(pin_fname)
+        elif (len(args) == 1) and pin_phone:
+            request_list = dao.GetPINByPHONE(pin_phone)
         elif (len(args) == 1) and city:
-            request_list = dao.GetADMINByCITY(city)
+            request_list = dao.GetPINByCITY(city)
         elif (len(args) == 1) and country:
-            request_list = dao.GetADMINByCOUNTRY(country)
+            request_list = dao.GetPINByCOUNTRY(country)
         elif (len(args) == 1) and district:
-            request_list = dao.GetADMINByDISTRICT(district)
-        elif (len(args) == 2) and ad_fname and ad_lname:
-            request_list = dao.GeADMINByFULLNAME(ad_fname, ad_lname)
+            request_list = dao.GetPINByDISTRICT(district)
+        elif (len(args) == 2) and pin_fname and pin_lname:
+            request_list = dao.GetPINByFULLNAME(pin_fname, pin_lname)
         else:
             return jsonify(error="malformed query string"), 400
         result_list = []
