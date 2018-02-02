@@ -25,6 +25,15 @@ def getAllProducts():
         else:
             return producthandler().search_products(request.args)  # filter products by product attributes
 
+# @app.route('/register', methods=['POST'])
+# def Register():
+#     peopleHandler().add_user()
+#     return redirect(url_for('user_home')
+#
+# @app.route('/register/address', methods=['POST'])
+# def Register():
+#     peopleHandler().add_user()
+#     return redirect(url_for('user_home')
 
 @app.route('/products/supplier')
 def get_products_by_supplier():
@@ -32,6 +41,7 @@ def get_products_by_supplier():
         return peopleHandler().get_all_products_by_supplier()  # gets all products by product name, grouped by supplier id
     else:
         return peopleHandler().getProductsBySupplier(request.args)  # filters products by supplier id, first name, full name
+
 
 
 @app.route('/products/city')
