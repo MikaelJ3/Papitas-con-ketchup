@@ -70,7 +70,7 @@ def getPINByFirstName():
 
 # # #  A D M I N I S T R A T O R  # # #
 
-@app.route('/AyudaPalJibaro/admin', methods=['GET', 'POST'])
+@app.route('/AyudaPalJibaro/admins', methods=['GET', 'POST'])
 def getAllAdmin():
     if not request.args:
         return peopleHandler().getAllAdmin()
