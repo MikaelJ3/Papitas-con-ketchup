@@ -332,7 +332,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
                 " country, district " \
-                "from admins natural inner join addresses" \
+                "from admin natural inner join addresses" \
                 "where addresses.address_id = admins.adaddress_id;"
         cursor.execute(query)
         result = []
