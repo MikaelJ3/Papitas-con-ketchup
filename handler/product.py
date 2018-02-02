@@ -70,7 +70,7 @@ class producthandler:
         for row in product_list:
             result = self.build_product(row)
             result_list.append(result)
-        return result_list
+        return jsonify(Product=result_list)
 
     def getAvailabilityOfProduct(self, p_id):
         dao = ProductDAO()

@@ -371,8 +371,6 @@ def getAllProducts():
 
 # OK
 '''GET PRODUCT BY ID'''
-
-
 @app.route('/AyudaPalJibaro/products/<int:p_id>')
 def getProductById(p_id):
     return producthandler().getProductById(p_id)
@@ -380,8 +378,6 @@ def getProductById(p_id):
 
 # OK
 '''GET IF AVAILABLE'''
-
-
 @app.route('/AyudaPalJibaro/products/availability/<int:p_id>')
 def getAvailabilityOfProduct(p_id):
     return producthandler().getAvailabilityOfProduct(p_id)
@@ -498,7 +494,7 @@ def getOrdersBySupplier():
 
 '''GET Person in need BY First Name'''
 
-
+#https://ayudapaljibaro.herokuapp.com/AyudaPalJibaro/PIN/FirstName?pin_fname=Michael
 @app.route('/AyudaPalJibaro/PIN/FirstName')
 def getPINByFirstName():
     if not request.args:
