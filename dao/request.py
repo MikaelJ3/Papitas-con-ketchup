@@ -21,8 +21,6 @@ class RequestDAO:
             result.append(row)
         return result
 
-
-    # ######################SEARCH BY REQUESTED######################
     def GetRequestsByID(self, r_id):
         cursor = self.conn.cursor()
         query = "select r_id, r_pname, r_qty, r_date, pin_id, pin_fname, pin_lname " \
@@ -101,39 +99,6 @@ class RequestDAO:
         return result
 
 
-    ###############SEARCH BY AVAILABILITY###########################################################################
-    def getRequestBypinId(self, p_id):
-        cursor = self.conn.cursor()
-        query = "select * from request natural inner join pin where p_id = %s order by r_pname;"
-        cursor.execute(query, (p_id,))
-        result = cursor.fetchone()
-        return result
-
-    def insert(self, pname, pcolor, pmaterial, pprice):
-        cursor = self.conn.cursor()
-        query = "insert into parts(pname, pcolor, pmaterial, pprice) values (%s, %s, %s, %s) returning pid;"
-        cursor.execute(query, (pname, pcolor, pmaterial, pprice,))
-        pid = cursor.fetchone()[0]
-        self.conn.commit()
-        return pid
-
-
-    def delete(self, pid):
-        cursor = self.conn.cursor()
-        query = "delete from parts where pid = %s;"
-        cursor.execute(query, (pid,))
-        self.conn.commit()
-        return pid
-
-
-    def update(self, pid, pname, pcolor, pmaterial, pprice):
-        cursor = self.conn.cursor()
-        query = "update parts set pname = %s, pcolor = %s, pmaterial = %s, pprice = %s where pid = %s;"
-        cursor.execute(query, (pname, pcolor, pmaterial, pprice, pid,))
-        self.conn.commit()
-        return pid
-
-
     def insert_new_request(self, pin_id, r_pname, r_qty, r_date):
         cursor = self.conn.cursor()
         query = "insert into request(pin_id, r_pname, r_qty, r_date) values (%s, %s, %s, %s) returning r_id;"
@@ -153,3 +118,32 @@ class RequestDAO:
 #        for row in cursor:
 #            result.append(row)
 #        return result
+###############SEARCH BY AVAILABILITY###########################################################################
+#    def getRequestBypinId(self, p_id):
+#        cursor = self.conn.cursor()
+#        query = "select * from request natural inner join pin where p_id = %s order by r_pname;"
+#        cursor.execute(query, (p_id,))
+#        result = cursor.fetchone()
+#        return result
+#
+#    def insert(self, pname, pcolor, pmaterial, pprice):
+#        cursor = self.conn.cursor()
+#        query = "insert into parts(pname, pcolor, pmaterial, pprice) values (%s, %s, %s, %s) returning pid;"
+#        cursor.execute(query, (pname, pcolor, pmaterial, pprice,))
+#        pid = cursor.fetchone()[0]
+#        self.conn.commit()
+#        return pid
+#
+#    def delete(self, pid):
+#        cursor = self.conn.cursor()
+#        query = "delete from parts where pid = %s;"
+#        cursor.execute(query, (pid,))
+#        self.conn.commit()
+#        return pid
+#
+#   def update(self, pid, pname, pcolor, pmaterial, pprice):
+#        cursor = self.conn.cursor()
+#        query = "update parts set pname = %s, pcolor = %s, pmaterial = %s, pprice = %s where pid = %s;"
+#        cursor.execute(query, (pname, pcolor, pmaterial, pprice, pid,))
+#        self.conn.commit()
+#        return pid

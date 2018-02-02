@@ -14,59 +14,9 @@ class RequestHandler:
         result['pin_lname'] = row[6]
         return result
 
-
-    def build_dict(self, row):
-        result = {}
-        result['pin_fname'] = row[0]
-        result['pin_lname'] = row[1]
-        result['r_pname'] = row[2]
-        result['r_qty'] = row[3]
-        result['r_date'] = row[4]
-        return result
-
-    def build_product(self, row):
-        result = {}
-        result['pr_id'] = row[0]
-        result['pr_name'] = row[1]
-        result['pr_qty'] = row[2]
-        result['pr_unit'] = row[3]
-        result['pr_category'] = row[4]
-        result['pr_priceperunit'] = row[5]
-        return result
-
-    def build_pin_dict(self, row):
-        result = {}
-        result['pid'] = row[0]
-        result['p_fname'] = row[1]
-        result['p_lname'] = row[2]
-        result['p_street_apt_urb'] = row[3]
-        result['p_city'] = row[4]
-        result['p_zipcode'] = row[5]
-        result['p_country'] = row[6]
-        result['p_phone'] = row[7]
-        return result
-
     def getAllRequest(self):
         dao = RequestDAO()
         request_list = dao.getAllRequest()
-        result_list = []
-        for row in request_list:
-            result = self.build_request_dict(row)
-            result_list.append(result)
-        return jsonify(Request=result_list)
-
-    def browseResourcesRequested(self):
-        dao = RequestDAO()
-        request_list = dao.browseResourcesRequested()
-        result_list = []
-        for row in request_list:
-            result = self.build_request_dict(row)
-            result_list.append(result)
-        return jsonify(Request=result_list)
-
-    def browseResourcesAvailable(self):
-        dao = RequestDAO()
-        request_list = dao.browseResourcesAvailable()
         result_list = []
         for row in request_list:
             result = self.build_request_dict(row)
@@ -109,15 +59,43 @@ class RequestHandler:
 
 
 
-    def insert_new_request(self, pin_id, r_pname, r_qty, r_date):
-        dao = RequestDAO()
-        r_id = dao.insert_new_request(pin_id, r_pname, r_qty, r_date)
-        result = {}
-        result["Request Id"] = r_id
-        result["Person Id"] = pin_id
-        result["Product Name"] = r_pname
-        result["Quantity"] = r_qty
-        result["Date"] = r_date
-        return result
+    def insert_new_request(self, form):
+        if len(form) != 4:
+            return jsonify(Error = "Malformed post request"), 400
+        else:
+            pin_id = form['pin_id']
+            r_pname = form['r_pname']
+            r_qty = form['r_qty']
+            r_date = form['r_date']
+            if r_pname and r_date and r_qty:
+                dao = RequestDAO()
+                r_id = dao.insert_new_request(pin_id, r_pname, r_qty, r_date)
+                result_list = dao.GetRequestsByID(r_id)
+                result_list = []
+                for row in result_list:
+                    result = self.build_request_dict(row)
+                    result_list.append(result)
+                return jsonify(Result_list = result_list), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
 
 
+    ##### U N U S E D  O R  O B S O L E T E ####
+
+#    def browseResourcesRequested(self):
+#        dao = RequestDAO()
+#        request_list = dao.browseResourcesRequested()
+#        result_list = []
+#        for row in request_list:
+#            result = self.build_request_dict(row)
+#            result_list.append(result)
+#        return jsonify(Request=result_list)
+
+#    def browseResourcesAvailable(self):
+#        dao = RequestDAO()
+#        request_list = dao.browseResourcesAvailable()
+#        result_list = []
+#        for row in request_list:
+#            result = self.build_request_dict(row)
+#            result_list.append(result)
+#        return jsonify(Request=result_list)
