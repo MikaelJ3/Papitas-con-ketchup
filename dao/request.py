@@ -13,7 +13,8 @@ class RequestDAO:
 
     def getAllRequest(self):
         cursor = self.conn.cursor()
-        query = "select * from request;"
+        query = "select r_id, r_pname, r_qty, r_date, pin_id, pin_fname, pin_lname " \
+                "from request natural inner join pin ;"
         cursor.execute(query)
         result = []
         for row in cursor:
