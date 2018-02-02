@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e0150894-958a-4602-8658-d1551553d034" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/dao/request.py" afterPath="$PROJECT_DIR$/dao/request.py" />
       <change beforePath="$PROJECT_DIR$/handler/request.py" afterPath="$PROJECT_DIR$/handler/request.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +29,8 @@
       <file leaf-file-name="request.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/handler/request.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1921">
-              <caret line="115" column="31" lean-forward="true" selection-start-line="115" selection-start-column="31" selection-end-line="115" selection-end-column="31" />
+            <state relative-caret-position="238">
+              <caret line="83" column="21" lean-forward="false" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -460,7 +459,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517541691512</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Testing getPINByFirstName 2.2">
+      <created>1517542188440</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1517542188440</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -808,8 +814,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/handler/request.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1921">
-          <caret line="115" column="31" lean-forward="true" selection-start-line="115" selection-start-column="31" selection-end-line="115" selection-end-column="31" />
+        <state relative-caret-position="238">
+          <caret line="83" column="21" lean-forward="false" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
           <folding />
         </state>
       </provider>

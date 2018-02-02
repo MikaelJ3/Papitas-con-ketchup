@@ -93,7 +93,7 @@ class RequestHandler:
             request_list = dao.GetRequestsByQTY(r_qty)
         elif (len(args) == 1) and pin_id:
             request_list = dao.GetRequestsByPINID(pin_id)
-        elif (len(args) == 1) and pin_id:
+        elif (len(args) == 1) and pin_fname:
             request_list = dao.GetRequestsByPINFNAME(pin_fname)
         elif (len(args) == 2) and pin_fname and pin_lname:
             request_list = dao.GetRequestsByPINFULLNAME(pin_fname, pin_lname)
