@@ -14,13 +14,13 @@ class RequestHandler:
         result['pin_lname'] = row[6]
         return result
 
-    def build_request2_dict(self, row):
+    def build_request2_dict(self, r_id, r_pname, r_qty, r_date, pin_id):
         result = {}
-        result['r_id'] = row[0]
-        result['r_pname'] = row[1]
-        result['r_qty'] = row[2]
-        result['r_date'] = row[3]
-        result['pin_id'] = row[4]
+        result['r_id'] = r_id
+        result['r_pname'] = r_pname
+        result['r_qty'] = r_qty
+        result['r_date'] = r_date
+        result['pin_id'] = pin_id
         return result
 
     def getAllRequest(self):
