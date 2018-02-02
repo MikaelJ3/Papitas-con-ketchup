@@ -344,20 +344,20 @@ class peopledao:
 
     def GetADMINByID(self, ad_id):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
-                "district " \
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
                 "from admins natural inner join addresses " \
-                "where ad_id = %s;"
+                "where addresses.address_id = admins.adaddress_id and ad_id = %s;"
         cursor.execute(query, (ad_id,))
         result = cursor.fetchone()
         return result
 
     def GetADMINByFNAME(self, ad_fname):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
-                "district " \
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
                 "from admins natural inner join addresses " \
-                "where ad_fname = %s;"
+                "where addresses.address_id = admins.adaddress_id and ad_fname = %s;"
         cursor.execute(query, (ad_fname,))
         result = cursor.fetchone()
         for row in cursor:
@@ -366,20 +366,20 @@ class peopledao:
 
     def GetADMINByPHONE(self, ad_phone):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
-                "district " \
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
                 "from admins natural inner join addresses " \
-                "where ad_phone = %s;"
+                "where addresses.address_id = admins.adaddress_id and ad_phone = %s;"
         cursor.execute(query, (ad_phone,))
         result = cursor.fetchone()
         return result
 
     def GetADMINByCITY(self, city):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
-                "district " \
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
                 "from admins natural inner join addresses " \
-                "where city = %s;"
+                "where addresses.address_id = admins.adaddress_id and city = %s;"
         cursor.execute(query, (city,))
         result = cursor.fetchone()
         for row in cursor:
@@ -388,10 +388,10 @@ class peopledao:
 
     def GetADMINByCOUNTRY(self, country):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
-                "district " \
-                "from admin natural inner join addresses" \
-                "where country = %s;"
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id and country = %s;"
         cursor.execute(query, (country,))
         result = cursor.fetchone()
         for row in cursor:
@@ -400,10 +400,10 @@ class peopledao:
 
     def GetADMINByDISTRICT(self, district):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
-                "district " \
-                "from admin natural inner join addresses" \
-                "where district = %s;"
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id and district = %s;"
         cursor.execute(query, (district,))
         result = cursor.fetchone()
         for row in cursor:
@@ -412,10 +412,10 @@ class peopledao:
 
     def GeADMINByFULLNAME(self, ad_fname, ad_lname):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
-                "district " \
-                "from admin natural inner join addresses" \
-                "where ad_fname = %s and ad_lname = %s;"
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id and ad_fname = %s and ad_lname = %s;"
         cursor.execute(query, (ad_fname, ad_lname,))
         result = cursor.fetchone()
         for row in cursor:
