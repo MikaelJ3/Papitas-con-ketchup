@@ -553,7 +553,7 @@ class peopledao:
     ### P I N ######################################################################################################
     def getAllSUP(self):
         cursor = self.conn.cursor()
-        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, " \
+        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, " \
                 "zipcode," \
                 " country, district " \
                 "from pin natural inner join addresses " \
