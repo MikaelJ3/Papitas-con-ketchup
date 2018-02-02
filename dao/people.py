@@ -35,7 +35,8 @@ class peopledao:
     ### A D M I N I S T R A T O R S ####################################################################################
     def getAllAdmin(self):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, district " \
+        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
+                "district " \
                 "from admin natural inner join addresses;"
         cursor.execute(query)
         result = []
@@ -45,7 +46,8 @@ class peopledao:
 
     def GetADMINByID(self, ad_id):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, district " \
+        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
+                "district " \
                 "from admin natural inner join addresses" \
                 "where ad_id = %s;"
         cursor.execute(query, (ad_id,))
@@ -54,7 +56,8 @@ class peopledao:
 
     def GetADMINByFNAME(self, ad_fname):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, district " \
+        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
+                "district " \
                 "from admin natural inner join addresses" \
                 "where ad_fname = %s;"
         cursor.execute(query, (ad_fname,))
@@ -65,7 +68,8 @@ class peopledao:
 
     def GetADMINByPHONE(self, ad_phone):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, district " \
+        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
+                "district " \
                 "from admin natural inner join addresses" \
                 "where ad_phone = %s;"
         cursor.execute(query, (ad_phone,))
@@ -74,7 +78,8 @@ class peopledao:
 
     def GetADMINByCITY(self, city):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, district " \
+        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
+                "district " \
                 "from admin natural inner join addresses" \
                 "where city = %s;"
         cursor.execute(query, (city,))
@@ -85,7 +90,8 @@ class peopledao:
 
     def GetADMINByCOUNTRY(self, country):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, district " \
+        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
+                "district " \
                 "from admin natural inner join addresses" \
                 "where country = %s;"
         cursor.execute(query, (country,))
@@ -96,7 +102,8 @@ class peopledao:
 
     def GetADMINByDISTRICT(self, district):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, district " \
+        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
+                "district " \
                 "from admin natural inner join addresses" \
                 "where district = %s;"
         cursor.execute(query, (district,))
@@ -107,7 +114,8 @@ class peopledao:
 
     def GeADMINByFULLNAME(self, ad_fname, ad_lname):
         cursor = self.conn.cursor()
-        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, district " \
+        query = "select ad_id, ad_fname, ad_lname, a_id, ad_phone, addressid, addressline1, city, zipcode, country, " \
+                "district " \
                 "from admin natural inner join addresses" \
                 "where ad_fname = %s and ad_lname = %s;"
         cursor.execute(query, (ad_fname, ad_lname,))
