@@ -107,6 +107,12 @@ class RequestDAO:
         self.conn.commit()
         return request_id
 
+    def update_request(self, r_id, pin_id, r_pname, r_date, r_qty):
+        cursor = self.conn.cursor()
+        query = "update reques set pin_id = %s, r_pname = %s, r_date = %s, r_qty = %s where r_id = %s;"
+        cursor.execute(query, (pin_id, r_pname, r_date, r_qty, r_id,))
+        self.conn.commit()
+        return r_id
 
     ##### U N U S E D  O R  O B S O L E T E ####
 

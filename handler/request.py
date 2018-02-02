@@ -66,9 +66,7 @@ class RequestHandler:
 
         return jsonify(Request=result_list)
 
-
-
-    def insert_new_request(self, form):
+    def insert_request(self, form):
         if len(form) != 4:
             return jsonify(Error="Malformed post request"), 400
         else:
@@ -84,7 +82,24 @@ class RequestHandler:
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
-
+    def updateRequest(self, r_id, form):
+        dao = RequestDAO()
+        if not dao.GetRequestsByID(r_id):
+            return jsonify(Error="Request not found."), 404
+        else:
+            if len(form) != 4:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                pin_id = form['pin_id']
+                r_pname = form['r_pname']
+                r_qty = form['r_qty']
+                r_date = form['r_date']
+                if pin_id and r_pname and r_date and r_qty:
+                    dao.update_request(r_id, pin_id, r_pname, r_date, r_qty)
+                    result = self.build_request2_dict(r_id, r_pname, r_qty, r_date, pin_id)
+                    return jsonify(UpdatedRequest=result), 200
+                else:
+                    return jsonify(Error="Unexpected attributes in update request"), 400
     ##### U N U S E D  O R  O B S O L E T E ####
 
 #    def browseResourcesRequested(self):

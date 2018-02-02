@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, flash, redirect, url_for
+from flask import Flask, request, render_template, flash, redirect, url_for, jsonify
 from flask_login import login_manager, current_user, login_user, logout_user
 from handler.people import peopleHandler
 from handler.product import producthandler
@@ -407,12 +407,19 @@ def browseResourcesAvailable():
 @app.route('/AyudaPalJibaro/request', methods=['GET', 'POST'])
 def getAllRequest():
     if request.method == 'POST':
-        return RequestHandler().insert_new_request(request.form)
+        return RequestHandler().insert_request(request.form)
     else:
         if not request.args:
             return RequestHandler().getAllRequest()
         else:
             return RequestHandler().searchProductByRequests(request.args)
+
+@app.route('/AyudaPalJibaro/request/change/<int:r_id>', methods=['PUT', 'DELETE'])
+def requestChange(r_id):
+    if request.method == 'PUT':
+        return RequestHandler().updateRequest(r_id, request.form)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 
 # OK
