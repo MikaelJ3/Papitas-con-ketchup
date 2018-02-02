@@ -70,17 +70,17 @@ class RequestHandler:
 
     def insert_new_request(self, form):
         if len(form) != 4:
-            return jsonify(Error = "Malformed post request"), 400
+            return jsonify(Error="Malformed post request"), 400
         else:
             pin_id = form['pin_id']
             r_pname = form['r_pname']
             r_qty = form['r_qty']
             r_date = form['r_date']
-            if r_pname and r_date and r_qty:
+            if pin_id and r_pname and r_date and r_qty:
                 dao = RequestDAO()
                 r_id = dao.insert_new_request(pin_id, r_pname, r_qty, r_date)
                 result = self.build_request2_dict(r_id, r_pname, r_qty, r_date, pin_id)
-                return jsonify(Request=result), 201
+                return jsonify(result=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
