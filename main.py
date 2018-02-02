@@ -67,6 +67,19 @@ def getPINByFirstName():
 
 ##################### N E W ############################################################################################
 
+
+# # #  A D M I N I S T R A T O R  # # #
+
+@app.route('/AyudaPalJibaro/admin', methods=['GET', 'POST'])
+def getAllAdmin():
+    if request.method == 'POST':
+        return peopleHandler().insert_admin(request.form)
+    else:
+        if not request.args:
+            return peopleHandler().getAllAdmin()
+        else:
+            return peopleHandler().searchADMINByRequests(request.args)
+
 # # #  R E Q U E S T S # # #
 
 @app.route('/AyudaPalJibaro/request', methods=['GET', 'POST'])

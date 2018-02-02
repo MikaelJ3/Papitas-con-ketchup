@@ -9,8 +9,13 @@ class peopleHandler:
         result['ad_fname'] = row[1]
         result['ad_lname'] = row[2]
         result['a_id'] = row[3]
-        result['adressid'] = row[4]
-        result['ad_phone'] = row[5]
+        result['ad_phone'] = row[4]
+        result['adressid'] = row[5]
+        result['addressline1'] = row[6]
+        result['city'] = row[7]
+        result['zipcode'] = row[8]
+        result['country'] = row[9]
+        result['district'] = row[10]
         return result
 
     def build_pin_dict(self, row):
@@ -19,18 +24,28 @@ class peopleHandler:
         result['pin_fname'] = row[1]
         result['pin_lname'] = row[2]
         result['a_id'] = row[3]
-        result['adressid'] = row[4]
-        result['pin_phone'] = row[5]
+        result['pin_phone'] = row[4]
+        result['adressid'] = row[5]
+        result['addressline1'] = row[6]
+        result['city'] = row[7]
+        result['zipcode'] = row[8]
+        result['country'] = row[9]
+        result['district'] = row[10]
         return result
 
     def build_supplier_dict(self, row):
         result = {}
-        result['ad_id'] = row[0]
-        result['ad_fname'] = row[1]
-        result['ad_lname'] = row[2]
+        result['s_id'] = row[0]
+        result['s_fname'] = row[1]
+        result['s_lname'] = row[2]
         result['a_id'] = row[3]
-        result['adressid'] = row[4]
-        result['s_phone'] = row[5]
+        result['a_phone'] = row[4]
+        result['adressid'] = row[5]
+        result['addressline1'] = row[6]
+        result['city'] = row[7]
+        result['zipcode'] = row[8]
+        result['country'] = row[9]
+        result['district'] = row[10]
         return result
 
     def build_product_dict(self, row):
@@ -281,3 +296,50 @@ class peopleHandler:
             result = self.build_pin_dict(row)
             result_list.append(result)
         return jsonify(SupplierByProduct=result_list)
+
+    ########## NEW #####################################################################################################
+    def getAllAdmin(self):
+        dao = peopledao()
+        suppliers_list = dao.getAllAdmin()
+        result_list = []
+        for row in suppliers_list:
+            result = self.build_admin_dict(row)
+            result_list.append(result)
+        return jsonify(Admins=result_list)
+
+    ##SEARCH ADMIN BY REQUESTS##
+    def searchADMINByRequests(self, args):
+        ad_id = args.get("ad_id")
+        ad_fname = args.get("ad_fname")
+        ad_lname = args.get("ad_lname")
+        ad_phone = args.get("ad_phone")
+        city = args.get("city")
+        country = args.get("country")
+        district = args.get("district")
+
+        dao = peopledao()
+        request_list = []
+
+        if (len(args) == 1) and ad_id:
+            request_list = dao.GetADMINByID(ad_id)
+        elif (len(args) == 1) and ad_fname:
+            request_list = dao.GetADMINByFNAME(ad_fname)
+        elif (len(args) == 1) and ad_phone:
+            request_list = dao.GetADMINByPHONE(ad_phone)
+        elif (len(args) == 1) and city:
+            request_list = dao.GetADMINByCITY(city)
+        elif (len(args) == 1) and country:
+            request_list = dao.GetADMINByCOUNTRY(country)
+        elif (len(args) == 1) and district:
+            request_list = dao.GetADMINByDISTRICT(district)
+        elif (len(args) == 2) and ad_fname and ad_lname:
+            request_list = dao.GeADMINByFULLNAME(ad_fname, ad_lname)
+        else:
+            return jsonify(error="malformed query string"), 400
+        result_list = []
+        for row in request_list:
+            result = self.build_admin_dict(row)
+            result_list.append(result)
+            print(row)
+
+        return jsonify(Request=result_list)
