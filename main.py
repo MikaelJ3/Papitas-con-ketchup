@@ -102,6 +102,18 @@ def getAllpin():
         else:
             return peopleHandler().searchPINByRequests(request.args)
 
+# # #  S U P P L I E R  # # #
+
+@app.route('/supplier', methods=['GET', 'POST'])
+def getAllSUP():
+    if request.method == 'POST':
+        return peopleHandler().insert_sup(request.form)
+    else:
+        if not request.args:
+            return peopleHandler().getAllsup()
+        else:
+            return peopleHandler().searchSUPByRequests(request.args)
+
 
 # # #  R E Q U E S T S # # #
 

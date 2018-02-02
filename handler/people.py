@@ -53,9 +53,9 @@ class peopleHandler:
         result['s_id'] = row[0]
         result['s_fname'] = row[1]
         result['s_lname'] = row[2]
-        result['a_id'] = row[3]
-        result['a_phone'] = row[4]
-        result['adressid'] = row[5]
+        result['sa_id'] = row[3]
+        result['adressid'] = row[4]
+        result['s_phone'] = row[5]
         result['addressline1'] = row[6]
         result['city'] = row[7]
         result['zipcode'] = row[8]
@@ -428,6 +428,51 @@ class peopleHandler:
         result_list = []
         for row in request_list:
             result = self.build_admin_dict(row)
+            result_list.append(result)
+            print(row)
+
+        return jsonify(Request=result_list)
+
+    def getAllsup(self):
+        dao = peopledao()
+        sup_list = dao.getAllsup()
+        result_list = []
+        for row in sup_list:
+            result = self.build_supplier_dict(row)
+            result_list.append(result)
+        return jsonify(PIN=result_list)
+
+    ##SEARCH SUP BY REQUESTS##
+    def searchSUPByRequests(self, args):
+        s_id = args.get("s_id")
+        s_fname = args.get("s_fname")
+        s_lname = args.get("s_lname")
+        s_phone = args.get("s_phone")
+        city = args.get("city")
+        country = args.get("country")
+        district = args.get("district")
+        dao = peopledao()
+        request_list = []
+
+        if (len(args) == 1) and s_id:
+            request_list = dao.GetSUPByID(s_id)
+        elif (len(args) == 1) and s_fname:
+            request_list = dao.GetSUPByFNAME(s_fname)
+        elif (len(args) == 1) and s_phone:
+            request_list = dao.GetSUPByPHONE(s_phone)
+        elif (len(args) == 1) and city:
+            request_list = dao.GetSUPByCITY(city)
+        elif (len(args) == 1) and country:
+            request_list = dao.GetSUPByCOUNTRY(country)
+        elif (len(args) == 1) and district:
+            request_list = dao.GetSUPByDISTRICT(district)
+        elif (len(args) == 2) and s_fname and s_lname:
+            request_list = dao.GetSUPByFULLNAME(s_fname, s_lname)
+        else:
+            return jsonify(error="malformed query string"), 400
+        result_list = []
+        for row in request_list:
+            result = self.build_supplier_dict(row)
             result_list.append(result)
             print(row)
 
