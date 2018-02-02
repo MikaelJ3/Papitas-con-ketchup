@@ -21,14 +21,6 @@ class RequestDAO:
             result.append(row)
         return result
 
-    def browseResourcesRequested(self):
-        cursor = self.conn.cursor()
-        query = "select * from request natural inner join ain;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
 
     # ######################SEARCH BY REQUESTED######################
     def GetRequestsByID(self, r_id):
@@ -149,3 +141,15 @@ class RequestDAO:
         request_id = cursor.fetchone()[0]
         self.conn.commit()
         return request_id
+
+
+    ##### U N U S E D  O R  O B S O L E T E ####
+
+#    def browseResourcesRequested(self):
+#        cursor = self.conn.cursor()
+#        query = "select * from request natural inner join ain;"
+#        cursor.execute(query)
+#        result = []
+#        for row in cursor:
+#            result.append(row)
+#        return result

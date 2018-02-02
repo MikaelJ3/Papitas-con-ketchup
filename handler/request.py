@@ -101,7 +101,7 @@ class RequestHandler:
             return jsonify(error="malformed query string"), 400
         result_list = []
         for row in request_list:
-            result = self.build_dict(row)
+            result = self.build_request_dict(row)
             result_list.append(result)
             print(row)
 
