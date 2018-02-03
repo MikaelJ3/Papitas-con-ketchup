@@ -48,6 +48,21 @@ class peopleHandler:
         result['district'] = row[10]
         return result
 
+    def build_pinINS_dict(self, pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode, country, district):
+        result = {}
+        result['pin_id'] = pin_id
+        result['pin_fname'] = pin_fname
+        result['pin_lname'] = pin_lname
+        result['pina_id'] = pina_id
+        result['pinaddress_id'] = pinaddress_id
+        result['pin_phone'] = pin_phone
+        result['addressline1'] = addressline1
+        result['city'] = city
+        result['zipcode'] = zipcode
+        result['country'] = country
+        result['district'] = district
+        return result
+
     def build_supplier_dict(self, row):
         result = {}
         result['s_id'] = row[0]
@@ -61,6 +76,21 @@ class peopleHandler:
         result['zipcode'] = row[8]
         result['country'] = row[9]
         result['district'] = row[10]
+        return
+
+    def build_supplierINS_dict(self, s_id, s_fname, s_lname, sa_id, adressid, s_phone, addressline1, city, zipcode, country, district):
+        result = {}
+        result['s_id'] = s_id
+        result['s_fname'] = s_fname
+        result['s_lname'] = s_lname
+        result['sa_id'] = sa_id
+        result['adressid'] = adressid
+        result['s_phone'] = s_phone
+        result['addressline1'] = addressline1
+        result['city'] = city
+        result['zipcode'] = zipcode
+        result['country'] = country
+        result['district'] = district
         return result
 
     def build_product_dict(self, row):
@@ -446,6 +476,34 @@ class peopleHandler:
         return jsonify(Request=result_list)
     ####################################################################################################################
     ####### S U P P L I E R ############################################################################################
+
+    def insert_sup(self, form):
+        if len(form) != 10:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            s_fname = form['s_fname']
+            s_lname = form['s_lname']
+            a_username = form['a_username']
+            a_password = form['a_password']
+            s_phone = form['s_phone']
+            addressline1 = form['addressline1']
+            city = form['city']
+            zipcode = form['zipcode']
+            country = form['country']
+            district = form['district']
+            if s_fname and s_lname and s_phone and addressline1 and city and zipcode and country \
+                    and district and a_username and a_password:
+                dao = peopledao()
+                saddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
+                sa_id = dao.insert_new_user(a_username, a_password)
+                s_id = dao.insert_new_sup(s_fname, s_lname, sa_id, saddress_id, s_phone)
+                result = self.build_supplierINS_dict(s_id, s_fname, s_lname, sa_id, saddress_id, s_phone,
+                                                  addressline1, city, zipcode, country, district)
+                return jsonify(NewRequest=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
     def getAllsup(self):
         dao = peopledao()
         sup_list = dao.getAllSUP()

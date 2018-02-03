@@ -529,7 +529,16 @@ class peopledao:
         self.conn.commit()
         return pin_id
 
-    ### P I N ######################################################################################################
+    ### S U P  ######################################################################################################
+    def insert_new_sup(self, s_fname, s_lname, sa_id, saddress_id, s_phone):
+        cursor = self.conn.cursor()
+        query = "insert into supplier(s_fname, s_lname, sa_id, saddress_id, s_phone) values (%s, %s, %s, %s, " \
+                "%s) returning s_id;"
+        cursor.execute(query, (s_fname, s_lname, sa_id, saddress_id, s_phone),)
+        s_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return s_id
+
     def getAllSUP(self):
         cursor = self.conn.cursor()
         query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
