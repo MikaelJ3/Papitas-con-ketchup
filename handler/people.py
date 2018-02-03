@@ -76,7 +76,7 @@ class peopleHandler:
         result['zipcode'] = row[8]
         result['country'] = row[9]
         result['district'] = row[10]
-        return
+        return result
 
     def build_supplierINS_dict(self, s_id, s_fname, s_lname, sa_id, adressid, s_phone, addressline1, city, zipcode, country, district):
         result = {}
