@@ -298,21 +298,8 @@ class peopleHandler:
             result_list.append(result)
         return jsonify(Product=result_list)
 
-    def getPINByFirstName(self, args):
-        pin_fname = args.get("pin_fname")
-        dao = peopledao()
-        pin_list = []
-        if ((len(args)) == 1) and pin_fname:
-            pin_list = dao.getPINByFirstName(pin_fname)
-        else:
-            return jsonify(error="malformed query string"), 400
-        result_list = []
-        for row in pin_list:
-            result = self.build_pin_dict(row)
-            result_list.append(result)
-        return jsonify(SupplierByProduct=result_list)
 
-    ########## NEW #####################################################################################################
+    ########## A D M I N ###############################################################################################
 
     def insert_admin(self, form):
         if len(form) != 10:
@@ -331,16 +318,20 @@ class peopleHandler:
             if ad_fname and ad_lname and ad_phone and addressline1 and city and zipcode and country \
                     and district and a_username and a_password:
                 dao = peopledao()
-                adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
-                ada_id = dao.insert_new_user(a_username, a_password)
-                ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
-                result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,
-                                                  addressline1, city, zipcode, country, district)
-                return jsonify(NewRequest=result), 201
+                row = dao.getAccountByUsername(a_username);
+                if not row:
+                    adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
+                    ada_id = dao.insert_new_user(a_username, a_password)
+                    ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
+                    result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,
+                                                      addressline1, city, zipcode, country, district)
+                    return jsonify(NewRequest=result), 201
+                else:
+                    return jsonify(error= "Username already taken")
+
+
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
-
-
 
     def getAllAdmin(self):
         dao = peopledao()
@@ -387,7 +378,7 @@ class peopleHandler:
 
         return jsonify(Request=result_list)
 
-
+    ####### P E O P L E  I N  N E E D ##################################################################################
     def getAllpin(self):
         dao = peopledao()
         pin_list = dao.getAllpin()
@@ -432,7 +423,8 @@ class peopleHandler:
             print(row)
 
         return jsonify(Request=result_list)
-
+    ####################################################################################################################
+    ####### S U P P L I E R ############################################################################################
     def getAllsup(self):
         dao = peopledao()
         sup_list = dao.getAllSUP()

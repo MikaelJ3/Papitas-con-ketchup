@@ -11,38 +11,18 @@ class peopledao:
                                                                     pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
 
-    '''Return everyone registered as person in need'''
 
-    def getAllPeopleInNeed(self):
+
+    def getAccountByUsername(self, a_username):
         cursor = self.conn.cursor()
-        query = "select * from pin;"
+        query = "select * from account where a_username =%s;"
         cursor.execute(query)
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    '''Return everyone registered as supplier'''
 
-    def getAllSuppliers(self):
-        cursor = self.conn.cursor()
-        query = "select * from supplier;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
-
-    '''Return everyone registered as admin'''
-
-    def getAllAdminOLD(self):
-        cursor = self.conn.cursor()
-        query = "select * from admin;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
 
     '''Return all order info'''
 
