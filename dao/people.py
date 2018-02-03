@@ -563,13 +563,13 @@ class peopledao:
             result.append(row)
         return result
 
-    def GetSUPByID(self, pin_id):
+    def GetSUPByID(self, s_id):
         cursor = self.conn.cursor()
         query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
                 " country, district " \
                 "from supplier natural inner join addresses " \
-                "where addresses.address_id = supplier.saddress_id and pin_id = %s;"
-        cursor.execute(query, (pin_id,))
+                "where addresses.address_id = supplier.saddress_id and s_id = %s;"
+        cursor.execute(query, (s_id,))
         result = []
         for row in cursor:
             result.append(row)
