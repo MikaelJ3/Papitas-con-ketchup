@@ -327,7 +327,7 @@ class peopleHandler:
                                                       addressline1, city, zipcode, country, district)
                     return jsonify(NewRequest=result), 201
                 else:
-                    return jsonify(error= "Username already taken"), 400
+                    return jsonify(error="Username already taken"), 400
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
