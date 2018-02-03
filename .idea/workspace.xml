@@ -29,8 +29,8 @@
       <file leaf-file-name="people.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/handler/people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="329" column="72" lean-forward="false" selection-start-line="329" selection-start-column="72" selection-end-line="329" selection-end-column="72" />
+            <state relative-caret-position="448">
+              <caret line="331" column="74" lean-forward="false" selection-start-line="331" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -303,13 +303,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516814862194</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Testing getPINByFirstName 2.2">
-      <created>1517583319018</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1517583319018</updated>
     </task>
     <task id="LOCAL-00030" summary="Testing getPINByFirstName 2.2">
       <created>1517584096858</created>
@@ -647,7 +640,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517617484638</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="chucha">
+      <created>1517617623310</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1517617623310</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -988,8 +988,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/handler/people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="329" column="72" lean-forward="false" selection-start-line="329" selection-start-column="72" selection-end-line="329" selection-end-column="72" />
+        <state relative-caret-position="448">
+          <caret line="331" column="74" lean-forward="false" selection-start-line="331" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

@@ -318,7 +318,7 @@ class peopleHandler:
             if ad_fname and ad_lname and ad_phone and addressline1 and city and zipcode and country \
                     and district and a_username and a_password:
                 dao = peopledao()
-                row = dao.getAccountByUsername(a_username);
+                row = dao.getAccountByUsername(a_username)
                 if not row:
                     adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
                     ada_id = dao.insert_new_user(a_username, a_password)
@@ -328,8 +328,6 @@ class peopleHandler:
                     return jsonify(NewRequest=result), 201
                 else:
                     return jsonify(error= "Username already taken"), 400
-
-
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
