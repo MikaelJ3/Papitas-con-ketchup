@@ -455,11 +455,11 @@ class peopledao:
     ### P I N ######################################################################################################
     def getAllpin(self):
         cursor = self.conn.cursor()
-        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, " \
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
                 "zipcode," \
                 " country, district " \
-                "from supplier natural inner join addresses " \
-                "where addresses.address_id = supplier.saddress_id;"
+                "from pin natural inner join addresses " \
+                "where addresses.address_id = pin.pinaddress_id"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -553,8 +553,7 @@ class peopledao:
     ### P I N ######################################################################################################
     def getAllSUP(self):
         cursor = self.conn.cursor()
-        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, " \
-                "zipcode," \
+        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
                 " country, district " \
                 "from supplier natural inner join addresses " \
                 "where addresses.address_id = supplier.saddress_id;"
@@ -566,35 +565,35 @@ class peopledao:
 
     def GetSUPByID(self, pin_id):
         cursor = self.conn.cursor()
-        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
+        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
                 " country, district " \
-                "from pin natural inner join addresses " \
-                "where addresses.address_id = pin.pinaddress_id and pin_id = %s;"
+                "from supplier natural inner join addresses " \
+                "where addresses.address_id = supplier.saddress_id and pin_id = %s;"
         cursor.execute(query, (pin_id,))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    def GetSUPByFNAME(self, pin_fname):
+    def GetSUPByFNAME(self, s_fname):
         cursor = self.conn.cursor()
-        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
+        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
                 " country, district " \
-                "from pin natural inner join addresses " \
-                "where addresses.address_id = pin.pinaddress_id and pin_fname = %s;"
-        cursor.execute(query, (pin_fname,))
+                "from supplier natural inner join addresses " \
+                "where addresses.address_id = supplier.saddress_id and s_fname = %s;"
+        cursor.execute(query, (s_fname,))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    def GetSUPByPHONE(self, pin_phone):
+    def GetSUPByPHONE(self, s_phone):
         cursor = self.conn.cursor()
-        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
+        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
                 " country, district " \
-                "from pin natural inner join addresses " \
-                "where addresses.address_id = pin.pinaddress_id and pin_phone = %s;"
-        cursor.execute(query, (pin_phone,))
+                "from supplier natural inner join addresses " \
+                "where addresses.address_id = supplier.saddress_id and s_phone = %s;"
+        cursor.execute(query, (s_phone,))
         result = []
         for row in cursor:
             result.append(row)
@@ -602,10 +601,10 @@ class peopledao:
 
     def GetSUPByCITY(self, city):
         cursor = self.conn.cursor()
-        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
+        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
                 " country, district " \
-                "from pin natural inner join addresses " \
-                "where addresses.address_id = pin.pinaddress_id and city = %s;"
+                "from supplier natural inner join addresses " \
+                "where addresses.address_id = supplier.saddress_id and city = %s;"
         cursor.execute(query, (city,))
         result = []
         for row in cursor:
@@ -614,10 +613,10 @@ class peopledao:
 
     def GetSUPByCOUNTRY(self, country):
         cursor = self.conn.cursor()
-        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
+        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
                 " country, district " \
-                "from pin natural inner join addresses " \
-                "where addresses.address_id = pin.pinaddress_id and country = %s;"
+                "from supplier natural inner join addresses " \
+                "where addresses.address_id = supplier.saddress_id and country = %s;"
         cursor.execute(query, (country,))
         result = []
         for row in cursor:
@@ -626,23 +625,23 @@ class peopledao:
 
     def GetSUPByDISTRICT(self, district):
         cursor = self.conn.cursor()
-        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
+        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
                 " country, district " \
-                "from pin natural inner join addresses " \
-                "where addresses.address_id = pin.pinaddress_id and district = %s;"
+                "from supplier natural inner join addresses " \
+                "where addresses.address_id = supplier.saddress_id and district = %s;"
         cursor.execute(query, (district,))
         result = []
         for row in cursor:
             result.append(row)
         return result
 
-    def GetSUPByFULLNAME(self, pin_fname, pin_lname):
+    def GetSUPByFULLNAME(self, s_fname, s_lname):
         cursor = self.conn.cursor()
-        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
+        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
                 " country, district " \
-                "from pin natural inner join addresses " \
-                "where addresses.address_id = pin.pinaddress_id and pin_fname = %s and pin_lname = %s;"
-        cursor.execute(query, (pin_fname, pin_lname,))
+                "from supplier natural inner join addresses " \
+                "where addresses.address_id = supplier.saddress_id and s_fname = %s and s_lname = %s;"
+        cursor.execute(query, (s_fname, s_lname,))
         result = []
         for row in cursor:
             result.append(row)

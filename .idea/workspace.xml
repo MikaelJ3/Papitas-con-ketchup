@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e0150894-958a-4602-8658-d1551553d034" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/handler/people.py" afterPath="$PROJECT_DIR$/handler/people.py" />
+      <change beforePath="$PROJECT_DIR$/dao/people.py" afterPath="$PROJECT_DIR$/dao/people.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,8 +41,8 @@
       <file leaf-file-name="people.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dao/people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="569" column="39" lean-forward="true" selection-start-line="569" selection-start-column="39" selection-end-line="569" selection-end-column="39" />
+            <state relative-caret-position="561">
+              <caret line="582" column="78" lean-forward="false" selection-start-line="582" selection-start-column="78" selection-end-line="582" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -158,8 +158,8 @@
         <option value="$PROJECT_DIR$/dao/request.py" />
         <option value="$PROJECT_DIR$/handler/request.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/dao/people.py" />
         <option value="$PROJECT_DIR$/handler/people.py" />
+        <option value="$PROJECT_DIR$/dao/people.py" />
       </list>
     </option>
   </component>
@@ -303,13 +303,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516814862194</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Testing getPINByFirstName 2.2">
-      <created>1517542188440</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1517542188440</updated>
     </task>
     <task id="LOCAL-00025" summary="Testing getPINByFirstName 2.2">
       <created>1517542659744</created>
@@ -647,7 +640,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517615203378</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Testing getPINByFirstName 2.2">
+      <created>1517615454285</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1517615454285</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -987,8 +987,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dao/people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="569" column="39" lean-forward="true" selection-start-line="569" selection-start-column="39" selection-end-line="569" selection-end-column="39" />
+        <state relative-caret-position="561">
+          <caret line="582" column="78" lean-forward="false" selection-start-line="582" selection-start-column="78" selection-end-line="582" selection-end-column="78" />
           <folding />
         </state>
       </provider>
