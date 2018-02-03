@@ -396,6 +396,24 @@ class peopledao:
             result.append(row)
         return result
 
+    #### ADDRESS #######################################################################################################
+    def getAllAddress(self):
+        cursor = self.conn.cursor()
+        query = "select * " \
+                "from addresses;"
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getAddressByID(self, address_id):
+        cursor = self.conn.cursor()
+        query = "select * from addresses where address_id;"
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def insert_new_address(self, addressline1, city, country, district, zipcode):
         cursor = self.conn.cursor()
         query = "insert into addresses(addressline1, city, country, district, zipcode) values (%s, %s, %s, %s, %s) " \
@@ -405,6 +423,15 @@ class peopledao:
         self.conn.commit()
         return address_id
 
+    def update_address(self, address_id, addressline1, city, country, district, zipcode):
+        cursor = self.conn.cursor()
+        query = "update addresses set addressline1 = %s, city = %s, country = %s, district = %s, zipcode = %s " \
+                "where address_id = %s;"
+        cursor.execute(query, (addressline1, city, country, district, zipcode, address_id),)
+        self.conn.commit()
+        return address_id
+
+    ########### USER ###################################################################################################
     def insert_new_user(self, a_username, a_password):
         cursor = self.conn.cursor()
         query = "insert into account(a_username, a_password) values (%s, %s) returning a_id;"
@@ -419,6 +446,14 @@ class peopledao:
                 "%s) returning ad_id;"
         cursor.execute(query, (ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,))
         ad_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return ad_id
+
+    def update_admin(self, ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone):
+        cursor = self.conn.cursor()
+        query = "update admins set ad_fname = %s, ad_lname = %s, ada_id = %s, adaddress_id = %s, ad_phone = %s " \
+                "where ad_id = %s;"
+        cursor.execute(query, (ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, ad_id),)
         self.conn.commit()
         return ad_id
 
@@ -529,6 +564,14 @@ class peopledao:
         self.conn.commit()
         return pin_id
 
+    def update_pin(self, pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, s_phone):
+        cursor = self.conn.cursor()
+        query = "update pin set pin_fname = %s, pin_lname = %s, pina_id = %s, pinaddress_id = %s, s_phone = %s " \
+                "where pin_id = %s;"
+        cursor.execute(query, (pin_fname, pin_lname, pina_id, pinaddress_id, s_phone, pin_id),)
+        self.conn.commit()
+        return pin_id
+
     ### S U P  ######################################################################################################
     def insert_new_sup(self, s_fname, s_lname, sa_id, saddress_id, s_phone):
         cursor = self.conn.cursor()
@@ -634,6 +677,14 @@ class peopledao:
         for row in cursor:
             result.append(row)
         return result
+
+    def update_supplier(self, s_id, s_fname, s_lname, sa_id, saddress_id, s_phone):
+        cursor = self.conn.cursor()
+        query = "update supplier set s_fname = %s, s_lname = %s, sa_id = %s, saddress_id = %s, s_phone = %s " \
+                "where s_id = %s;"
+        cursor.execute(query, (s_fname, s_lname, sa_id, saddress_id, s_phone, s_id),)
+        self.conn.commit()
+        return s_id
 
     ''' not specified in phase 2 specs'''
     '''def getRequestsbypersoninneed(self, pin_id):

@@ -75,9 +75,24 @@ def getPINByFirstName():
     else:
         return peopleHandler().getPINByFirstName(request.args)
 
-##################### N E W ############################################################################################
+# # #  A D D R E S S # # #
 
+@app.route('/address', methods=['GET', 'POST'])
+def getAllAddress():
+    if request.method == 'POST':
+        return peopleHandler().updateAddresses(request.form)
+    else:
+        if not request.args:
+            return peopleHandler().getAllAddress()
+        else:
+            return peopleHandler().getAddressByID(request.args)
 
+@app.route('/admin/update/<int:pin_id>', methods=['PUT', 'DELETE'])
+def addressChange(ad_id):
+    if request.method == 'PUT':
+        return peopleHandler().updateadmin(ad_id, request.form)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 # # #  A D M I N I S T R A T O R  # # #
 
 @app.route('/admins', methods=['GET', 'POST'])
@@ -89,6 +104,13 @@ def getAllAdmin():
             return peopleHandler().getAllAdmin()
         else:
             return peopleHandler().searchADMINByRequests(request.args)
+
+@app.route('/admin/update/<int:pin_id>', methods=['PUT', 'DELETE'])
+def adminChange(ad_id):
+    if request.method == 'PUT':
+        return peopleHandler().updateadmin(ad_id, request.form)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 # # #  P E O P L E  I N  N E E D  # # #
 
@@ -102,6 +124,13 @@ def getAllpin():
         else:
             return peopleHandler().searchPINByRequests(request.args)
 
+@app.route('/pin/update/<int:pin_id>', methods=['PUT', 'DELETE'])
+def pinChange(pin_id):
+    if request.method == 'PUT':
+        return peopleHandler().updatepin(pin_id, request.form)
+    else:
+        return jsonify(Error="Method not allowed."), 405
+
 # # #  S U P P L I E R  # # #
 
 @app.route('/supplier', methods=['GET', 'POST'])
@@ -113,6 +142,13 @@ def getAllSUP():
             return peopleHandler().getAllsup()
         else:
             return peopleHandler().searchSUPByRequests(request.args)
+
+@app.route('/supplier/update/<int:s_id>', methods=['PUT', 'DELETE'])
+def supChange(s_id):
+    if request.method == 'PUT':
+        return peopleHandler().updatesup(s_id, request.form)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 
 # # #  R E Q U E S T S # # #

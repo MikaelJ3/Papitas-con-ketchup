@@ -18,6 +18,27 @@ class peopleHandler:
         result['district'] = row[10]
         return result
 
+    def build_address_dict(self, row):
+        result = ()
+        result['address_id'] = row[1]
+        result['addressline1'] = row[2]
+        result['city'] = row[3]
+        result['zipcode'] = row[4]
+        result['country'] = row[5]
+        result['district'] = row[6]
+        return result
+
+    def build_adminSOLO_dict(self, row):
+        result = {}
+        result['ad_id'] = row[0]
+        result['ad_fname'] = row[1]
+        result['ad_lname'] = row[2]
+        result['ada_id'] = row[3]
+        result['adaddress_id'] = row[4]
+        result['ad_phone'] = row[5]
+        return result
+
+
     def build_adminINS_dict(self, ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode, country, district):
         result = {}
         result['ad_id'] = ad_id
@@ -48,6 +69,16 @@ class peopleHandler:
         result['district'] = row[10]
         return result
 
+    def build_pinSOLO_dict(self, row):
+        result = {}
+        result['pin_id'] = row[0]
+        result['pin_fname'] = row[1]
+        result['pin_lname'] = row[2]
+        result['pina_id'] = row[3]
+        result['pinaddress_id'] = row[4]
+        result['pin_phone'] = row[5]
+        return result
+
     def build_pinINS_dict(self, pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode, country, district):
         result = {}
         result['pin_id'] = pin_id
@@ -76,6 +107,16 @@ class peopleHandler:
         result['zipcode'] = row[8]
         result['country'] = row[9]
         result['district'] = row[10]
+        return result
+
+    def build_subSOLO_dict(self, row):
+        result = {}
+        result['s_id'] = row[0]
+        result['s_fname'] = row[1]
+        result['s_lname'] = row[2]
+        result['sa_id'] = row[3]
+        result['aaddress_id'] = row[4]
+        result['s_phone'] = row[5]
         return result
 
     def build_supplierINS_dict(self, s_id, s_fname, s_lname, sa_id, adressid, s_phone, addressline1, city, zipcode, country, district):
@@ -328,8 +369,72 @@ class peopleHandler:
             result_list.append(result)
         return jsonify(Product=result_list)
 
+    def getAllAddress(self):
+        dao = peopledao()
+        sup_list = dao.getAllAddress()
+        result_list = []
+        for row in sup_list:
+            result = self.build_address_dict(row)
+            result_list.append(result)
+        return jsonify(Address=result_list)
+
+    ##SEARCH SUP BY REQUESTS##
+    def getAddressByID(self, args):
+        address_id = args.get("address_id")
+        dao = peopledao()
+        request_list = []
+
+        if (len(args) == 1) and address_id:
+            request_list = dao.getAddressByID(address_id)
+        else:
+            return jsonify(error="malformed query string"), 400
+        result_list = []
+        for row in request_list:
+            result = self.build_address_dict(row)
+            result_list.append(result)
+        return jsonify(AdressByID=result_list)
+
+    def updateAddresses(self, addresses_id, form):
+        dao = peopledao()
+        if not dao.getAddressByID(addresses_id):
+            return jsonify(Error="Request not found."), 404
+        else:
+            if len(form) != 5:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                addressline1 = form['addressline1']
+                city = form['city']
+                country = form['country']
+                district = form['district']
+                zipcode = form['zipcode']
+                if addresses_id and addressline1 and city and country and district and zipcode:
+                    dao.update_address(addresses_id, addressline1, city, country, district, zipcode)
+                    result = self.build_address_dict(addresses_id, addressline1, city, country, district, zipcode)
+                    return jsonify(UpdatedRequest=result), 200
+                else:
+                    return jsonify(Error="Unexpected attributes in update request"), 400
 
     ########## A D M I N ###############################################################################################
+
+    def updateAdmin(self, ad_id, form):
+        dao = peopledao()
+        if not dao.GetADMINByID(ad_id):
+            return jsonify(Error="Request not found."), 404
+        else:
+            if len(form) != 5:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                ad_fname = form['ad_fname']
+                ad_lname = form['ad_lname']
+                ada_id = form['ada_id']
+                adaddress_id = form['adaddress_id']
+                ad_phone = form['ad_phone']
+                if ad_fname and ad_lname and ada_id and adaddress_id and ad_phone:
+                    dao.update_admin(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
+                    result = self.build_adminSOLO_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
+                    return jsonify(UpdatedRequest=result), 200
+                else:
+                    return jsonify(Error="Unexpected attributes in update request"), 400
 
     def insert_admin(self, form):
         if len(form) != 10:
@@ -353,7 +458,7 @@ class peopleHandler:
                 ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
                 result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,
                                                   addressline1, city, zipcode, country, district)
-                return jsonify(NewRequest=result), 201
+                return jsonify(NewAdministrator=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
@@ -426,7 +531,7 @@ class peopleHandler:
                 pin_id = dao.insert_new_pin(pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone)
                 result = self.build_adminINS_dict(pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone,
                                                   addressline1, city, zipcode, country, district)
-                return jsonify(NewRequest=result), 201
+                return jsonify(NewPersonInNeed=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
@@ -499,7 +604,7 @@ class peopleHandler:
                 s_id = dao.insert_new_sup(s_fname, s_lname, sa_id, saddress_id, s_phone)
                 result = self.build_supplierINS_dict(s_id, s_fname, s_lname, sa_id, saddress_id, s_phone,
                                                   addressline1, city, zipcode, country, district)
-                return jsonify(NewRequest=result), 201
+                return jsonify(NewSupplier=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
