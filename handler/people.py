@@ -318,16 +318,12 @@ class peopleHandler:
             if ad_fname and ad_lname and ad_phone and addressline1 and city and zipcode and country \
                     and district and a_username and a_password:
                 dao = peopledao()
-                row = dao.getAccountByUsername(a_username)
-                if not row:
-                    adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
-                    ada_id = dao.insert_new_user(a_username, a_password)
-                    ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
-                    result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,
-                                                      addressline1, city, zipcode, country, district)
-                    return jsonify(NewRequest=result), 201
-                else:
-                    return jsonify(error="Username already taken"), 400
+                adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
+                ada_id = dao.insert_new_user(a_username, a_password)
+                ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
+                result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,
+                                                  addressline1, city, zipcode, country, district)
+                return jsonify(NewRequest=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
@@ -377,6 +373,33 @@ class peopleHandler:
         return jsonify(Request=result_list)
 
     ####### P E O P L E  I N  N E E D ##################################################################################
+
+    def insert_pin(self, form):
+        if len(form) != 10:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            pin_fname = form['pin_fname']
+            pin_lname = form['pin_lname']
+            a_username = form['a_username']
+            a_password = form['a_password']
+            pin_phone = form['pin_phone']
+            addressline1 = form['addressline1']
+            city = form['city']
+            zipcode = form['zipcode']
+            country = form['country']
+            district = form['district']
+            if pin_fname and pin_lname and pin_phone and addressline1 and city and zipcode and country \
+                    and district and a_username and a_password:
+                dao = peopledao()
+                pinaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
+                pina_id = dao.insert_new_user(a_username, a_password)
+                pin_id = dao.insert_new_pin(pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone)
+                result = self.build_adminINS_dict(pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone,
+                                                  addressline1, city, zipcode, country, district)
+                return jsonify(NewRequest=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
     def getAllpin(self):
         dao = peopledao()
         pin_list = dao.getAllpin()

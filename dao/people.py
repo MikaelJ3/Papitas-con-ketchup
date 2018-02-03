@@ -298,16 +298,6 @@ class peopledao:
             result.append(row)
         return result
 
-    def getPINByFirstName(self, pin_fname):
-        cursor = self.conn.cursor()
-        query = "Select * " \
-                "from pin " \
-                "where pin_fname = %s ;"
-        cursor.execute(query, (pin_fname,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
 
     ### A D M I N I S T R A T O R S ####################################################################################
     def getAllAdmin(self):
@@ -529,6 +519,15 @@ class peopledao:
         for row in cursor:
             result.append(row)
         return result
+
+    def insert_new_pin(self, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone):
+        cursor = self.conn.cursor()
+        query = "insert into pin(pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone) values (%s, %s, %s, %s, " \
+                "%s) returning pin_id;"
+        cursor.execute(query, (pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone,))
+        pin_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return pin_id
 
     ### P I N ######################################################################################################
     def getAllSUP(self):
