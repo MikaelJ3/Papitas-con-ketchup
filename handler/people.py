@@ -603,7 +603,7 @@ class peopleHandler:
 
     def update_pin(self, pin_id, form):
         dao = peopledao()
-        if not dao.GetPINByID(pin_id):
+        if not dao.get_pin(pin_id):
             return jsonify(Error="Product not found."), 404
         else:
             if len(form) != 3:
