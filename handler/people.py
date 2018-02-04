@@ -373,9 +373,9 @@ class peopleHandler:
     #############################ADDRESS ###############################################################################
     def getAllAddress(self):
         dao = peopledao()
-        sup_list = dao.getAllAddress()
+        add_list = dao.getAllAddress()
         result_list = []
-        for row in sup_list:
+        for row in add_list:
             result = self.build_address_dict(row)
             result_list.append(result)
         return jsonify(Address=result_list)

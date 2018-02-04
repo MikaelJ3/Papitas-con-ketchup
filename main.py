@@ -78,10 +78,10 @@ def getAllAddress():
         return peopleHandler().insert_address(request.form)
     else:
         if not request.args:
-            return peopleHandler().getAllAddress()
+            return jsonify(peopleHandler().getAllAddress())
 
 
-@app.route('/admin/update/<int:pin_id>', methods=['PUT', 'DELETE'])
+@app.route('/address/update/<int:pin_id>', methods=['PUT', 'DELETE'])
 def addressChange(ad_id):
     if request.method == 'PUT':
         return peopleHandler().updateAddresses(ad_id, request.form)
