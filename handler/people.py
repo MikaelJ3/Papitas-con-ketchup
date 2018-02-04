@@ -390,22 +390,22 @@ class peopleHandler:
             result_list.append(result)
         return jsonify(AdressByID=address_list)
 
-    def insert_address(self, form):
-        if len(form) != 5:
-            return jsonify(Error="Malformed post request"), 400
-        else:
-            addressline1 = form['addressline1']
-            city = form['city']
-            zipcode = form['zipcode']
-            country = form['country']
-            district = form['district']
-            if addressline1 and city and zipcode and country and district:
-                dao = peopledao()
-                address_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
-                result = self.build_addressSOLO_dict(address_id, addressline1, city, zipcode, country, district)
-                return jsonify(NewAddress=result), 201
-            else:
-                return jsonify(Error="Unexpected attributes in post request"), 400
+    # def insert_address(self, form):
+    #     if len(form) != 5:
+    #         return jsonify(Error="Malformed post request"), 400
+    #     else:
+    #         addressline1 = form['addressline1']
+    #         city = form['city']
+    #         zipcode = form['zipcode']
+    #         country = form['country']
+    #         district = form['district']
+    #         if addressline1 and city and zipcode and country and district:
+    #             dao = peopledao()
+    #             address_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
+    #             result = self.build_addressSOLO_dict(address_id, addressline1, city, zipcode, country, district)
+    #             return jsonify(NewAddress=result), 201
+    #         else:
+    #             return jsonify(Error="Unexpected attributes in post request"), 400
 
 
     def updateAddresses(self, addresses_id, form):
