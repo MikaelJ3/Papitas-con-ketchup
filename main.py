@@ -72,18 +72,15 @@ def get_products_by_country():
 
 # # #  A D D R E S S # # #
 
-@app.route('/address', methods=['GET', 'POST'])
-def getAllAddress():
-    if request.method == 'POST':
-        return peopleHandler().insert_address(request.form)
-    else:
-        return peopleHandler().getAllAddress()
+@app.route('/address/<int:address_id>')
+def getAllAddress(address_id):
+    return peopleHandler().getAddressByID(address_id)
 
 
-@app.route('/address/update/<int:pin_id>', methods=['PUT', 'DELETE'])
-def addressChange(ad_id):
+@app.route('/address/update/<int:address_id>', methods=['PUT', 'DELETE'])
+def addressChange(address_id):
     if request.method == 'PUT':
-        return peopleHandler().updateAddresses(ad_id, request.form)
+        return peopleHandler().updateAddresses(address_id, request.form)
     else:
         return jsonify(Error="Method not allowed."), 405
 
