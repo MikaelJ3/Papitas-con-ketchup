@@ -597,7 +597,6 @@ class peopleHandler:
 
     def get_specific_pin(self, pin_id):
         dao = peopledao()
-        result_list = []
         pin = dao.get_pin(pin_id)
         result_list = self.build_pin_dict(pin)
         return jsonify(PIN=result_list)

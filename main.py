@@ -115,7 +115,7 @@ def getAllpin():
         else:
             return peopleHandler().searchPINByRequests(request.args)
 
-@app.route('/pin/update/<int:pin_id>', methods=['PUT', 'DELETE'])
+@app.route('/pin/update/<int:pin_id>', methods=['PUT', 'GET'])
 def get_specific_pin(pin_id):
     if request.method == 'GET':
         return peopleHandler().get_specific_pin(pin_id)
