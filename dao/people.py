@@ -691,13 +691,25 @@ class peopledao:
             result.append(row)
         return result
 
-    def update_supplier(self, s_id, s_fname, s_lname, sa_id, saddress_id, s_phone):
+    def get_sup(self, s_id):
         cursor = self.conn.cursor()
-        query = "update supplier set s_fname = %s, s_lname = %s, sa_id = %s, saddress_id = %s, s_phone = %s " \
-                "where s_id = %s;"
-        cursor.execute(query, (s_fname, s_lname, sa_id, saddress_id, s_phone, s_id),)
+        query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from supplier natural inner join addresses " \
+                "where addresses.address_id = supplier.saaddress_id " \
+                "AND s_id = %s;"
+        cursor.execute(query, (s_id,))
+        result = cursor.fetchone()
+        return result
+
+    def update_supplier(self, s_id, s_fname , s_lname  , s_phone):
+        cursor = self.conn.cursor()
+        query = "update supplier set s_fname = %s, s_lname = %s, s_phone = %s where s_id = %s returning s_id;"
+        cursor.execute(query, (s_fname, s_lname, s_phone, s_id,))
+        s_id = cursor.fetchone()[0]
         self.conn.commit()
         return s_id
+
 
     ''' not specified in phase 2 specs'''
     '''def getRequestsbypersoninneed(self, pin_id):

@@ -136,10 +136,12 @@ def getAllSUP():
         else:
             return peopleHandler().searchSUPByRequests(request.args)
 
-@app.route('/supplier/update/<int:s_id>', methods=['PUT', 'DELETE'])
-def supChange(s_id):
-    if request.method == 'PUT':
-        return peopleHandler().updatesup(s_id, request.form)
+@app.route('/supplier/<int:s_id>', methods=['PUT', 'GET'])
+def get_specific_pin(s_id):
+    if request.method == 'GET':
+        return peopleHandler().get_specific_sup(s_id)
+    elif request.method == 'PUT':
+        return peopleHandler().update_supplier(s_id, request.form)
     else:
         return jsonify(Error="Method not allowed."), 405
 

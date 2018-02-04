@@ -604,7 +604,7 @@ class peopleHandler:
     def update_pin(self, pin_id, form):
         dao = peopledao()
         if not dao.get_pin(pin_id):
-            return jsonify(Error="Product not found."), 404
+            return jsonify(Error="Person in Need not found."), 404
         else:
             if len(form) != 3:
                 return jsonify(Error="Malformed update request"), 400
@@ -617,12 +617,40 @@ class peopleHandler:
                 profile = dao.get_pin(pin_id)
                 print(profile)
                 result = self.build_pin_dict(profile)
-                return jsonify(PersonInNeed=result), 200
+                return jsonify(PersonInNeed_updated=result), 200
             else:
                 return jsonify(Error="Unexpected attributes in update request"), 400
 
     ####################################################################################################################
     ####### S U P P L I E R ############################################################################################
+
+
+    def get_specific_sup(self, s_id):
+        dao = peopledao()
+        sid = dao.get_sup(s_id)
+        result_list = self.build_supplier_dict(sid)
+        return jsonify(SUP=result_list)
+
+    def update_supplier(self, s_id, form):
+        dao = peopledao()
+        if not dao.getSupplierById(s_id):
+            return jsonify(Error="Supplier not found"), 404
+        else:
+            if len(form) != 3:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                s_fname = form['s_fname']
+                s_lname = form['s_lname']
+                s_phone = form['s_phone']
+                if s_fname and s_lname and s_phone:
+                    check = dao.update_supplier(s_fname, s_lname, s_phone)
+                    profile = dao.get_sub(s_id)
+                    result = self.build_supplier_dict(profile)
+                    return jsonify(Updated_Supplier=result), 201
+                else:
+                    return jsonify(Error="Unexpected attributes in post request"), 400
+
+
 
     def insert_sup(self, form):
         if len(form) != 10:
