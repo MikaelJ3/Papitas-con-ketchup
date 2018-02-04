@@ -116,8 +116,10 @@ def getAllpin():
             return peopleHandler().searchPINByRequests(request.args)
 
 @app.route('/pin/update/<int:pin_id>', methods=['PUT', 'DELETE'])
-def pinChange(pin_id):
-    if request.method == 'PUT':
+def get_specific_pin(pin_id):
+    if request.method == 'GET':
+        return peopleHandler().get_specific_pin(pin_id)
+    elif request.method == 'PUT':
         return peopleHandler().update_pin(pin_id, request.form)
     else:
         return jsonify(Error="Method not allowed."), 405

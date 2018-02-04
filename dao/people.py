@@ -574,6 +574,17 @@ class peopledao:
         self.conn.commit()
         return pin_id
 
+    def get_pin(self, pin):
+        cursor = self.conn.cursor()
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from pin natural inner join addresses " \
+                "where addresses.address_id = pin.pinaddress_id " \
+                "AND pin_id = %s;"
+        cursor.execute(query, (pin,))
+        result = cursor.fetchone()
+        return result
+
     ### S U P  ######################################################################################################
     def insert_new_sup(self, s_fname, s_lname, sa_id, saddress_id, s_phone):
         cursor = self.conn.cursor()

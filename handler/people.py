@@ -595,6 +595,15 @@ class peopleHandler:
 
         return jsonify(Request=result_list)
 
+    def get_specific_pin(self, pin_id):
+        dao = peopledao()
+        result_list = []
+        pin = dao.get_pin(pin_id)
+        for row in pin:
+            result = self.build_pin_dict(row)
+            result_list.append(result)
+        return jsonify(PIN=result_list)
+
     def update_pin(self, pin_id, form):
         dao = peopledao()
         if not dao.GetPINByID(pin_id):
