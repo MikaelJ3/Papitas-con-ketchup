@@ -77,8 +77,7 @@ def getAllAddress():
     if request.method == 'POST':
         return peopleHandler().insert_address(request.form)
     else:
-        if not request.args:
-            return jsonify(peopleHandler().getAllAddress())
+        return peopleHandler().getAllAddress()
 
 
 @app.route('/address/update/<int:pin_id>', methods=['PUT', 'DELETE'])
