@@ -68,31 +68,26 @@ def get_products_by_country():
         return peopleHandler().get_all_products_by_country(request.args)  # filters products by city
 
 
-@app.route('/PIN/FirstName')
-def getPINByFirstName():
-    if not request.args:
-        return peopleHandler().getAllPeopleInNeed()
-    else:
-        return peopleHandler().getPINByFirstName(request.args)
+
 
 # # #  A D D R E S S # # #
 
 @app.route('/address', methods=['GET', 'POST'])
 def getAllAddress():
     if request.method == 'POST':
-        return peopleHandler().updateAddresses(request.form)
+        return peopleHandler().insert_address(request.form)
     else:
         if not request.args:
             return peopleHandler().getAllAddress()
-        else:
-            return peopleHandler().getAddressByID(request.args)
+
 
 @app.route('/admin/update/<int:pin_id>', methods=['PUT', 'DELETE'])
 def addressChange(ad_id):
     if request.method == 'PUT':
-        return peopleHandler().updateadmin(ad_id, request.form)
+        return peopleHandler().updateAddresses(ad_id, request.form)
     else:
         return jsonify(Error="Method not allowed."), 405
+
 # # #  A D M I N I S T R A T O R  # # #
 
 @app.route('/admins', methods=['GET', 'POST'])
@@ -108,7 +103,7 @@ def getAllAdmin():
 @app.route('/admin/update/<int:pin_id>', methods=['PUT', 'DELETE'])
 def adminChange(ad_id):
     if request.method == 'PUT':
-        return peopleHandler().updateadmin(ad_id, request.form)
+        return peopleHandler().updateAdmin(ad_id, request.form)
     else:
         return jsonify(Error="Method not allowed."), 405
 

@@ -408,7 +408,7 @@ class peopledao:
 
     def getAddressByID(self, address_id):
         cursor = self.conn.cursor()
-        query = "select * from addresses where address_id;"
+        query = "select * from addresses where address_id = %s;"
         result = []
         for row in cursor:
             result.append(row)
