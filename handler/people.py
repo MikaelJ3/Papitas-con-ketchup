@@ -20,12 +20,12 @@ class peopleHandler:
 
     def build_address_dict(self, row):
         result = {}
-        result['address_id'] = row[1]
-        result['addressline1'] = row[2]
-        result['city'] = row[3]
-        result['zipcode'] = row[4]
-        result['country'] = row[5]
-        result['district'] = row[6]
+        result['address_id'] = row[0]
+        result['addressline1'] = row[1]
+        result['city'] = row[2]
+        result['zipcode'] = row[3]
+        result['country'] = row[4]
+        result['district'] = row[5]
         return result
 
     def build_addressSOLO_dict(self, address_id, addressline1, city, zipcode, country, district):
@@ -378,7 +378,7 @@ class peopleHandler:
         for row in add_list:
             result = self.build_address_dict(row)
             result_list.append(result)
-        return jsonify(Address=result_list)
+        return jsonify(Addresses=result_list)
 
     ##SEARCH SUP BY ID##
     def getAddressByID(self, address_id):
