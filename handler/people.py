@@ -384,9 +384,10 @@ class peopleHandler:
     def getAddressByID(self, address_id):
         dao = peopledao()
         address_list = dao.getAddressByID(address_id)
+        result_list = []
         for row in address_list:
             result = self.build_address_dict(row)
-            address_list.append(result)
+            result_list.append(result)
         return jsonify(AdressByID=address_list)
 
     def insert_address(self, form):
