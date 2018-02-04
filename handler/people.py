@@ -600,7 +600,7 @@ class peopleHandler:
         result_list = []
         pin = dao.get_pin(pin_id)
         for row in pin:
-            result = self.build_pin_dict(row)
+            result = self.build_pinINS_dict(row)
             result_list.append(result)
         return jsonify(PIN=result_list)
 
