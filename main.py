@@ -96,12 +96,16 @@ def getAllAdmin():
         else:
             return peopleHandler().searchADMINByRequests(request.args)
 
-@app.route('/admin/update/<int:pin_id>', methods=['PUT', 'DELETE'])
-def adminChange(ad_id):
-    if request.method == 'PUT':
-        return peopleHandler().updateAdmin(ad_id, request.form)
+
+@app.route('/sadmin/<int:ad_id>', methods=['PUT', 'GET'])
+def get_specific_admin(ad_id):
+    if request.method == 'GET':
+        return peopleHandler().get_specific_admin(ad_id)
+    elif request.method == 'PUT':
+        return peopleHandler().update_admin(ad_id, request.form)
     else:
         return jsonify(Error="Method not allowed."), 405
+
 
 # # #  P E O P L E  I N  N E E D  # # #
 

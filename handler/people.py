@@ -431,25 +431,6 @@ class peopleHandler:
 
     ########## A D M I N ###############################################################################################
 
-    def updateAdmin(self, ad_id, form):
-        dao = peopledao()
-        if not dao.GetADMINByID(ad_id):
-            return jsonify(Error="Request not found."), 404
-        else:
-            if len(form) != 5:
-                return jsonify(Error="Malformed update request"), 400
-            else:
-                ad_fname = form['ad_fname']
-                ad_lname = form['ad_lname']
-                ada_id = form['ada_id']
-                adaddress_id = form['adaddress_id']
-                ad_phone = form['ad_phone']
-                if ad_fname and ad_lname and ada_id and adaddress_id and ad_phone:
-                    dao.update_admin(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
-                    result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
-                    return jsonify(UpdatedRequest=result), 200
-                else:
-                    return jsonify(Error="Unexpected attributes in update request"), 400
 
     def insert_admin(self, form):
         if len(form) != 10:
@@ -521,6 +502,32 @@ class peopleHandler:
             print(row)
 
         return jsonify(Request=result_list)
+
+    def get_specific_admin(self, ad_id):
+        dao = peopledao()
+        aid = dao.get_admin(ad_id)
+        result_list = self.build_admin_dict(aid)
+        return jsonify(admin=result_list)
+
+    def update_admin(self, ad_id, form):
+        dao = peopledao()
+        if not dao.get_admin(ad_id):
+            return jsonify(Error="Person in Need not found."), 404
+        else:
+            if len(form) != 3:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                ad_fname = form['ad_fname']
+                ad_lname = form['ad_lname']
+                ad_phone = form['ad_phone']
+            if ad_fname and ad_lname and ad_phone:
+                check = dao.update_admin(ad_id, ad_fname, ad_lname, ad_phone)
+                profile = dao.get_admin(ad_id)
+                print(profile)
+                result = self.build_admin_dict(profile)
+                return jsonify(PersonInNeed_updated=result), 200
+            else:
+                return jsonify(Error="Unexpected attributes in update request"), 400
 
     ####### P E O P L E  I N  N E E D ##################################################################################
 

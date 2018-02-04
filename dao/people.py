@@ -396,6 +396,34 @@ class peopledao:
             result.append(row)
         return result
 
+    def insert_new_admin(self, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone):
+        cursor = self.conn.cursor()
+        query = "insert into admins(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone) values (%s, %s, %s, %s, " \
+                "%s) returning ad_id;"
+        cursor.execute(query, (ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,))
+        ad_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return ad_id
+
+    def update_admin(self, ad_id, ad_fname, ad_lname, ad_phone):
+        cursor = self.conn.cursor()
+        query = "update admins set ad_fname=%s, ad_lname=%s, ad_phone=%s where ad_id=%s returning ad_id;"
+        cursor.execute(query, (ad_fname, ad_lname, ad_phone, ad_id,))
+        ad_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return ad_id
+
+    def get_admin(self, ad_id):
+        cursor = self.conn.cursor()
+        query = "select ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from admins natural inner join addresses " \
+                "where addresses.address_id = admins.adaddress_id " \
+                "AND ad_id = %s;"
+        cursor.execute(query, (ad_id,))
+        result = cursor.fetchone()
+        return result
+
     #### ADDRESS #######################################################################################################
     def getAllAddress(self):
         cursor = self.conn.cursor()
@@ -450,13 +478,24 @@ class peopledao:
         self.conn.commit()
         return ad_id
 
-    def update_admin(self, ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone):
+    def update_admin(self, pin_id, fname, lname, phone):
         cursor = self.conn.cursor()
-        query = "update admins set ad_fname = %s, ad_lname = %s, ada_id = %s, adaddress_id = %s, ad_phone = %s " \
-                "where ad_id = %s;"
-        cursor.execute(query, (ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, ad_id),)
+        query = "update pin set pin_fname=%s, pin_lname=%s, pin_phone=%s where pin_id=%s returning pin_id;"
+        cursor.execute(query, (fname, lname, phone, pin_id,))
+        pin_id = cursor.fetchone()[0]
         self.conn.commit()
-        return ad_id
+        return pin_id
+
+    def get_admin(self, pin):
+        cursor = self.conn.cursor()
+        query = "select pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode," \
+                " country, district " \
+                "from pin natural inner join addresses " \
+                "where addresses.address_id = pin.pinaddress_id " \
+                "AND pin_id = %s;"
+        cursor.execute(query, (pin,))
+        result = cursor.fetchone()
+        return result
 
     ### P I N ######################################################################################################
     def getAllpin(self):
