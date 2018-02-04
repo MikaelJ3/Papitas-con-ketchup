@@ -72,9 +72,9 @@ def get_products_by_country():
 
 # # #  A D D R E S S # # #
 
-@app.route('/address/<int:address_id>')
-def getAllAddress(address_id):
-    return peopleHandler().getAddressByID(address_id)
+@app.route('/address')
+def getAllAddress():
+    return peopleHandler().getAllAddress()
 
 
 @app.route('/address/update/<int:address_id>', methods=['PUT', 'DELETE'])
