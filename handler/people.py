@@ -614,7 +614,7 @@ class peopleHandler:
                 phone = form['pin_phone']
             if fname and lname and phone:
                 check = dao.update_pin(pin_id, fname, lname, phone)
-                profile = dao.GetPINByID(pin_id)
+                profile = dao.get_pin(pin_id)
                 print(profile)
                 result = self.build_pin_dict(profile)
                 return jsonify(PersonInNeed=result), 200
