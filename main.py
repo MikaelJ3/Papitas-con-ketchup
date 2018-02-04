@@ -97,7 +97,7 @@ def getAllAdmin():
             return peopleHandler().searchADMINByRequests(request.args)
 
 
-@app.route('/sadmin/<int:ad_id>', methods=['PUT', 'GET'])
+@app.route('/admins/<int:ad_id>', methods=['PUT', 'GET'])
 def get_specific_admin(ad_id):
     if request.method == 'GET':
         return peopleHandler().get_specific_admin(ad_id)
