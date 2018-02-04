@@ -399,9 +399,9 @@ class peopledao:
     #### ADDRESS #######################################################################################################
     def getAllAddress(self):
         cursor = self.conn.cursor()
-        query = "select * " \
-                "from addresses;"
+        query = "select * from addresses;"
         result = []
+        cursor.execute(query)
         for row in cursor:
             result.append(row)
         return result
@@ -410,6 +410,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select * from addresses where address_id = %s;"
         result = []
+        cursor.execute(query)
         for row in cursor:
             result.append(row)
         return result
