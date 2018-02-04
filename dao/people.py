@@ -410,7 +410,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select * from addresses where address_id = %s;"
         result = []
-        cursor.execute(query)
+        cursor.execute(query, (address_id,))
         for row in cursor:
             result.append(row)
         return result
