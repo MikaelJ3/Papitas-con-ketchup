@@ -565,11 +565,12 @@ class peopledao:
         self.conn.commit()
         return pin_id
 
-    def update_pin(self, pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, s_phone):
+
+    def update_pin(self, pin_id, fname, lname, phone):
         cursor = self.conn.cursor()
-        query = "update pin set pin_fname = %s, pin_lname = %s, pina_id = %s, pinaddress_id = %s, s_phone = %s " \
-                "where pin_id = %s;"
-        cursor.execute(query, (pin_fname, pin_lname, pina_id, pinaddress_id, s_phone, pin_id),)
+        query = "update pin set pin_fname=%s, pin_lname=%s, pin_phone=%s where pin_id=%s returning pin_id;"
+        cursor.execute(query, (fname, lname, phone, pin_id,))
+        pin_id = cursor.fetchone()[0]
         self.conn.commit()
         return pin_id
 

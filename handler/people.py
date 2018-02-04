@@ -595,6 +595,26 @@ class peopleHandler:
 
         return jsonify(Request=result_list)
 
+    def update_pin(self, pin_id, form):
+        dao = peopledao()
+        if not dao.GetPINByID(pin_id):
+            return jsonify(Error="Product not found."), 404
+        else:
+            if len(form) != 3:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                fname = form['pin_fname']
+                lname = form['pin_lname']
+                phone = form['pin_phone']
+            if fname and lname and phone:
+                check = dao.update_pin(pin_id, fname, lname, phone)
+                profile = dao.GetPINByID(pin_id)
+                print(profile)
+                result = self.build_pin_dict(profile)
+                return jsonify(PersonInNeed=result), 200
+            else:
+                return jsonify(Error="Unexpected attributes in update request"), 400
+
     ####################################################################################################################
     ####### S U P P L I E R ############################################################################################
 
