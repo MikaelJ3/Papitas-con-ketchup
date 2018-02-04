@@ -422,6 +422,7 @@ class peopleHandler:
                 district = form['district']
                 zipcode = form['zipcode']
                 if addresses_id and addressline1 and city and country and district and zipcode:
+
                     dao.update_address(addresses_id, addressline1, city, country, district, zipcode)
                     result = self.build_addressSOLO_dict(addresses_id, addressline1, city, country, district, zipcode)
                     return jsonify(UpdatedAdress=result), 200
