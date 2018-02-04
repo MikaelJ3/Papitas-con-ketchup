@@ -100,7 +100,7 @@ class peopleHandler:
         result['s_fname'] = row[1]
         result['s_lname'] = row[2]
         result['sa_id'] = row[3]
-        result['adressid'] = row[4]
+        result['sadress_id'] = row[4]
         result['s_phone'] = row[5]
         result['addressline1'] = row[6]
         result['city'] = row[7]
@@ -627,8 +627,8 @@ class peopleHandler:
 
     def get_specific_sup(self, s_id):
         dao = peopledao()
-        sid = dao.get_sup(s_id)
-        result_list = self.build_supplier_dict(sid)
+        result = dao.get_sup(s_id)
+        result_list = self.build_supplier_dict(result)
         return jsonify(SUP=result_list)
 
     def update_supplier(self, s_id, form):

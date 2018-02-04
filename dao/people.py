@@ -696,7 +696,7 @@ class peopledao:
         query = "select s_id, s_fname, s_lname, sa_id, saddress_id, s_phone, addressline1, city, zipcode," \
                 " country, district " \
                 "from supplier natural inner join addresses " \
-                "where addresses.address_id = supplier.saaddress_id " \
+                "where addresses.address_id = supplier.saddress_id " \
                 "AND s_id = %s;"
         cursor.execute(query, (s_id,))
         result = cursor.fetchone()
