@@ -399,10 +399,10 @@ class peopleHandler:
             zipcode = form['zipcode']
             country = form['country']
             district = form['district']
-            if addressline1 and  city and zipcode and country and district:
+            if addressline1 and city and zipcode and country and district:
                 dao = peopledao()
-                adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
-                result = self.build_adminINS_dict(addressline1, city, zipcode, country, district);
+                address_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
+                result = self.build_addressSOLO_dict(address_id, addressline1, city, zipcode, country, district)
                 return jsonify(NewAddress=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400

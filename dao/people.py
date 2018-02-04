@@ -428,7 +428,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "update addresses set addressline1 = %s, city = %s, country = %s, district = %s, zipcode = %s " \
                 "where address_id = %s;"
-        cursor.execute(query, (addressline1, city, country, district, zipcode, address_id),)
+        cursor.execute(query, (addressline1, city, country, district, zipcode, address_id,))
         self.conn.commit()
         return address_id
 
