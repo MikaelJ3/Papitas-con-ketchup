@@ -599,9 +599,7 @@ class peopleHandler:
         dao = peopledao()
         result_list = []
         pin = dao.get_pin(pin_id)
-        for row in pin:
-            result = self.build_pin_dict(row)
-            result_list.append(result)
+        result_list = self.build_pin_dict(pin)
         return jsonify(PIN=result_list)
 
     def update_pin(self, pin_id, form):
