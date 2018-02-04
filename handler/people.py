@@ -643,8 +643,8 @@ class peopleHandler:
                 s_lname = form['s_lname']
                 s_phone = form['s_phone']
                 if s_fname and s_lname and s_phone:
-                    check = dao.update_supplier(s_fname, s_lname, s_phone)
-                    profile = dao.get_sub(s_id)
+                    check = dao.update_supplier(s_id, s_fname, s_lname, s_phone)
+                    profile = dao.get_sup(s_id)
                     result = self.build_supplier_dict(profile)
                     return jsonify(Updated_Supplier=result), 201
                 else:

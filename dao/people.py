@@ -704,11 +704,13 @@ class peopledao:
 
     def update_supplier(self, s_id, s_fname , s_lname  , s_phone):
         cursor = self.conn.cursor()
-        query = "update supplier set s_fname = %s, s_lname = %s, s_phone = %s where s_id = %s returning s_id;"
+        query = "update supplier set s_fname=%s, s_lname=%s, s_phone=%s where s_id=%s returning s_id;"
         cursor.execute(query, (s_fname, s_lname, s_phone, s_id,))
         s_id = cursor.fetchone()[0]
         self.conn.commit()
         return s_id
+
+
 
 
     ''' not specified in phase 2 specs'''
