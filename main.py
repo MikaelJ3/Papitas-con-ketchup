@@ -137,7 +137,7 @@ def getAllSUP():
             return peopleHandler().searchSUPByRequests(request.args)
 
 @app.route('/supplier/<int:s_id>', methods=['PUT', 'GET'])
-def get_specific_pin(s_id):
+def get_specific_sup(s_id):
     if request.method == 'GET':
         return peopleHandler().get_specific_sup(s_id)
     elif request.method == 'PUT':
