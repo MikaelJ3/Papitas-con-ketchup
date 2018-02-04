@@ -17,8 +17,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="117" column="12" lean-forward="true" selection-start-line="117" selection-start-column="12" selection-end-line="117" selection-end-column="36" />
+            <state relative-caret-position="340">
+              <caret line="122" column="1" lean-forward="false" selection-start-line="122" selection-start-column="1" selection-end-line="122" selection-end-column="1" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -29,8 +29,8 @@
       <file leaf-file-name="people.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/handler/people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="602" column="43" lean-forward="false" selection-start-line="602" selection-start-column="43" selection-end-line="602" selection-end-column="43" />
+            <state relative-caret-position="283">
+              <caret line="613" column="17" lean-forward="true" selection-start-line="613" selection-start-column="17" selection-end-line="613" selection-end-column="17" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -41,8 +41,8 @@
       <file leaf-file-name="people.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dao/people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="587" column="57" lean-forward="false" selection-start-line="587" selection-start-column="57" selection-end-line="587" selection-end-column="57" />
+            <state relative-caret-position="-21">
+              <caret line="553" column="19" lean-forward="true" selection-start-line="553" selection-start-column="19" selection-end-line="553" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -304,13 +304,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516814862194</updated>
-    </task>
-    <task id="LOCAL-00054" summary="Testing getPINByFirstName 2.2">
-      <created>1517597786634</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1517597786634</updated>
     </task>
     <task id="LOCAL-00055" summary="Testing getPINByFirstName 2.2">
       <created>1517597950142</created>
@@ -648,7 +641,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517783691911</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="chucha">
+      <created>1517783846215</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1517783846215</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -968,28 +968,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/people.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="587" column="57" lean-forward="false" selection-start-line="587" selection-start-column="57" selection-end-line="587" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="117" column="12" lean-forward="true" selection-start-line="117" selection-start-column="12" selection-end-line="117" selection-end-column="36" />
+        <state relative-caret-position="340">
+          <caret line="122" column="1" lean-forward="false" selection-start-line="122" selection-start-column="1" selection-end-line="122" selection-end-column="1" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dao/people.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-21">
+          <caret line="553" column="19" lean-forward="true" selection-start-line="553" selection-start-column="19" selection-end-line="553" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/handler/people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="602" column="43" lean-forward="false" selection-start-line="602" selection-start-column="43" selection-end-line="602" selection-end-column="43" />
+        <state relative-caret-position="283">
+          <caret line="613" column="17" lean-forward="true" selection-start-line="613" selection-start-column="17" selection-end-line="613" selection-end-column="17" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
