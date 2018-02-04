@@ -619,7 +619,7 @@ class peopleHandler:
                 check = dao.update_pin(pin_id, fname, lname, phone)
                 profile = dao.GetPINByID(pin_id)
                 print(profile)
-                result = self.build_pin_dict(profile)
+                result = self.build_pinINS_dict(profile)
                 return jsonify(PersonInNeed=result), 200
             else:
                 return jsonify(Error="Unexpected attributes in update request"), 400
