@@ -13,12 +13,12 @@ class peopleHandler:
         result['ba_routingnumber '] = row[3]
         return result
 
-    def build_bankinfo_attributes(self, a, b, c, d):
+    def build_bankinfo_attributes(self, ba_id, s_id, ba_accnumber, ba_routingnumber):
         result = {}
-        result['ba_id'] = a
-        result['s_id'] = b
-        result['ba_accnumber '] = c
-        result['ba_routingnumber '] = d
+        result['ba_id'] = ba_id
+        result['s_id'] = s_id
+        result['ba_accnumber '] = ba_accnumber
+        result['ba_routingnumber '] = ba_routingnumber
         return result
 
     def build_creditcard_dict(self, row):
