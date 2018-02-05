@@ -31,14 +31,14 @@ class peopleHandler:
         result['c_cardnumber '] = row[5]
         return result
 
-    def build_creditcard_attributes(self, a, b, c, d, e, f):
+    def build_creditcard_attributes(self, c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, address_id):
         result = {}
-        result['c_id'] = a
-        result['c_cardtype '] = b
-        result['c_cardnumber '] = c
-        result['c_cardname '] = d
-        result['pin_id '] = e
-        result['addressid '] = f
+        result['c_id'] = c_id
+        result['c_cardtype '] = c_cardtype
+        result['c_cardnumber '] = c_cardnumber
+        result['c_cardname '] = c_cardname
+        result['pin_id '] = pin_id
+        result['address_id '] = address_id
         return result
 
     def build_account_dict(self, row):
