@@ -263,6 +263,7 @@ def view_creditcard():
 
 
 #https://ayudapaljibaro.herokuapp.com/pin/creditcard/1
+#https://ayudapaljibaro.herokuapp.com/pin/creditcard/1
 @app.route('/pin/creditcard/<int:pin_id>', methods=['GET', 'PUT'])
 def view_creditcard_by_pin(pin_id):
     if request.method == 'GET':
