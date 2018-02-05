@@ -607,19 +607,21 @@ class peopleHandler:
 
 
     def insert_creditcard(self, form):
-        if len(form) != 5:
+        if len(form) != 6:
             return jsonify(Error="Malformed post request"), 400
         else:
             dao = peopledao
-            pin_id = form['pin_id']
             c_cardtype = form['c_cardtype']
-            c_cardnumber = form['c_cardnumber']
             c_cardname = form['c_cardname']
+            pin_id = form['pin_id']
             address_id = form['address_id']
-            if c_cardtype and c_cardnumber and c_cardname and pin_id and address_id:
-                c_id = dao.insert_creditcard(c_cardtype, c_cardnumber, c_cardname, pin_id, address_id)
+            c_cardnumber = form['c_cardnumber']
+
+
+            if c_cardtype and c_cardname and pin_id and pin_id and address_id and c_cardnumber:
+                c_id = dao.insert_creditcard(c_cardtype, c_cardnumber, c_cardname, pin_id, address_id, c_cardnumber)
                 result = self.build_creditcard_attributes(c_id, c_cardtype, c_cardnumber, c_cardname, pin_id,
-                                                          address_id)
+                                                          address_id, c_cardnumber)
                 return jsonify(New_CreditCard=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
