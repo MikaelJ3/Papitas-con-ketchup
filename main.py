@@ -253,15 +253,22 @@ def view_bankinfo_by_sid(s_id):
 
 
 ################## CREDIT CARD ############
+
+@app.route('/supplier/bankinfo', methods=['GET','POST'])
+def view_creditcard_by_pin():
+    if request.method == 'GET':
+        return peopleHandler().view_creditcard()
+    elif request.method == 'POST':
+        return peopleHandler().insert_creditcard(request.form)
+
+
 #https://ayudapaljibaro.herokuapp.com/pin/creditcard/1
-@app.route('/pin/creditcard/<int:pin_id>', methods=['GET', 'PUT', 'POST'])
+@app.route('/pin/creditcard/<int:pin_id>', methods=['GET', 'PUT'])
 def view_creditcard_by_pin(pin_id):
     if request.method == 'GET':
         return peopleHandler().view_creditcard_by_PIN(pin_id)
     elif request.method == 'PUT':
         return peopleHandler().update_creditcard(pin_id, request.form)
-    elif request.method == 'POST':
-        return peopleHandler().insert_creditcard(pin_id, request.form)
 
 ################# USER ACCOUNT #################
 #https://ayudapaljibaro.herokuapp.com/accounts

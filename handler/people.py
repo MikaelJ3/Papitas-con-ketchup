@@ -547,6 +547,16 @@ class peopleHandler:
             result_list.append(result)
         return jsonify(CREDITcard=result_list)
 
+    def view_creditcard(self):
+        dao = peopledao()
+        CC = dao.view_creditcard()
+        result_list = []
+        for row in CC:
+            result = self.build_creditcard_dict(row)
+            result_list.append(result)
+        return jsonify(CREDITcard=result_list)
+
+
 
     def search_account_by_a_id(self, a_id):
         dao = peopledao()
@@ -598,16 +608,18 @@ class peopleHandler:
 
     def insert_creditcard(self, pin_id, form):
         dao = peopledao
-        if len(form) != 4:
+        if len(form) != 5:
             return jsonify(Error="Malformed post request"), 400
         else:
+            pin_id = form['pin_id']
             c_cardtype = form['c_cardtype']
             c_cardnumber = form['c_cardnumber']
             c_cardname = form['c_cardname']
             address_id = form['address_id']
             if c_cardtype and c_cardnumber and c_cardname and pin_id and address_id:
                 c_id = dao.insert_creditcard(c_cardtype, c_cardnumber, c_cardname, pin_id, address_id)
-                result = self.build_creditcard_attributes(c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, address_id)
+                result = self.build_creditcard_attributes(c_id, c_cardtype, c_cardnumber, c_cardname, pin_id,
+                                                          address_id)
                 return jsonify(New_CreditCard=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
@@ -621,7 +633,7 @@ class peopleHandler:
         if not dao.get_creditcard(c_id):
             return jsonify(Error="Credit Card not found."), 404
         else:
-            if len(form) != 5:
+            if len(form) != 4:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 c_cardtype = form['c_cardtype']

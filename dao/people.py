@@ -794,6 +794,16 @@ class peopledao:
             result.append(row)
         return result
 
+    def view_creditcard(self):
+        cursor = self.conn.cursor()
+        query = "select * from creditcard;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+
 
     def get_bankaccount_by_s_id(self, s_id):
         cursor = self.conn.cursor()
