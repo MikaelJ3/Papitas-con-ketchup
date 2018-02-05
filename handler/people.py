@@ -535,7 +535,7 @@ class peopleHandler:
         if not row:
             return jsonify(Error="Bank Info Not Found"), 404
         else:
-            result = self.build_bankinfo_dict(row)
+            result = self.build_bankinfo_attributes(row)
             return jsonify(Bank_info_by_SID=result)
 
 
