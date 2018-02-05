@@ -839,18 +839,20 @@ class peopledao:
         return result
 
 
-    def update_creditcard(self, c_id, s_id, c_cardtype, c_cardnumber, c_cardname, pin_id, addressid):
+    def update_creditcard(self, c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, address_id):
         cursor = self.conn.cursor()
-        query = "update bankinfo set c_id = %s, s_id = %s, c_cardtype = %s, c_cardnumber = %s, c_cardname = %s, pin_id = %s, addressid = %s  where c_id = %s;"
-        cursor.execute(query, (c_id, s_id, c_cardtype, c_cardnumber, c_cardname, pin_id, addressid,))
+        query = "update creditcard set c_cardtype = %s, c_cardnumber = %s, c_cardname = %s, pin_id = %s, " \
+                "address_id = %s  where c_id = %s;"
+        cursor.execute(query, (c_cardtype, c_cardnumber, c_cardname, pin_id, address_id, c_id,))
         self.conn.commit()
         return c_id
 
 
-    def insert_creditcard(self, s_id, c_cardtype, c_cardnumber, c_cardname, pin_id, addressid):
+    def insert_creditcard(self, c_cardtype, c_cardnumber, c_cardname, pin_id, address_id):
         cursor = self.conn.cursor()
-        query = "insert into creditcard(s_id, c_cardtype , c_cardnumber, c_cardname, pin_id, addressid) values (%s, %s, %s) returning ba_id;"
-        cursor.execute(query, (s_id, c_cardtype, c_cardnumber, c_cardname, pin_id, addressid,))
+        query = "insert into creditcard(c_cardtype , c_cardnumber, c_cardname, pin_id, address_id) values " \
+                "(%s, %s, %s, %s, %s) returning c_id;"
+        cursor.execute(query, (c_cardtype, c_cardnumber, c_cardname, pin_id, address_id,))
         c_id = cursor.fetchone()[0]
         self.conn.commit()
         return c_id

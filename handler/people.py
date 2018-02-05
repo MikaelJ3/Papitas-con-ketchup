@@ -625,14 +625,13 @@ class peopleHandler:
             if len(form) != 6:
                 return jsonify(Error="Malformed update request"), 400
             else:
-                s_id = form['s_id']
                 c_cardtype = form['c_cardtype']
                 c_cardnumber = form['c_cardnumber']
                 c_cardname = form['c_cardname']
                 pin_id = form['pin_id']
                 addressid = form['addressid']
-                if s_id and c_cardtype and c_cardnumber and c_cardname and pin_id and addressid:
-                    dao.update_creditcard(c_id, s_id, c_cardtype, c_cardnumber, c_cardname, pin_id, addressid)
+                if c_cardtype and c_cardnumber and c_cardname and pin_id and addressid:
+                    dao.update_creditcard(c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, addressid)
                     result = self.build_creditcard_attributes(c_id, c_cardtype, c_cardnumber, c_cardname, pin_id,
                                                               addressid)
                     return jsonify(Updated_CreditCard=result), 201
