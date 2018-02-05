@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e0150894-958a-4602-8658-d1551553d034" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/dao/product.py" afterPath="$PROJECT_DIR$/dao/product.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,22 +16,10 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="21" />
+            <state relative-caret-position="255">
+              <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="people.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/handler/people.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8347">
-              <caret line="7" column="39" lean-forward="true" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -42,29 +29,27 @@
         <entry file="file://$PROJECT_DIR$/dao/people.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="11" selection-end-column="53" />
+              <caret line="7" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="852" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="product.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/handler/product.py">
+        <entry file="file://$PROJECT_DIR$/dao/product.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3547">
-              <caret line="237" column="36" lean-forward="true" selection-start-line="237" selection-start-column="36" selection-end-line="237" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="153">
+              <caret line="10" column="30" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dao/product.py">
+      <file leaf-file-name="request.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dao/request.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+            <state relative-caret-position="442">
+              <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -332,13 +317,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516814862194</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Testing getPINByFirstName 2.2">
-      <created>1517607590643</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1517607590643</updated>
     </task>
     <task id="LOCAL-00070" summary="Testing getPINByFirstName 2.2">
       <created>1517609004387</created>
@@ -676,7 +654,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517795676324</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="chucha">
+      <created>1517795852720</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1517795852720</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -967,28 +952,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="26" lean-forward="true" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handler/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
-          <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#25#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="21" />
+        <state relative-caret-position="255">
+          <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -997,8 +964,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/handler/people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8347">
-          <caret line="7" column="39" lean-forward="true" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+        <state relative-caret-position="187">
+          <caret line="17" column="22" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="930" selection-end-column="43" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -1007,18 +974,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/handler/product.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3547">
-          <caret line="237" column="36" lean-forward="true" selection-start-line="237" selection-start-column="36" selection-end-line="237" selection-end-column="36" />
+        <state relative-caret-position="352">
+          <caret line="226" column="35" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="262" selection-end-column="0" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/handler/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="88" column="30" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dao/people.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="11" selection-end-column="53" />
+          <caret line="7" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="852" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1026,7 +1001,15 @@
     <entry file="file://$PROJECT_DIR$/dao/product.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
+          <caret line="10" column="30" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
           <folding />
         </state>
       </provider>
