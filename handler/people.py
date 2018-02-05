@@ -593,7 +593,7 @@ class peopleHandler:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
     def insert_creditcard(self, form):
-        if len(form) != 5:
+        if len(form)  > 0:
             test = []
             c_cardtype = form['c_cardtype']
             c_cardname = form['c_cardname']
