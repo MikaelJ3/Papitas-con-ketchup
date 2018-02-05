@@ -243,6 +243,7 @@ def get_all_bank_info():
         return peopleHandler().insert_bankinfo(request.form)
 
 #https://ayudapaljibaro.herokuapp.com/supplier/bankinfo
+#https://ayudapaljibaro.herokuapp.com/supplier/bankinfo/2
 @app.route('/supplier/bankinfo/<int:s_id>', methods=['GET', 'PUT', 'POST'])
 def view_bankinfo_by_sid(s_id):
     if request.method == 'GET':
