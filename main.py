@@ -258,7 +258,7 @@ def view_bankinfo_by_sid(s_id):
 def view_creditcard():
     if request.method == 'GET':
         return peopleHandler().view_creditcard()
-    elif request.method == 'POST':
+    if request.method == 'POST':
         return peopleHandler().insert_creditcard(request.form)
 
 
