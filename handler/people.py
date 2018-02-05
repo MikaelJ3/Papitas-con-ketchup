@@ -31,14 +31,14 @@ class peopleHandler:
         result['c_cardnumber '] = row[5]
         return result
 
-    def build_creditcard_attributes(self, c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, address_id):
+    def build_creditcard_attributes(self, c_id, c_cardtype, c_cardname, pin_id, address_id, c_cardnumber):
         result = {}
         result['c_id'] = c_id
         result['c_cardtype '] = c_cardtype
-        result['c_cardnumber '] = c_cardnumber
         result['c_cardname '] = c_cardname
         result['pin_id '] = pin_id
         result['address_id '] = address_id
+        result['c_cardnumber '] = c_cardnumber
         return result
 
     def build_account_dict(self, row):
@@ -549,9 +549,9 @@ class peopleHandler:
 
     def view_creditcard(self):
         dao = peopledao()
-        CC = dao.view_creditcard()
+        cc = dao.view_creditcard()
         result_list = []
-        for row in CC:
+        for row in cc:
             result = self.build_creditcard_dict(row)
             result_list.append(result)
         return jsonify(CREDITcard=result_list)
@@ -613,12 +613,12 @@ class peopleHandler:
             dao = peopledao
             c_cardtype = form['c_cardtype']
             c_cardname = form['c_cardname']
-            pin_id = form['pin_id']
+            pin_id = form['pina_id']
             address_id = form['address_id']
             c_cardnumber = form['c_cardnumber']
 
 
-            if c_cardtype and c_cardname and pin_id and pin_id and address_id and c_cardnumber:
+            if c_cardtype and c_cardname and pin_id and address_id and c_cardnumber:
                 c_id = dao.insert_creditcard(c_cardtype, c_cardnumber, c_cardname, pin_id, address_id, c_cardnumber)
                 result = self.build_creditcard_attributes(c_id, c_cardtype, c_cardnumber, c_cardname, pin_id,
                                                           address_id, c_cardnumber)
