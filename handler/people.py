@@ -325,48 +325,6 @@ class peopleHandler:
 
     #####################################################################################################################
 
-    def getOrdersByPersonInNeed(self, args):
-        pin_id = args.get("pin_id")
-        pin_fname = args.get("pin_fname")
-        pin_lname = args.get("pin_lname")
-        dao = peopledao()
-        order_list = []
-        if (len(args) == 1) and pin_id:
-            order_list = dao.getOrdersByPersonInNeedById(pin_id)
-        elif (len(args) == 1) and pin_fname:
-            order_list = dao.getOrdersByPersonInNeedByFirstName(pin_fname)
-        elif (len(args) == 2) and pin_fname and pin_lname:
-            order_list = dao.getOrdersByPersonInNeedByFullName(pin_fname, pin_lname)
-        else:
-            return jsonify(error="malformed query string"), 400
-        result_list = []
-        for row in order_list:
-            result = self.build_orderinfo_dict(row)
-            result_list.append(result)
-        return jsonify(OrdersByPersonInNeed=result_list)
-
-    '''Encontrar las ordenes de una supplier'''
-
-    def getOrdersBySupplier(self, args):
-        s_id = args.get("s_id")
-        s_fname = args.get("s_fname")
-        s_lname = args.get("s_lname")
-        dao = peopledao()
-        order_list = []
-        if (len(args) == 1) and s_id:
-            order_list = dao.getOrdersBySupplierById(s_id)
-        elif (len(args) == 1) and s_fname:
-            order_list = dao.getOrdersBySuppplierByFirstName(s_fname)
-        elif (len(args) == 2) and s_fname and s_lname:
-            order_list = dao.getOrdersBySupplierByFullName(s_fname, s_lname)
-        else:
-            return jsonify(error="malformed query string"), 400
-        result_list = []
-        for row in order_list:
-            print(row)
-            result = self.build_orderinfo_dict(row)
-            result_list.append(result)
-        return jsonify(OrdersBySupplier=result_list)
 
     def get_all_products_by_supplier(self):
         dao = peopledao()
