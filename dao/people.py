@@ -781,23 +781,23 @@ class peopledao:
         self.conn.commit()
         return ba_id
 
-    def view_creditcard_by_PIN(self, pin_id):
-        cursor = self.conn.cursor()
-        query = "select * from creditcard where pin_id = %s;"
-        cursor.execute(query, (pin_id,))
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def view_creditcard_by_PIN(self, pin_id):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from creditcard where pin_id = %s;"
+    #     cursor.execute(query, (pin_id,))
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
-    def view_creditcard(self):
-        cursor = self.conn.cursor()
-        query = "select * from creditcard;"
-        cursor.execute(query)
-        result = []
-        for row in cursor:
-            result.append(row)
-        return result
+    # def view_creditcard(self):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from creditcard;"
+    #     cursor.execute(query)
+    #     result = []
+    #     for row in cursor:
+    #         result.append(row)
+    #     return result
 
     def get_bankaccount_by_s_id(self, s_id):
         cursor = self.conn.cursor()
@@ -815,12 +815,12 @@ class peopledao:
         result = cursor.fetchone()
         return result
 
-    def get_creditcard(self, c_id):
-        cursor = self.conn.cursor()
-        query = "select * from creditcard where c_id = %s;"
-        cursor.execute(query, (c_id,))
-        result = cursor.fetchone()
-        return result
+    # def get_creditcard(self, c_id):
+    #     cursor = self.conn.cursor()
+    #     query = "select * from creditcard where c_id = %s;"
+    #     cursor.execute(query, (c_id,))
+    #     result = cursor.fetchone()
+    #     return result
 
     def check_bankinfo(self, s_id):
         cursor = self.conn.cursor()
@@ -838,18 +838,64 @@ class peopledao:
             result.append(row)
         return result
 
-    def update_creditcard(self, c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, address_id):
+    # def update_creditcard(self, c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, address_id):
+    #     cursor = self.conn.cursor()
+    #     query = "update creditcard set c_cardtype = %s, c_cardnumber = %s, c_cardname = %s, pin_id = %s, " \
+    #             "address_id = %s  where c_id = %s;"
+    #     cursor.execute(query, (c_cardtype, c_cardnumber, c_cardname, pin_id, address_id, c_id,))
+    #     self.conn.commit()
+    #     return c_id
+    #
+    # def insert_creditcard(self, c_cardtype, c_cardname, pin_id, address_id, c_cardnumber):
+    #     cursor = self.conn.cursor()
+    #     query = "insert into creditcard(c_cardtype, c_cardname, pin_id, address_id, c_cardnumber) values (%s, %s, %s, %s, %s) returning c_id;"
+    #     cursor.execute(query, (c_cardtype, c_cardname, pin_id, address_id, c_cardnumber,))
+    #     c_id = cursor.fetchone()[0]
+    #     self.conn.commit()
+    #     return c_id
+
+    def view_creditcard_by_PIN(self, pin_id):
         cursor = self.conn.cursor()
-        query = "update creditcard set c_cardtype = %s, c_cardnumber = %s, c_cardname = %s, pin_id = %s, " \
+        query = "select * from pin natural inner join creditcard where pin_id = %s;"
+        cursor.execute(query, (pin_id,))
+        result = cursor.fetchone()
+        print(result)
+        return result
+
+    def get_creditcard(self, pin_id):
+        cursor = self.conn.cursor()
+        query = "select c_id from creditcard where pin_id = %s;"
+        cursor.execute(query, (pin_id,))
+        result = cursor.fetchone()
+        return result
+
+    def update_creditcard(self, c_id, c_cardtype, c_cardnumber, c_cardname, addressid):
+        cursor = self.conn.cursor()
+        query = "update creditcard set c_cardtype = %s, c_cardnumber = %s, c_cardname = %s, " \
                 "address_id = %s  where c_id = %s;"
-        cursor.execute(query, (c_cardtype, c_cardnumber, c_cardname, pin_id, address_id, c_id,))
+        cursor.execute(query, (c_cardtype, c_cardnumber, c_cardname, addressid, c_id,))
         self.conn.commit()
         return c_id
 
-    def insert_creditcard(self, c_cardtype, c_cardname, pin_id, address_id, c_cardnumber):
+    def insert_creditcard(self, c_cardtype, c_cardnumber, c_cardname, pin_id, addressid):
         cursor = self.conn.cursor()
-        query = "insert into creditcard(c_cardtype, c_cardname, pin_id, address_id, c_cardnumber) values (%s, %s, %s, %s, %s) returning c_id;"
-        cursor.execute(query, (c_cardtype, c_cardname, pin_id, address_id, c_cardnumber,))
+        query = "insert into creditcard(c_cardtype, c_cardname, pin_id, address_id, c_cardnumber) " \
+                "values (%s, %s, %s, %s, %s) returning c_id;"
+        cursor.execute(query, (c_cardtype, c_cardname, pin_id, addressid, c_cardnumber,))
         c_id = cursor.fetchone()[0]
         self.conn.commit()
         return c_id
+
+    def getSupplierByProductCategory(self, cat):
+        cursor = self.conn.cursor()
+        query = "select p_id, ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit, s_fname, s_lname, ct_type " \
+                "from supplier natural inner join product natural inner join category " \
+                "where supplier.s_id = product.s_id " \
+                "AND product.ct_id = category.ct_id " \
+                "AND ct_type = %s " \
+                "ORDER BY p_name;"
+        cursor.execute(query, (cat,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

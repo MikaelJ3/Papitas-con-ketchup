@@ -254,22 +254,24 @@ def view_bankinfo_by_sid(s_id):
 
 ################## CREDIT CARD ############
 #https://ayudapaljibaro.herokuapp.com/supplier/creditcard
-@app.route('/pin/creditcard', methods=['GET', 'POST'])
-def view_creditcard():
-    if request.method == 'GET':
-        return peopleHandler().view_creditcard()
-    if request.method == 'POST':
-        return peopleHandler().insert_creditcard(request.form)
-
-
-#https://ayudapaljibaro.herokuapp.com/pin/creditcard/1
-#https://ayudapaljibaro.herokuapp.com/pin/creditcard/1
-@app.route('/pin/creditcard/<int:pin_id>', methods=['GET', 'PUT'])
+@app.route('/pin/creditcard/<int:pin_id>', methods=['GET', 'PUT', 'POST'])
 def view_creditcard_by_pin(pin_id):
     if request.method == 'GET':
         return peopleHandler().view_creditcard_by_PIN(pin_id)
-    if request.method == 'PUT':
+    elif request.method == 'PUT':
         return peopleHandler().update_creditcard(pin_id, request.form)
+    elif request.method == 'POST':
+        return peopleHandler().insert_creditcard(pin_id, request.form)
+
+
+# #https://ayudapaljibaro.herokuapp.com/pin/creditcard/1
+# #https://ayudapaljibaro.herokuapp.com/pin/creditcard/1
+# @app.route('/pin/creditcard/<int:pin_id>', methods=['GET', 'PUT'])
+# def view_creditcard_by_pin(pin_id):
+#     if request.method == 'GET':
+#         return peopleHandler().view_creditcard_by_PIN(pin_id)
+#     if request.method == 'PUT':
+#         return peopleHandler().update_creditcard(pin_id, request.form)
 
 ################# USER ACCOUNT #################
 #https://ayudapaljibaro.herokuapp.com/accounts
@@ -287,6 +289,8 @@ def search_account_by_username(a_id):
 @app.route('/categories')
 def get_categories():
     return producthandler().get_categories()
+
+
 
 if __name__ == '__main__':
     app.run()
