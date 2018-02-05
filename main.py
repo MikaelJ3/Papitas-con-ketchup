@@ -274,6 +274,7 @@ def search_account_by_username(a_id):
     return peopleHandler().search_account_by_a_id(a_id)
 
 ############# CATEGORIES ###########################
+#https://ayudapaljibaro.herokuapp.com/categories
 @app.route('/categories')
 def get_categories():
     return producthandler().get_categories()

@@ -495,20 +495,19 @@ class peopleHandler:
             zipcode = form['zipcode']
             country = form['country']
             district = form['district']
-            if not dao.getAccountByUsername(a_username):
-                if ad_fname and ad_lname and ad_phone and addressline1 and city and zipcode and country \
-                        and district and a_username and a_password:
+            if ad_fname and ad_lname and ad_phone and addressline1 and city and zipcode and country \
+                    and district and a_username and a_password:
 
-                    adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
-                    ada_id = dao.insert_new_user(a_username, a_password)
-                    ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
-                    result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,
-                                                      addressline1, city, zipcode, country, district)
-                    return jsonify(NewAdministrator=result), 201
-                else:
-                    return jsonify(Error="Unexpected attributes in post request"), 400
+                adaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
+                ada_id = dao.insert_new_user(a_username, a_password)
+                ad_id = dao.insert_new_admin(ad_fname, ad_lname, ada_id, adaddress_id, ad_phone)
+                result = self.build_adminINS_dict(ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone,
+                                                  addressline1, city, zipcode, country, district)
+                return jsonify(NewAdministrator=result), 201
             else:
-                return jsonify(Error="Username Already Taken"), 400
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
 
     def getAllAdmin(self):
         dao = peopledao()
@@ -588,15 +587,14 @@ class peopleHandler:
             s_id = form['s_id']
             ba_accnumber = form['ba_accnumber']
             ba_routingnumber = form['ba_routingnumber']
-            if not dao.get_bankaccount_by_s_id(s_id):
-                if s_id and ba_accnumber and ba_accnumber:
-                    ba_id = dao.insert_bankinfo(s_id, ba_accnumber, ba_routingnumber)
-                    result = self.build_bankinfo_attributes(ba_id, s_id, ba_accnumber, ba_routingnumber)
-                    return jsonify(New_Bank_info=result), 201
-                else:
-                    return jsonify(Error="Unexpected attributes in post request"), 400
+            if s_id and ba_accnumber and ba_accnumber:
+                ba_id = dao.insert_bankinfo(s_id, ba_accnumber, ba_routingnumber)
+                result = self.build_bankinfo_attributes(ba_id, s_id, ba_accnumber, ba_routingnumber)
+                return jsonify(New_Bank_info=result), 201
             else:
-                return jsonify(Error="Bank Info Exists"), 400
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
 
 
     def insert_creditcard(self, form):
@@ -609,16 +607,14 @@ class peopleHandler:
             c_cardnumber = form['c_cardnumber']
             c_cardname = form['c_cardname']
             address_id = form['addressid']
-            if not dao.view_creditcard_by_PIN(pin_id):
-                if c_cardtype and c_cardnumber and c_cardname and pin_id and address_id:
-                    #dao = peopledao()
-                    c_id = dao.insert_creditcard(c_cardtype, c_cardnumber, c_cardname, pin_id, address_id)
-                    result = self.build_creditcard_attributes(c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, address_id)
-                    return jsonify(New_CreditCard=result), 201
-                else:
-                    return jsonify(Error="Unexpected attributes in post request"), 400
+            if c_cardtype and c_cardnumber and c_cardname and pin_id and address_id:
+                c_id = dao.insert_creditcard(c_cardtype, c_cardnumber, c_cardname, pin_id, address_id)
+                result = self.build_creditcard_attributes(c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, address_id)
+                return jsonify(New_CreditCard=result), 201
             else:
-                return jsonify(Error="PIN has creditCard"), 400
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
 
 
 
@@ -747,19 +743,18 @@ class peopleHandler:
             zipcode = form['zipcode']
             country = form['country']
             district = form['district']
-            if not dao.getAccountByUsername(a_username):
-                if pin_fname and pin_lname and pin_phone and addressline1 and city and zipcode and country \
-                        and district and a_username and a_password:
-                    pinaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
-                    pina_id = dao.insert_new_user(a_username, a_password)
-                    pin_id = dao.insert_new_pin(pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone)
-                    result = self.build_adminINS_dict(pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone,
-                                                      addressline1, city, zipcode, country, district)
-                    return jsonify(NewPersonInNeed=result), 201
-                else:
-                    return jsonify(Error="Unexpected attributes in post request"), 400
+            if pin_fname and pin_lname and pin_phone and addressline1 and city and zipcode and country \
+                    and district and a_username and a_password:
+                pinaddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
+                pina_id = dao.insert_new_user(a_username, a_password)
+                pin_id = dao.insert_new_pin(pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone)
+                result = self.build_adminINS_dict(pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone,
+                                                  addressline1, city, zipcode, country, district)
+                return jsonify(NewPersonInNeed=result), 201
             else:
-                return jsonify(Error="USERNAME ALREADY EXISTS"), 400
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
 
     def getAllpin(self):
         dao = peopledao()
@@ -883,19 +878,17 @@ class peopleHandler:
             zipcode = form['zipcode']
             country = form['country']
             district = form['district']
-            if not dao.getAccountByUsername(a_username):
-                if s_fname and s_lname and s_phone and addressline1 and city and zipcode and country \
-                        and district and a_username and a_password:
-                    saddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
-                    sa_id = dao.insert_new_user(a_username, a_password)
-                    s_id = dao.insert_new_sup(s_fname, s_lname, sa_id, saddress_id, s_phone)
-                    result = self.build_supplierINS_dict(s_id, s_fname, s_lname, sa_id, saddress_id, s_phone,
-                                                         addressline1, city, zipcode, country, district)
-                    return jsonify(NewSupplier=result), 201
-                else:
-                    return jsonify(Error="Unexpected attributes in post request"), 400
+            if s_fname and s_lname and s_phone and addressline1 and city and zipcode and country \
+                    and district and a_username and a_password:
+                saddress_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
+                sa_id = dao.insert_new_user(a_username, a_password)
+                s_id = dao.insert_new_sup(s_fname, s_lname, sa_id, saddress_id, s_phone)
+                result = self.build_supplierINS_dict(s_id, s_fname, s_lname, sa_id, saddress_id, s_phone,
+                                                     addressline1, city, zipcode, country, district)
+                return jsonify(NewSupplier=result), 201
             else:
-                return jsonify(Error="USERNAME ALREADY EXISTS"), 400
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
 
 
     def getAllsup(self):
