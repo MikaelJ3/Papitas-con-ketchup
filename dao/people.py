@@ -787,7 +787,7 @@ class peopledao:
 
     def view_creditcard_by_PIN(self, pin_id):
         cursor = self.conn.cursor()
-        query = "select * from supplier natural inner join where pin_id = %s;"
+        query = "select * from creditcard where pin_id = %s;"
         cursor.execute(query, (pin_id,))
         result = []
         for row in cursor:

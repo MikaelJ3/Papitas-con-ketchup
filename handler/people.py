@@ -25,10 +25,10 @@ class peopleHandler:
         result = {}
         result['c_id'] = row[0]
         result['c_cardtype '] = row[1]
-        result['c_cardnumber '] = row[2]
-        result['c_cardname '] = row[3]
-        result['pin_id '] = row[4]
-        result['addressid '] = row[5]
+        result['c_cardname '] = row[2]
+        result['pin_id '] = row[3]
+        result['addressid '] = row[4]
+        result['c_cardnumber '] = row[5]
         return result
 
     def build_creditcard_attributes(self, a, b, c, d, e, f):
@@ -545,7 +545,7 @@ class peopleHandler:
         for row in CC:
             result = self.build_creditcard_dict(row)
             result_list.append(result)
-        return jsonify(BANKINFO=result_list)
+        return jsonify(CREDITcard=result_list)
 
 
     def search_account_by_a_id(self, a_id):
