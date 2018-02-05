@@ -1,18 +1,45 @@
 from flask import jsonify
 from dao.product import ProductDAO
 from dao.people import peopledao
+import time
 
 class producthandler:
     def build_product(self, row):
         result = {}
-        result['Product Id'] = row[0]
-        result['Category'] = row[1]
-        result['Supplier Id'] = row[2]
-        result['Product Name'] = row[3]
-        result['Left in Stock'] = row[4]
-        result['Unit'] = row[5]
-        result['Price Per Unit'] = '$' + str(row[6])
+        result['p_id'] = row[0]
+        result['p_ct'] = row[1]
+        result['s_id'] = row[2]
+        result['p_name'] = row[3]
+        result['p_qty'] = row[4]
+        result['p_unit'] = row[5]
+        result['p_priceperunit'] = row[6]
         return result
+
+    def build_new_product(self, row):
+        result = {}
+        result['p_id'] = row[0]
+        result['ct_id'] = row[1]
+        result['s_id'] = row[2]
+        result['p_name'] = row[3]
+        result['p_qty'] = row[4]
+        result['p_unit'] = row[5]
+        result['p_priceperunit'] = row[6]
+        result['s_fname'] = row[7]
+        result['s_lname'] = row[8]
+        result['ct_type'] = row[9]
+        return result
+
+    def build_product_attributes(self, p_id, ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit):
+        result = {}
+        result['p_id'] = p_id
+        result['ct_id'] = ct_id
+        result['s_id'] = s_id
+        result['p_name'] = p_name
+        result['p_qty'] = p_qty
+        result['p_unit'] = p_unit
+        result['p_priceperunit'] = p_priceperunit
+        return result
+
 
     def build_category(self, row):
         result = {}
@@ -27,7 +54,7 @@ class producthandler:
         result['pin_fname'] = row[1]
         result['pin_lname'] = row[2]
         result['a_id'] = row[3]
-        result['addressid'] = row[4]
+        result['adressid'] = row[4]
         result['pin_phone'] = row[5]
         return result
 
@@ -37,7 +64,7 @@ class producthandler:
         result['ad_fname'] = row[1]
         result['ad_lname'] = row[2]
         result['a_id'] = row[3]
-        result['addressid'] = row[4]
+        result['adressid'] = row[4]
         result['s_phone'] = row[5]
         return result
 
@@ -50,37 +77,35 @@ class producthandler:
         result['district'] = row[4]
         return result
 
-    def build_orderdetails_dict(self, row):
+    def build_order_attributes(self, oid, odid, qty, pprice, sup, ba, pid, pin, cid, date, supfn, supln, pinfn, pinln,
+                                pname):
         result = {}
-        result['od_id'] = row[0]
-        result['od_qty'] = row[1]
-        result['od_price'] = row[2]
-        result['o_id'] = row[3]
-        result['pin_id'] = row[4]
-        result['s_id'] = row[5]
-        result['ba_id'] = row[6]
-        result['p_id'] = row[7]
+        result['o_id'] = oid
+        result['od_id'] = odid
+        result['od_qty'] = qty
+        result['od_pprice'] = pprice
+        result['s_id'] = sup
+        result['ba_id'] = ba
+        result['p_id'] = pid
+        result['Product Name'] = pname
+        result['pin_id'] = pin
+        result['c_id'] = cid
+        result['o_date'] = date
+        result['Supplier Name'] = supfn + " " + supln
+        result['Customer Name'] = pinfn + " " + pinln
         return result
 
 
-    def getAllProducts(self):
+    def get_all_products(self):
         dao = ProductDAO()
-        product_list = dao.getAllProducts()
+        product_list = dao.get_all_products()
         result_list = []
         for row in product_list:
-            result = self.build_product(row)
+            result = self.build_new_product(row)
             result_list.append(result)
         return jsonify(Product=result_list)
 
-    def getAvailabilityOfProduct(self, p_id):
-        dao = ProductDAO()
-        row = dao.getAvailabilityOfProduct(p_id)
-        if not row:
-            return jsonify(error="product not found"), 404
-        else:
-            print(row)
-            product = self.build_product(row)
-            return jsonify(Product=product)
+
 
     def getProductById(self, p_id):
         dao = ProductDAO()
@@ -91,99 +116,82 @@ class producthandler:
             product = self.build_product(row)
             return jsonify(Product=product)
 
-    def getProductByName(self, p_name):
-        dao = ProductDAO()
-        row = dao.getProductByName(p_name)
-        if not row:
-            return jsonify(error="product not found"), 404
+
+    def insert_product(self, form):
+        if len(form) != 6:
+            return jsonify(Error="Malformed post request"), 400
         else:
-            product = self.build_product(row)
-            return jsonify(Product=product)
+            ct_id = form['ct_id']
+            s_id = form['s_id']
+            p_name = form['p_name']
+            p_qty = form['p_qty']
+            p_unit = form['p_unit']
+            p_priceperunit = form['p_priceperunit']
+            if  s_id and p_name and p_qty and p_unit and p_priceperunit and ct_id:
+                dao = ProductDAO()
+                p_id = dao.insert_product(ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit)
+                result = self.build_product_attributes(p_id, ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit)
+                return jsonify(Product=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
 
-    def getProductsByQuantity(self, p_qty):
+    def search_products(self, args):
         dao = ProductDAO()
-        product_list = dao.getProductByQty(p_qty)
-        result_list = []
-        for row in product_list:
-            result = self.build_product(row)
-            result_list.append(result)
-        return jsonify(Product=result_list)
-
-    def findSpecificProduct(self, args):
-        p_id = args.get("p_id")
-        district = args.get("district")
-        dao = ProductDAO()
+        ct_id = args.get("ct_id")
+        s_id = args.get("s_id")
+        p_name = args.get("p_name")
+        p_qty = args.get("p_qty")
+        p_unit = args.get("p_unit")
+        p_priceperunit = args.get("p_priceperunit")
         product_list = []
-        if (len(args) == 2) and p_id and district:
-            product_list = dao.findSpecificProduct(p_id, district)
+        if len(args) == 1 and ct_id:
+            product_list = dao.filter_products(ct_id, 1)
+        elif  len(args) == 1 and s_id:
+            product_list  =dao.filter_products(s_id, 2)
+        elif len(args) == 1 and p_name:
+            product_list = dao.filter_products(p_name, 3)
+        elif len(args) == 1 and p_qty:
+            product_list = dao.filter_products(p_qty, 4)
+        elif len(args) == 1 and p_unit:
+            product_list = dao.filter_products(p_unit, 5)
+        elif len(args) == 1 and p_priceperunit:
+            product_list = dao.filter_products(p_priceperunit, 6)
         else:
-            return jsonify(error="Malformed query string"), 400
+            return jsonify(Error="Malformed query string"), 400
         result_list = []
         for row in product_list:
-            result = self.build_product(row)
+            result = self.build_new_product(row)
             result_list.append(result)
-        return jsonify(Product=result_list)
+        return jsonify(Products=result_list)
 
-    def browseResourcesAvailable(self):
+    def update_product(self, p_id, form):
         dao = ProductDAO()
-        product_list = dao.browseResourcesAvailable()
-        result_list = []
-        for row in product_list:
-            result = self.build_product(row)
-            result_list.append(result)
-        return jsonify(Product=result_list)
-
-    def VerifyID(self, p_id):
-        dao = ProductDAO()
-        row = dao.getProductById(p_id)
-        if not row:
-            return False
+        if not dao.getProductById(p_id):
+            return jsonify(Error="Product not found."), 404
         else:
-            return True
+            if len(form) != 6:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                ct_id = form['ct_id']
+                s_id = form['s_id']
+                p_name = form['p_name']
+                p_qty = form['p_qty']
+                p_unit = form['p_unit']
+                p_priceperunit = form['p_priceperunit']
+            if s_id and p_name and p_qty and p_unit and p_priceperunit and ct_id:
+                dao.update_product(p_id, ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit)
+                result = self.build_product_attributes(p_id, ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit)
+                return jsonify(Product=result), 200
+            else:
+                return jsonify(Error="Unexpected attributes in update request"), 400
 
-    def insert_new_product(self, cat, sid, name, qty, unit, ppu):
+    def delete_product(self, pid):
         dao = ProductDAO()
-        pid = dao.insert_new_product(cat, sid, name, qty, unit, ppu)
-        result = {}
-        result['Product Id'] = pid
-        result['Category'] = cat
-        result['Supplier Id'] = sid
-        result['Product Name'] = name
-        result['Quantity'] = qty
-        result['Unit'] = unit
-        result['Price Per Unit'] = str(ppu) + '$'
-        return result
-
-    def update_product(self, p_id, ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit):
-        dao = ProductDAO()
-        p_id = dao.update_product(p_id, ct_id, s_id, p_name, p_qty, p_unit, p_priceperunit)
-        result = {}
-        result['Product Id'] = p_id
-        result['Category'] = ct_id
-        result['Supplier Id'] = s_id
-        result['Product Name'] = p_name
-        result['Quantity'] = p_qty
-        result['Unit'] = p_unit
-        result['Price Per Unit'] = str(p_priceperunit) + '$'
-        return result
-
-    def AnnounceAvailability(self):
-        dao = ProductDAO()
-        product_list = dao.getAllProductsA()
-        result_list = []
-        for row in product_list:
-            result = self.build_product(row)
-            result_list.append(result)
-        return result_list
-
-    def getPurchasableProduct(self):
-        dao = ProductDAO()
-        product_list = dao.getPurchasableProduct()
-        result_list = []
-        for row in product_list:
-            result = self.build_product(row)
-            result_list.append(result)
-        return result_list
+        if not dao.getProductById(pid):
+            return jsonify(Error="Product not found."), 404
+        else:
+            dao.delete_product(pid)
+        return jsonify(DeleteStatus="OK"), 200
 
     def getFreeProduct(self):
         dao = ProductDAO()
@@ -192,22 +200,63 @@ class producthandler:
         for row in product_list:
             result = self.build_product(row)
             result_list.append(result)
-        return result_list
+        max_order = int(dao.get_max_order_id()) + 1
+        message = "For a new order please use order id: " + str(max_order) + ", if not please reuse your order id."
+        return jsonify(Message=message, PurchasableProduct=result_list)
 
-    def insert_new_OrderDetails(self, od_qty, o_id, pin_id, p_id):
-        product_dao = ProductDAO()
-        people_dao = peopledao()
-        p_priceperunit = product_dao.GetPricePerProductID(p_id)
-        od_price = p_priceperunit * od_qty
-        s_id = product_dao.getSupplierID_by_ProductID(p_id)
-        ba_id = people_dao.getBankIDBy_SupplierID(s_id)
+    def getPurchasableProduct(self):
+        dao = ProductDAO()
+        product_list = dao.getPurchasableProduct()
+        result_list = []
+        for row in product_list:
+            result = self.build_product(row)
+            result_list.append(result)
+        max_order = int(dao.get_max_order_id()) + 1
+        message = "For a new order please use order id: " + str(max_order) + ", if not please reuse your order id."
+        return jsonify(Message=message,PurchasableProduct=result_list)
 
-        od_id = people_dao.insert_product_to_OrderDetails(od_qty, od_price, o_id, pin_id, s_id, ba_id, p_id)
+    def buy_product(self, form):
+        if len(form) != 5:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            o_id = int(form['o_id'])
+            pin_id = int(form['pin_id'])
+            qty = int(form['od_qty'])
+            p_id = int(form['p_id'])
+            s_id = int(form['s_id'])
+            if o_id and pin_id and qty and p_id and s_id:
+                if qty <= 0 or o_id <= 0 or pin_id <=0 or p_id <= 0 or s_id <= 0:
+                    return jsonify(Error="Invalid inputs o_id and/or pin_id and/or s_id and/or p_id and/or od_qty")
+                else:
+                    dao = ProductDAO()
+                    pdao = peopledao()
+                    date = time.strftime("%d%m%Y")
+                    verify_o_id = pdao.check_o_id(o_id)  # returns true if o_id is less or equal max o_id, else false
+                    verify_pin_id = pdao.check_pin(pin_id)  # return c_id if pin_id is valid, false otherwise
+                    verify_sup = pdao.check_sup(s_id)  # returns ba_id if valid s_id, false otherwise
+                    verify_product = dao.check_product(p_id, qty)  # return true if valid p_id & qty is less than db qty
+                    if not(verify_o_id and verify_pin_id and verify_product and verify_sup):
+                        return jsonify(Error="Invalid inputs o_id and/or pin_id and/or s_id and/or p_id and/or od_qty")
+                    else:
+                        c_id = verify_pin_id[2]
+                        ba_id = verify_sup[2]
+                        p_priceperunit = verify_product[2]
+                        pname = verify_product[3]
+                        pin_fname = verify_pin_id[0]
+                        pin_lname = verify_pin_id[1]
+                        sup_fname = verify_sup[0]
+                        sup_lname = verify_sup[1]
+                        real_o_id = pdao.check_or_create_o_id(o_id, c_id, date)
+                        order = dao.insert_product_to_OrderDetails(qty, p_priceperunit, real_o_id, pin_id, s_id,
+                                                                    ba_id, p_id)
+                        if not order:
+                            return jsonify(Error="Purchase did not go through")
+                        else:
+                            order_details = self.build_order_attributes(real_o_id, order, qty, p_priceperunit, s_id,
+                                                                        ba_id, p_id, pin_id, c_id, date, sup_fname,
+                                                                        sup_lname, pin_fname, pin_lname, pname)
+                            return jsonify(OrderDetails=order_details)
+            else:
+                return jsonify(Error="Invalid Inputs")
 
-        #result = self.build_orderdetails_dict(od_id, od_qty, od_price, o_id, pin_id, s_id, ba_id, p_id)
 
-        current_p_qty = product_dao.getPqty_by_PID(p_id)
-        new_p_qty = current_p_qty - od_qty
-        product_dao.update_product_quantity(p_id, new_p_qty)
-
-        return od_id
