@@ -12,6 +12,10 @@ def greeting():
 
 
 #########PRODUCTS########
+
+#https://ayudapaljibaro.herokuapp.com/products
+#https://ayudapaljibaro.herokuapp.com/products?ct_id=2
+
 @app.route('/products', methods=['GET', 'POST'])
 def get_all_products():
     if request.method == 'POST':
@@ -22,7 +26,7 @@ def get_all_products():
         else:
             return producthandler().search_products(request.args)  # filter products by product attributes
 
-
+#https://ayudapaljibaro.herokuapp.com/products/1
 @app.route('/products/<int:p_id>', methods=['GET', 'PUT', 'DELETE'])
 def get_specific_product(p_id):
     if request.method == 'GET':
@@ -34,12 +38,14 @@ def get_specific_product(p_id):
     else:
         return jsonify(Error="Method not allowed."), 405
 
-
+### F I X ##
 @app.route('/products/<int:p_id>/suppliers')
 def get_supplier_by_product_id(p_id):
     return peopleHandler().getSupplierByProduct(p_id)
 
-
+# https://ayudapaljibaro.herokuapp.com/products/supplier
+# https://ayudapaljibaro.herokuapp.com/products/supplier?s_id=1
+# https://ayudapaljibaro.herokuapp.com/products/supplier?s_fname=Leia
 @app.route('/products/supplier')
 def get_products_by_supplier():
     if not request.args:
@@ -48,7 +54,8 @@ def get_products_by_supplier():
         return peopleHandler().getProductsBySupplier(request.args)  # filters products by supplier id, first name, full name
 
 
-
+# https://ayudapaljibaro.herokuapp.com/products/city
+# https://ayudapaljibaro.herokuapp.com/products/city?city=San Juan
 @app.route('/products/city')
 def get_products_by_city():
     if not request.args:
@@ -56,7 +63,8 @@ def get_products_by_city():
     else:
         return peopleHandler().get_all_products_by_city(request.args)  # filters products by city
 
-
+# https://ayudapaljibaro.herokuapp.com/products/zipcode
+# https://ayudapaljibaro.herokuapp.com/products/zipcode?zipcode=00623
 @app.route('/products/zipcode')
 def get_products_by_zipcode():
     if not request.args:
@@ -64,7 +72,8 @@ def get_products_by_zipcode():
     else:
         return peopleHandler().get_all_products_by_zipcode(request.args)  # filters products by city
 
-
+# https://ayudapaljibaro.herokuapp.com/products/country
+# https://ayudapaljibaro.herokuapp.com/products/country?country=Puerto Rico
 @app.route('/products/country')
 def get_products_by_country():
     if not request.args:
@@ -72,7 +81,8 @@ def get_products_by_country():
     else:
         return peopleHandler().get_all_products_by_country(request.args)  # filters products by city
 
-
+# https://ayudapaljibaro.herokuapp.com/products/district
+# https://ayudapaljibaro.herokuapp.com/products/district?district=San Juan
 @app.route('/products/district')
 def get_products_by_district():
     if not request.args:
@@ -82,6 +92,8 @@ def get_products_by_district():
 
 
 ############Transactions##################
+# https://ayudapaljibaro.herokuapp.com/transactions
+# https://ayudapaljibaro.herokuapp.com/transactions?s_id=2
 @app.route('/transactions')
 def get_all_orders():
     if not request.args:
@@ -89,6 +101,7 @@ def get_all_orders():
     else:
         return peopleHandler().search_orders(request.args)  # filter products by product attributes
 
+# https://ayudapaljibaro.herokuapp.com/products/buy
 @app.route('/products/buy', methods=['GET', 'POST'])
 def buy_product():
     if request.method == 'POST':
@@ -96,6 +109,7 @@ def buy_product():
     else:
         return producthandler().getPurchasableProduct()
 
+# https://ayudapaljibaro.herokuapp.com/products/reserve
 @app.route('/products/reserve', methods=['GET', 'POST'])
 def reserve_product():
     if request.method == 'POST':
@@ -105,11 +119,12 @@ def reserve_product():
 
 # # #  A D D R E S S # # #
 
+# https://ayudapaljibaro.herokuapp.com/address
 @app.route('/address')
 def getAllAddress():
     return peopleHandler().getAllAddress()
 
-
+# https://ayudapaljibaro.herokuapp.com/address/update/2
 @app.route('/address/update/<int:address_id>', methods=['PUT', 'DELETE'])
 def addressChange(address_id):
     if request.method == 'PUT':
@@ -119,7 +134,8 @@ def addressChange(address_id):
 
 
 # # #  A D M I N I S T R A T O R  # # #
-
+# https://ayudapaljibaro.herokuapp.com/admins
+# https://ayudapaljibaro.herokuapp.com/admins?ad_fname=Manuel
 @app.route('/admins', methods=['GET', 'POST'])
 def get_all_admin():
     if request.method == 'POST':

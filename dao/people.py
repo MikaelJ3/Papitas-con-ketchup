@@ -474,7 +474,7 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "insert into addresses(addressline1, city, country, district, zipcode) values (%s, %s, %s, %s, %s) " \
                 "returning address_id;"
-        cursor.execute(query, (addressline1, city, zipcode, country, district,))
+        cursor.execute(query, (addressline1, city, country, district, zipcode,))
         address_id = cursor.fetchone()[0]
         self.conn.commit()
         return address_id
