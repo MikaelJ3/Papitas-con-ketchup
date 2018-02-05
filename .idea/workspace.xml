@@ -4,7 +4,6 @@
     <list default="true" id="e0150894-958a-4602-8658-d1551553d034" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/dao/product.py" afterPath="$PROJECT_DIR$/dao/product.py" />
-      <change beforePath="$PROJECT_DIR$/handler/product.py" afterPath="$PROJECT_DIR$/handler/product.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,8 +17,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3774">
-              <caret line="246" column="0" lean-forward="true" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+            <state relative-caret-position="238">
+              <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="21" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -39,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="people.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="people.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dao/people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1995">
-              <caret line="844" column="0" lean-forward="true" selection-start-line="844" selection-start-column="0" selection-end-line="844" selection-end-column="0" />
+            <state relative-caret-position="102">
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="11" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -52,7 +51,7 @@
       <file leaf-file-name="product.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/handler/product.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
+            <state relative-caret-position="3547">
               <caret line="237" column="36" lean-forward="true" selection-start-line="237" selection-start-column="36" selection-end-line="237" selection-end-column="36" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
@@ -61,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="product.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dao/product.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1111">
-              <caret line="121" column="0" lean-forward="true" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+            <state relative-caret-position="153">
+              <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -333,13 +332,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516814862194</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Testing getPINByFirstName 2.2">
-      <created>1517607313732</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1517607313732</updated>
     </task>
     <task id="LOCAL-00069" summary="Testing getPINByFirstName 2.2">
       <created>1517607590643</created>
@@ -677,7 +669,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517795395718</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="chucha">
+      <created>1517795676324</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1517795676324</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -988,29 +987,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3774">
-          <caret line="246" column="0" lean-forward="true" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+        <state relative-caret-position="238">
+          <caret line="14" column="12" lean-forward="true" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="21" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/handler/product.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="237" column="36" lean-forward="true" selection-start-line="237" selection-start-column="36" selection-end-line="237" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/product.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1111">
-          <caret line="121" column="0" lean-forward="true" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1024,10 +1005,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/handler/product.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3547">
+          <caret line="237" column="36" lean-forward="true" selection-start-line="237" selection-start-column="36" selection-end-line="237" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dao/people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1995">
-          <caret line="844" column="0" lean-forward="true" selection-start-line="844" selection-start-column="0" selection-end-line="844" selection-end-column="0" />
+        <state relative-caret-position="102">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="11" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/product.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="30" lean-forward="false" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
           <folding />
         </state>
       </provider>
