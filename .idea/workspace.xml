@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0150894-958a-4602-8658-d1551553d034" name="Default" comment="">
+    <list default="true" id="e0150894-958a-4602-8658-d1551553d034" name="Default" comment="chucha">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/handler/people.py" afterPath="$PROJECT_DIR$/handler/people.py" />
+      <change beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,8 +18,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="261" column="40" lean-forward="true" selection-start-line="261" selection-start-column="40" selection-end-line="261" selection-end-column="40" />
+            <state relative-caret-position="478">
+              <caret line="267" column="23" lean-forward="true" selection-start-line="267" selection-start-column="23" selection-end-line="267" selection-end-column="23" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -29,8 +30,8 @@
       <file leaf-file-name="people.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/handler/people.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="629" column="47" lean-forward="true" selection-start-line="629" selection-start-column="47" selection-end-line="629" selection-end-column="47" />
+            <state relative-caret-position="370">
+              <caret line="609" column="37" lean-forward="false" selection-start-line="609" selection-start-column="37" selection-end-line="609" selection-end-column="37" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -186,8 +187,8 @@
         <option value="$PROJECT_DIR$/dao/request.py" />
         <option value="$PROJECT_DIR$/handler/product.py" />
         <option value="$PROJECT_DIR$/dao/product.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/dao/people.py" />
+        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/handler/people.py" />
       </list>
     </option>
@@ -332,13 +333,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516814862194</updated>
-    </task>
-    <task id="LOCAL-00080" summary="chucha">
-      <created>1517618084207</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1517618084207</updated>
     </task>
     <task id="LOCAL-00081" summary="chucha">
       <created>1517618133372</created>
@@ -676,7 +670,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517807367108</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="chucha">
+      <created>1517807466106</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1517807466106</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1011,8 +1012,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="261" column="40" lean-forward="true" selection-start-line="261" selection-start-column="40" selection-end-line="261" selection-end-column="40" />
+        <state relative-caret-position="478">
+          <caret line="267" column="23" lean-forward="true" selection-start-line="267" selection-start-column="23" selection-end-line="267" selection-end-column="23" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -1021,8 +1022,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/handler/people.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="629" column="47" lean-forward="true" selection-start-line="629" selection-start-column="47" selection-end-line="629" selection-end-column="47" />
+        <state relative-caret-position="370">
+          <caret line="609" column="37" lean-forward="false" selection-start-line="609" selection-start-column="37" selection-end-line="609" selection-end-column="37" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

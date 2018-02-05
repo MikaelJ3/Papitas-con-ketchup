@@ -596,12 +596,11 @@ class peopleHandler:
 
 
 
-    def insert_creditcard(self, form):
+    def insert_creditcard(self, pin_id, form):
         dao = peopledao
-        if len(form) != 5:
+        if len(form) != 4:
             return jsonify(Error="Malformed post request"), 400
         else:
-            pin_id = form['pin_id']
             c_cardtype = form['c_cardtype']
             c_cardnumber = form['c_cardnumber']
             c_cardname = form['c_cardname']

@@ -261,7 +261,7 @@ def view_creditcard_by_pin(pin_id):
     elif request.method == 'PUT':
         return peopleHandler().update_creditcard(pin_id, request.form)
     elif request.method == 'POST':
-        return peopleHandler().insert_creditcard(request.form)
+        return peopleHandler().insert_creditcard(pin_id, request.form)
 
 ################# USER ACCOUNT #################
 #https://ayudapaljibaro.herokuapp.com/accounts
