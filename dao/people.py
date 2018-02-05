@@ -789,7 +789,9 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select * from supplier natural inner join where pin_id = %s;"
         cursor.execute(query, (pin_id,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
 
@@ -797,7 +799,9 @@ class peopledao:
         cursor = self.conn.cursor()
         query = "select * from bankinfo where s_id = %s;"
         cursor.execute(query, (s_id,))
-        result = cursor.fetchone()
+        result = []
+        for row in cursor:
+            result.append(row)
         return result
 
 

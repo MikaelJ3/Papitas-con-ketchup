@@ -95,6 +95,20 @@ class producthandler:
         result['Customer Name'] = pinfn + " " + pinln
         return result
 
+    def build_categories(self, row):
+        result = {}
+        result['ct_id'] = row[0]
+        result['ct_type'] = row[1]
+        return result
+
+    def get_categories(self):
+        dao = ProductDAO()
+        categories = dao.get_categories()
+        result_list = []
+        for row in categories:
+            result = self.build_categories(row)
+            result_list.append(result)
+        return jsonify(Categories=result_list)
 
     def get_all_products(self):
         dao = ProductDAO()
@@ -143,11 +157,12 @@ class producthandler:
         p_qty = args.get("p_qty")
         p_unit = args.get("p_unit")
         p_priceperunit = args.get("p_priceperunit")
+        p_id = args.get("p_id")
         product_list = []
         if len(args) == 1 and ct_id:
             product_list = dao.filter_products(ct_id, 1)
-        elif  len(args) == 1 and s_id:
-            product_list  =dao.filter_products(s_id, 2)
+        elif len(args) == 1 and s_id:
+            product_list = dao.filter_products(s_id, 2)
         elif len(args) == 1 and p_name:
             product_list = dao.filter_products(p_name, 3)
         elif len(args) == 1 and p_qty:
@@ -156,6 +171,8 @@ class producthandler:
             product_list = dao.filter_products(p_unit, 5)
         elif len(args) == 1 and p_priceperunit:
             product_list = dao.filter_products(p_priceperunit, 6)
+        elif len(args) == 1 and p_id:
+            product_list = dao.filter_products(p_id, 7)
         else:
             return jsonify(Error="Malformed query string"), 400
         result_list = []
@@ -215,6 +232,7 @@ class producthandler:
         message = "For a new order please use order id: " + str(max_order) + ", if not please reuse your order id."
         return jsonify(Message=message,PurchasableProduct=result_list)
 
+    ### BUY PRODUCT ###
     def buy_product(self, form):
         if len(form) != 5:
             return jsonify(Error="Malformed post request"), 400
@@ -225,7 +243,7 @@ class producthandler:
             p_id = int(form['p_id'])
             s_id = int(form['s_id'])
             if o_id and pin_id and qty and p_id and s_id:
-                if qty <= 0 or o_id <= 0 or pin_id <=0 or p_id <= 0 or s_id <= 0:
+                if qty <= 0 or o_id <= 0 or pin_id <= 0 or p_id <= 0 or s_id <= 0:
                     return jsonify(Error="Invalid inputs o_id and/or pin_id and/or s_id and/or p_id and/or od_qty")
                 else:
                     dao = ProductDAO()
@@ -235,28 +253,40 @@ class producthandler:
                     verify_pin_id = pdao.check_pin(pin_id)  # return c_id if pin_id is valid, false otherwise
                     verify_sup = pdao.check_sup(s_id)  # returns ba_id if valid s_id, false otherwise
                     verify_product = dao.check_product(p_id, qty)  # return true if valid p_id & qty is less than db qty
-                    if not(verify_o_id and verify_pin_id and verify_product and verify_sup):
-                        return jsonify(Error="Invalid inputs o_id and/or pin_id and/or s_id and/or p_id and/or od_qty")
+                    if not (verify_o_id and verify_pin_id and verify_product and verify_sup):
+                        return jsonify(
+                            Error="Invalid inputs o_id and/or pin_id and/or s_id and/or p_id and/or od_qty")
                     else:
                         c_id = verify_pin_id[2]
                         ba_id = verify_sup[2]
                         p_priceperunit = verify_product[2]
                         pname = verify_product[3]
+                        product_supplier = verify_product[4]
                         pin_fname = verify_pin_id[0]
                         pin_lname = verify_pin_id[1]
                         sup_fname = verify_sup[0]
                         sup_lname = verify_sup[1]
+                        if product_supplier != s_id:
+                            return jsonify(Error="supplier does not supply that item")
                         real_o_id = pdao.check_or_create_o_id(o_id, c_id, date)
                         order = dao.insert_product_to_OrderDetails(qty, p_priceperunit, real_o_id, pin_id, s_id,
-                                                                    ba_id, p_id)
+                                                                   ba_id, p_id)
                         if not order:
                             return jsonify(Error="Purchase did not go through")
                         else:
                             order_details = self.build_order_attributes(real_o_id, order, qty, p_priceperunit, s_id,
                                                                         ba_id, p_id, pin_id, c_id, date, sup_fname,
                                                                         sup_lname, pin_fname, pin_lname, pname)
+                            new_qty = verify_product[1] - qty
+                            dao.update_product_qty(p_id, new_qty)
                             return jsonify(OrderDetails=order_details)
             else:
                 return jsonify(Error="Invalid Inputs")
+    ## UPDATE QTY DAO ##
 
-
+    def update_product_qty(self, pid, qty):
+        cursor = self.conn.cursor()
+        query = "UPDATE product set p_qty=%s WHERE p_id=%s;"
+        cursor.execute(query, (qty, pid,))
+        self.conn.commit()
+        return pid

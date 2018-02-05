@@ -26,7 +26,14 @@ class ProductDAO:
             result.append(row)
         return result
 
-
+    def get_categories(self):
+        cursor = self.conn.cursor()
+        query = "select * from category ORDER BY ct_id;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     def getProductById(self, p_id):
         cursor = self.conn.cursor()
@@ -42,7 +49,6 @@ class ProductDAO:
         p_id = cursor.fetchone()[0]
         self.conn.commit()
         return p_id
-
 
     def filter_products(self, form, int):
         cursor = self.conn.cursor()
@@ -60,6 +66,8 @@ class ProductDAO:
             query = query + "AND p_qty = %s;"
         elif int == 5:
             query = query + "AND p_unit = %s;"
+        elif int == 7:
+            query = query + "AND p_id = %s;"
         else:
             query = query + "AND p_priceperunit = %s;"
         cursor.execute(query, (form,))

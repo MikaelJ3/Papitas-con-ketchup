@@ -32,6 +32,7 @@ class RequestDAO:
             result.append(row)
         return result
 
+
     def GetRequestsByPNAME(self, r_pname):
         cursor = self.conn.cursor()
         query = "select r_id, r_pname, r_qty, r_date, pin_id, pin_fname, pin_lname " \

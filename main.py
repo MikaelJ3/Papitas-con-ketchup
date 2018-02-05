@@ -146,7 +146,7 @@ def get_all_admin():
         else:
             return peopleHandler().searchADMINByRequests(request.args)
 
-
+# https://ayudapaljibaro.herokuapp.com/admins/6
 @app.route('/admins/<int:ad_id>', methods=['PUT', 'GET'])
 def get_specific_admin(ad_id):
     if request.method == 'GET':
@@ -157,13 +157,15 @@ def get_specific_admin(ad_id):
         return jsonify(Error="Method not allowed."), 405
 
 ########################## U S E R S ######################
+# https://ayudapaljibaro.herokuapp.com/users
 @app.route('/users')
 def get_all_users():
     return peopleHandler().getAllUsers()
 
 
 # # #  P E O P L E  I N  N E E D  # # #
-
+# https://ayudapaljibaro.herokuapp.com/pin
+# https://ayudapaljibaro.herokuapp.com/pin?pin_id=4
 @app.route('/pin', methods=['GET', 'POST'])
 def getAllpin():
     if request.method == 'POST':
@@ -174,6 +176,7 @@ def getAllpin():
         else:
             return peopleHandler().searchPINByRequests(request.args)
 
+#https://ayudapaljibaro.herokuapp.com/pin/8
 @app.route('/pin/<int:pin_id>', methods=['PUT', 'GET'])
 def get_specific_pin(pin_id):
     if request.method == 'GET':
@@ -185,6 +188,8 @@ def get_specific_pin(pin_id):
 
 
 # # #  S U P P L I E R  # # #
+# https://ayudapaljibaro.herokuapp.com/supplier
+# https://ayudapaljibaro.herokuapp.com/supplier?s_id=5
 @app.route('/supplier', methods=['GET', 'POST'])
 def getAllSUP():
     if request.method == 'POST':
@@ -195,6 +200,7 @@ def getAllSUP():
         else:
             return peopleHandler().searchSUPByRequests(request.args)
 
+#https://ayudapaljibaro.herokuapp.com/supplier/5
 @app.route('/supplier/<int:s_id>', methods=['PUT', 'GET'])
 def get_specific_sup(s_id):
     if request.method == 'GET':
@@ -206,7 +212,8 @@ def get_specific_sup(s_id):
 
 
 # # #  R E Q U E S T S # # #
-
+# https://ayudapaljibaro.herokuapp.com/request
+# https://ayudapaljibaro.herokuapp.com/request?r_id=1
 @app.route('/request', methods=['GET', 'POST'])
 def getAllRequest():
     if request.method == 'POST':
@@ -217,7 +224,7 @@ def getAllRequest():
         else:
             return RequestHandler().searchProductByRequests(request.args)
 
-
+# https://ayudapaljibaro.herokuapp.com/request/change/25
 @app.route('/request/change/<int:r_id>', methods=['PUT', 'DELETE'])
 def requestChange(r_id):
     if request.method == 'PUT':
@@ -226,6 +233,7 @@ def requestChange(r_id):
         return jsonify(Error="Method not allowed."), 405
 
 ################ BANK INFO ################
+#https://ayudapaljibaro.herokuapp.com/supplier/bankinfo
 
 @app.route('/supplier/bankinfo', methods=['GET', 'PUT', 'POST'])
 def get_all_bank_info():
@@ -255,16 +263,20 @@ def view_creditcard_by_pin(pin_id):
         return peopleHandler().insert_creditcard(request.form)
 
 ################# USER ACCOUNT #################
-
+#https://ayudapaljibaro.herokuapp.com/accounts
 @app.route('/accounts')
 def get_account_by_username():
     return peopleHandler().get_all_accounts()
 
-
+#https://ayudapaljibaro.herokuapp.com/account/2
 @app.route('/account/<int:a_id>')
 def search_account_by_username(a_id):
     return peopleHandler().search_account_by_a_id(a_id)
 
+############# CATEGORIES ###########################
+@app.route('/categories')
+def get_categories():
+    return producthandler().get_categories()
 
 if __name__ == '__main__':
     app.run()
