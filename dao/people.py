@@ -899,3 +899,10 @@ class peopledao:
         for row in cursor:
             result.append(row)
         return result
+
+    def get_address_by_pin(self, pin):
+        cursor = self.conn.cursor()
+        query = "select pinaddress_id from pin where pin_id = %s;"
+        cursor.execute(query, (pin,))
+        address_id = cursor.fetchone()[0]
+        return address_id
