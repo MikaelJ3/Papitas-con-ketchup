@@ -1,6 +1,5 @@
 from flask import jsonify
 from dao.request import RequestDAO
-from dao.product import ProductDAO
 
 class RequestHandler:
     def build_request_dict(self, row):
@@ -100,22 +99,4 @@ class RequestHandler:
                     return jsonify(UpdatedRequest=result), 200
                 else:
                     return jsonify(Error="Unexpected attributes in update request"), 400
-    ##### U N U S E D  O R  O B S O L E T E ####
 
-#    def browseResourcesRequested(self):
-#        dao = RequestDAO()
-#        request_list = dao.browseResourcesRequested()
-#        result_list = []
-#        for row in request_list:
-#            result = self.build_request_dict(row)
-#            result_list.append(result)
-#        return jsonify(Request=result_list)
-
-#    def browseResourcesAvailable(self):
-#        dao = RequestDAO()
-#        request_list = dao.browseResourcesAvailable()
-#        result_list = []
-#        for row in request_list:
-#            result = self.build_request_dict(row)
-#            result_list.append(result)
-#        return jsonify(Request=result_list)

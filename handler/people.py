@@ -1,8 +1,60 @@
 from flask import jsonify
 from dao.people import peopledao
+from dao.product import ProductDAO
 
 
 class peopleHandler:
+
+    def build_bankinfo_dict(self, row):
+        result = {}
+        result['ba_id'] = row[0]
+        result['s_id'] = row[1]
+        result['ba_accnumber '] = row[2]
+        result['ba_routingnumber '] = row[3]
+        return result
+
+    def build_bankinfo_attributes(self, a, b, c, d):
+        result = {}
+        result['ba_id'] = a
+        result['s_id'] = b
+        result['ba_accnumber '] = c
+        result['ba_routingnumber '] = d
+        return result
+
+    def build_creditcard_dict(self, row):
+        result = {}
+        result['c_id'] = row[0]
+        result['c_cardtype '] = row[1]
+        result['c_cardnumber '] = row[2]
+        result['c_cardname '] = row[3]
+        result['pin_id '] = row[4]
+        result['addressid '] = row[5]
+        return result
+
+    def build_creditcard_attributes(self, a, b, c, d, e, f):
+        result = {}
+        result['c_id'] = a
+        result['c_cardtype '] = b
+        result['c_cardnumber '] = c
+        result['c_cardname '] = d
+        result['pin_id '] = e
+        result['addressid '] = f
+        return result
+
+    def build_account_dict(self, row):
+        result = {}
+        result['a_id'] = row[0]
+        result['a_username  '] = row[1]
+        result['a_password  '] = row[2]
+        return result
+
+    def build_user_dict(self, row):
+        result = {}
+        result['a_id'] = row[0]
+        result['a_username'] = row[1]
+        result['a_password'] = row[2]
+        return result
+
     def build_admin_dict(self, row):
         result = {}
         result['ad_id'] = row[0]
@@ -38,8 +90,8 @@ class peopleHandler:
         result['district'] = district
         return result
 
-
-    def build_adminINS_dict(self, ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city, zipcode, country, district):
+    def build_adminINS_dict(self, ad_id, ad_fname, ad_lname, ada_id, adaddress_id, ad_phone, addressline1, city,
+                            zipcode, country, district):
         result = {}
         result['ad_id'] = ad_id
         result['ad_fname'] = ad_fname
@@ -79,7 +131,8 @@ class peopleHandler:
         result['pin_phone'] = row[5]
         return result
 
-    def build_pinINS_dict(self, pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city, zipcode, country, district):
+    def build_pinINS_dict(self, pin_id, pin_fname, pin_lname, pina_id, pinaddress_id, pin_phone, addressline1, city,
+                          zipcode, country, district):
         result = {}
         result['pin_id'] = pin_id
         result['pin_fname'] = pin_fname
@@ -119,7 +172,8 @@ class peopleHandler:
         result['s_phone'] = row[5]
         return result
 
-    def build_supplierINS_dict(self, s_id, s_fname, s_lname, sa_id, adressid, s_phone, addressline1, city, zipcode, country, district):
+    def build_supplierINS_dict(self, s_id, s_fname, s_lname, sa_id, adressid, s_phone, addressline1, city, zipcode,
+                               country, district):
         result = {}
         result['s_id'] = s_id
         result['s_fname'] = s_fname
@@ -174,6 +228,25 @@ class peopleHandler:
         result[input] = row[10]
         return result
 
+    def build_order_dict(self, row):
+        result = {}
+        result['o_id'] = row[0]
+        result['od_id'] = row[1]
+        result['od_qty'] = row[2]
+        result['od_pprice'] = row[3]
+        result['s_id'] = row[4]
+        result['ba_id'] = row[5]
+        result['p_id'] = row[6]
+        result['p_name'] = row[7]
+        result['pin_id'] = row[8]
+        result['pin_fname'] = row[9]
+        result['pin_lname'] = row[10]
+        result['c_id'] = row[11]
+        result['o_date'] = row[12]
+        result['s_fname'] = row[13]
+        result['s_lname'] = row[14]
+        return result
+
     def build_orderinfo_dict(self, row):
         result = {}
         result['o_id'] = row[0]
@@ -191,51 +264,27 @@ class peopleHandler:
         result['o_date'] = row[12]
         return result
 
-
-
-    '''return everyone registered as person in need'''
-
-    def getAllPeopleInNeed(self):
-        dao = peopledao()
-        pin_list = dao.getAllPeopleInNeed()
-        result_list = []
-        for row in pin_list:
-            result = self.build_pin_dict(row)
-            result_list.append(result)
-        return jsonify(PeopleInNeed=result_list)
-
-    '''return everyone registered as supplier'''
-
-    def getAllSuppliers(self):
-        dao = peopledao()
-        suppliers_list = dao.getAllSuppliers()
-        result_list = []
-        for row in suppliers_list:
-            result = self.build_supplier_dict(row)
-            result_list.append(result)
-        return jsonify(Suppliers=result_list)
-
-    '''return everyone registered as administrator'''
-
-    def getAllAdminstrators(self):
-        dao = peopledao()
-        suppliers_list = dao.getAllAdmin()
-        result_list = []
-        for row in suppliers_list:
-            result = self.build_admin_dict(row)
-            result_list.append(result)
-        return jsonify(Admins=result_list)
-
-    '''Get All Orders'''
-
-    def getAllOrders(self):
-        dao = peopledao()
-        orders_list = dao.getAllOrders()
-        result_list = []
-        for row in orders_list:
-            result = self.build_orderinfo_dict(row)
-            result_list.append(result)
-        return jsonify(Orders=result_list)
+    # def getAllPeopleInNeed(self):
+    #     dao = peopledao()
+    #     pin_list = dao.getAllPeopleInNeed()
+    #     result_list = []
+    #     for row in pin_list:
+    #         result = self.build_pin_dict(row)
+    #         result_list.append(result)
+    #     return jsonify(PeopleInNeed=result_list)
+    #
+    # '''return everyone registered as administrator'''
+    #
+    # def getAllAdmin(self):
+    #     dao = peopledao()
+    #     suppliers_list = dao.getAllAdmin()
+    #     result_list = []
+    #     for row in suppliers_list:
+    #         result = self.build_admin_dict(row)
+    #         result_list.append(result)
+    #     return jsonify(Admins=result_list)
+    #
+    # '''Get All Orders'''
 
     '''encontrar productos por supplidor '''
 
@@ -259,16 +308,13 @@ class peopleHandler:
             result_list.append(result)
         return jsonify(ProductsBySupplier=result_list)
 
-   #####################################################################################################################
+    #####################GET SUPPLIER BY PRODUCT######################################################################################
     def getSupplierByProduct(self, args):
-        p_id = args.get("p_id")
-        p_name = args.get("p_name")
+        p_id = args
         dao = peopledao()
         product_list = []
-        if (len(args) == 1) and p_id:
-            product_list = dao.getSupplierByProductId(p_id)
-        elif (len(args) == 1) and p_name:
-            product_list = dao.getSupplierByProductName(p_name)
+        if p_id:
+            product_list = dao.getSupplierByProductId(args)
         else:
             return jsonify(error="malformed query string"), 400
         result_list = []
@@ -276,8 +322,8 @@ class peopleHandler:
             result = self.build_supplier_dict(row)
             result_list.append(result)
         return jsonify(SupplierByProduct=result_list)
+
     #####################################################################################################################
-    '''Encontrar las ordenes de una persona'''
 
     def getOrdersByPersonInNeed(self, args):
         pin_id = args.get("pin_id")
@@ -342,11 +388,11 @@ class peopleHandler:
         for row in product_list:
             result = self.build_new_product_declared(row, 'city')
             result_list.append(result)
-        return jsonify(Product=result_list)
+        return jsonify(ProductByCity=result_list)
 
     def get_all_products_by_zipcode(self, args):
         dao = peopledao()
-        zipcode= args.get('zipcode')
+        zipcode = args.get('zipcode')
         if not zipcode:
             product_list = dao.get_all_products_by_zipcode()
         else:
@@ -355,7 +401,7 @@ class peopleHandler:
         for row in product_list:
             result = self.build_new_product_declared(row, 'zipcode')
             result_list.append(result)
-        return jsonify(Product=result_list)
+        return jsonify(ProductByZipcode=result_list)
 
     def get_all_products_by_country(self, args):
         dao = peopledao()
@@ -368,7 +414,70 @@ class peopleHandler:
         for row in product_list:
             result = self.build_new_product_declared(row, 'country')
             result_list.append(result)
-        return jsonify(Product=result_list)
+        return jsonify(ProductByCountry=result_list)
+
+    def get_all_products_by_district(self, args):
+        dao = peopledao()
+        district = args.get('district')
+        if not district:
+            product_list = dao.get_all_products_by_district()
+        else:
+            product_list = dao.get_all_products_by_district_declared(district)
+        result_list = []
+        for row in product_list:
+            result = self.build_new_product_declared(row, 'district')
+            result_list.append(result)
+        return jsonify(ProductByDistrict=result_list)
+
+    def get_all_orders(self):
+        dao = peopledao()
+        orders_list = dao.getAllOrders()
+        result_list = []
+        for row in orders_list:
+            result = self.build_order_dict(row)
+            result_list.append(result)
+        return jsonify(Orders=result_list)
+
+    def search_orders(self, args):
+        dao = peopledao()
+        o_id = args.get("o_id")
+        c_id = args.get("c_id")
+        o_date = args.get("o_date")
+        od_qty = args.get("od_qty")
+        od_id = args.get("od_id")
+        od_pprice = args.get("od_pprice")
+        s_id = args.get("s_id")
+        ba_id = args.get("ba_id")
+        p_id = args.get("p_id")
+        pin_id = args.get("pin_id")
+        orders_list = []
+        if len(args) == 1 and o_id:
+            orders_list = dao.filter_orders(o_id, 1)
+        elif len(args) == 1 and o_date:
+            orders_list = dao.filter_orders(o_date, 2)
+        elif len(args) == 1 and c_id:
+            orders_list = dao.filter_orders(c_id, 3)
+        elif len(args) == 1 and od_qty:
+            orders_list = dao.filter_orders(od_qty, 4)
+        elif len(args) == 1 and od_id:
+            orders_list = dao.filter_orders(od_id, 5)
+        elif len(args) == 1 and od_pprice:
+            orders_list = dao.filter_orders(od_pprice, 6)
+        elif len(args) == 1 and s_id:
+            orders_list = dao.filter_orders(s_id, 7)
+        elif len(args) == 1 and ba_id:
+            orders_list = dao.filter_orders(ba_id, 8)
+        elif len(args) == 1 and p_id:
+            orders_list = dao.filter_orders(p_id, 9)
+        elif len(args) == 1 and pin_id:
+            orders_list = dao.filter_orders(pin_id, 10)
+        else:
+            return jsonify(Error="Malformed query string")
+        result_list = []
+        for row in orders_list:
+            result = self.build_order_dict(row)
+            result_list.append(result)
+        return jsonify(Orders=result_list)
 
     #############################ADDRESS ###############################################################################
     def getAllAddress(self):
@@ -389,24 +498,6 @@ class peopleHandler:
             result = self.build_address_dict(row)
             result_list.append(result)
         return jsonify(AdressByID=address_list)
-
-    # def insert_address(self, form):
-    #     if len(form) != 5:
-    #         return jsonify(Error="Malformed post request"), 400
-    #     else:
-    #         addressline1 = form['addressline1']
-    #         city = form['city']
-    #         zipcode = form['zipcode']
-    #         country = form['country']
-    #         district = form['district']
-    #         if addressline1 and city and zipcode and country and district:
-    #             dao = peopledao()
-    #             address_id = dao.insert_new_address(addressline1, city, zipcode, country, district)
-    #             result = self.build_addressSOLO_dict(address_id, addressline1, city, zipcode, country, district)
-    #             return jsonify(NewAddress=result), 201
-    #         else:
-    #             return jsonify(Error="Unexpected attributes in post request"), 400
-
 
     def updateAddresses(self, addresses_id, form):
         dao = peopledao()
@@ -430,7 +521,6 @@ class peopleHandler:
                     return jsonify(Error="Unexpected attributes in update request"), 400
 
     ########## A D M I N ###############################################################################################
-
 
     def insert_admin(self, form):
         if len(form) != 10:
@@ -467,7 +557,147 @@ class peopleHandler:
             result_list.append(result)
         return jsonify(Admins=result_list)
 
-    ##SEARCH ADMIN BY REQUESTS##
+
+    def getAllUsers(self):
+        dao = peopledao()
+        user_list = dao.getAllUsers()
+        result_list = []
+        for row in user_list:
+            result = self.build_user_dict(row)
+            result_list.append(result)
+        return jsonify(Users=result_list)
+
+
+    def get_bankinfo_by_SID(self, s_id):
+        dao = peopledao()
+        row = dao.get_bankaccount_by_s_id(s_id)
+        if not row:
+            return jsonify(Error="Bank Info Not Found"), 404
+        else:
+            result = self.build_bankinfo_dict(row)
+            return jsonify(Bank_info_by_SID=result)
+
+
+    def view_creditcard_by_PIN(self, pin_id):
+        dao = peopledao()
+        row = dao.view_creditcard_by_PIN(pin_id)
+        if not row:
+            return jsonify(Error="Bank Info Not Found"), 404
+        else:
+            result = self.build_creditcard_dict(row)
+            return jsonify(Bank_info_by_SID=result)
+
+
+    def search_account_by_a_id(self, a_id):
+        dao = peopledao()
+        row = dao.search_account_by_a_id(a_id)
+        if not row:
+            return jsonify(Error="Account Not Found"), 404
+        else:
+            result = self.build_account_dict(row)
+            return jsonify(Account_By_a_id=result)
+
+
+    def get_all_accounts(self):
+        dao = peopledao()
+        accounts_list = dao.get_all_accounts()
+        result_list = []
+        for row in accounts_list:
+            result = self.build_user_dict(row)
+            result_list.append(result)
+        return jsonify(Accounts=result_list)
+
+
+    def get_all_bank_info(self):
+        dao = peopledao()
+        ba_list = dao.get_all_bank_info()
+        result_list = []
+        for row in ba_list:
+            result = self.build_bankinfo_dict(row)
+            result_list.append(result)
+        return jsonify(Accounts=result_list)
+
+
+    def insert_bankinfo(self, form):
+        if len(form) != 3:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            s_id = form['s_id']
+            ba_accnumber = form['ba_accnumber']
+            ba_routingnumber = form['ba_routingnumber']
+
+            if s_id and ba_accnumber and ba_accnumber:
+                dao = peopledao()
+                ba_id = dao.insert_bankinfo(s_id, ba_accnumber, ba_routingnumber)
+                result = self.build_bankinfo_attributes(ba_id, s_id, ba_accnumber, ba_routingnumber)
+                return jsonify(New_Bank_info=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
+    def insert_creditcard(self, form):
+        if len(form) != 6:
+            return jsonify(Error="Malformed post request"), 400
+        else:
+            s_id = form['s_id']
+            c_cardtype = form['c_cardtype']
+            c_cardnumber = form['c_cardnumber']
+            c_cardname = form['c_cardname']
+            pin_id = form['pin_id']
+            addressid = form['addressid']
+            if s_id and c_cardtype and c_cardnumber and c_cardname and pin_id and addressid:
+                dao = peopledao()
+                c_id = dao.insert_creditcard(s_id, c_cardtype, c_cardnumber, c_cardname, pin_id, addressid)
+                result = self.build_creditcard_attributes(c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, addressid)
+                return jsonify(New_CreditCard=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+
+    def update_creditcard(self, c_id, form):
+        dao = peopledao()
+        if not dao.get_creditcard(c_id):
+            return jsonify(Error="Credit Card not found."), 404
+        else:
+            if len(form) != 6:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                s_id = form['s_id']
+                c_cardtype = form['c_cardtype']
+                c_cardnumber = form['c_cardnumber']
+                c_cardname = form['c_cardname']
+                pin_id = form['pin_id']
+                addressid = form['addressid']
+                if s_id and c_cardtype and c_cardnumber and c_cardname and pin_id and addressid:
+                    dao.update_creditcard(c_id, s_id, c_cardtype, c_cardnumber, c_cardname, pin_id, addressid)
+                    result = self.build_creditcard_attributes(c_id, c_cardtype, c_cardnumber, c_cardname, pin_id,
+                                                              addressid)
+                    return jsonify(Updated_CreditCard=result), 201
+                else:
+                    return jsonify(Error="Unexpected attributes in post request"), 400
+
+
+    def update_bankinfo(self, s_id, form):
+        dao = peopledao()
+        ba_id = dao.check_bankinfo(s_id)
+        if not ba_id:
+            return jsonify(Error="CBank Info not found."), 404
+        else:
+            if len(form) != 2:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                ba_accnumber = form['ba_accnumber']
+                ba_routingnumber = form['ba_routingnumber']
+                if s_id and ba_accnumber and ba_accnumber:
+                    dao.update_bankinfo(ba_id, s_id, ba_accnumber, ba_routingnumber)
+                    result = self.build_bankinfo_attributes(ba_id, s_id, ba_accnumber, ba_routingnumber)
+                    return jsonify(New_CreditCard=result), 201
+                else:
+                    return jsonify(Error="Unexpected attributes in post request"), 400
+
+                    ##SEARCH ADMIN BY REQUESTS##
+
+
     def searchADMINByRequests(self, args):
         ad_id = args.get("ad_id")
         ad_fname = args.get("ad_fname")
@@ -503,11 +733,13 @@ class peopleHandler:
 
         return jsonify(Request=result_list)
 
+
     def get_specific_admin(self, ad_id):
         dao = peopledao()
         aid = dao.get_admin(ad_id)
         result_list = self.build_admin_dict(aid)
         return jsonify(admin=result_list)
+
 
     def update_admin(self, ad_id, form):
         dao = peopledao()
@@ -529,7 +761,8 @@ class peopleHandler:
             else:
                 return jsonify(Error="Unexpected attributes in update request"), 400
 
-    ####### P E O P L E  I N  N E E D ##################################################################################
+        ####### P E O P L E  I N  N E E D ##################################################################################
+
 
     def insert_pin(self, form):
         if len(form) != 10:
@@ -557,6 +790,7 @@ class peopleHandler:
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
 
+
     def getAllpin(self):
         dao = peopledao()
         pin_list = dao.getAllpin()
@@ -566,7 +800,9 @@ class peopleHandler:
             result_list.append(result)
         return jsonify(PIN=result_list)
 
-    ##SEARCH PIN BY REQUESTS##
+        ##SEARCH PIN BY REQUESTS##
+
+
     def searchPINByRequests(self, args):
         pin_id = args.get("pin_id")
         pin_fname = args.get("pin_fname")
@@ -602,11 +838,14 @@ class peopleHandler:
 
         return jsonify(Request=result_list)
 
+
     def get_specific_pin(self, pin_id):
         dao = peopledao()
+        result_list = []
         pin = dao.get_pin(pin_id)
         result_list = self.build_pin_dict(pin)
         return jsonify(PIN=result_list)
+
 
     def update_pin(self, pin_id, form):
         dao = peopledao()
@@ -628,8 +867,8 @@ class peopleHandler:
             else:
                 return jsonify(Error="Unexpected attributes in update request"), 400
 
-    ####################################################################################################################
-    ####### S U P P L I E R ############################################################################################
+        ####################################################################################################################
+        ####### S U P P L I E R ############################################################################################
 
 
     def get_specific_sup(self, s_id):
@@ -638,9 +877,10 @@ class peopleHandler:
         result_list = self.build_supplier_dict(result)
         return jsonify(SUP=result_list)
 
+
     def update_supplier(self, s_id, form):
         dao = peopledao()
-        if not dao.getSupplierById(s_id):
+        if not dao.get_sup(s_id):
             return jsonify(Error="Supplier not found"), 404
         else:
             if len(form) != 3:
@@ -656,7 +896,6 @@ class peopleHandler:
                     return jsonify(Updated_Supplier=result), 201
                 else:
                     return jsonify(Error="Unexpected attributes in post request"), 400
-
 
 
     def insert_sup(self, form):
@@ -680,7 +919,7 @@ class peopleHandler:
                 sa_id = dao.insert_new_user(a_username, a_password)
                 s_id = dao.insert_new_sup(s_fname, s_lname, sa_id, saddress_id, s_phone)
                 result = self.build_supplierINS_dict(s_id, s_fname, s_lname, sa_id, saddress_id, s_phone,
-                                                  addressline1, city, zipcode, country, district)
+                                                     addressline1, city, zipcode, country, district)
                 return jsonify(NewSupplier=result), 201
             else:
                 return jsonify(Error="Unexpected attributes in post request"), 400
@@ -695,7 +934,9 @@ class peopleHandler:
             result_list.append(result)
         return jsonify(PIN=result_list)
 
-    ##SEARCH SUP BY REQUESTS##
+        ##SEARCH SUP BY REQUESTS##
+
+
     def searchSUPByRequests(self, args):
         s_id = args.get("s_id")
         s_fname = args.get("s_fname")
