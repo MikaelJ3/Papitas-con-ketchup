@@ -848,8 +848,7 @@ class peopledao:
 
     def insert_creditcard(self, c_cardtype, c_cardname, pin_id, address_id, c_cardnumber):
         cursor = self.conn.cursor()
-        query = "insert into creditcard(c_cardtype, c_cardname, pin_id, address_id, c_cardnumber) values " \
-                "(%s, %s, %s, %s, %s) returning c_id;"
+        query = "insert into creditcard(c_cardtype, c_cardname, pin_id, address_id, c_cardnumber) values (%s, %s, %s, %s, %s) returning c_id;"
         cursor.execute(query, (c_cardtype, c_cardname, pin_id, address_id, c_cardnumber,))
         c_id = cursor.fetchone()[0]
         self.conn.commit()
