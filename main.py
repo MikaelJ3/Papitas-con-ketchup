@@ -254,8 +254,8 @@ def view_bankinfo_by_sid(s_id):
 
 ################## CREDIT CARD ############
 
-@app.route('/supplier/bankinfo', methods=['GET','POST'])
-def view_creditcard_by_pin():
+@app.route('/supplier/creditcard', methods=['GET','POST'])
+def view_creditcard():
     if request.method == 'GET':
         return peopleHandler().view_creditcard()
     elif request.method == 'POST':
