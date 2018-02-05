@@ -531,12 +531,13 @@ class peopleHandler:
 
     def get_bankinfo_by_SID(self, s_id):
         dao = peopledao()
-        row = dao.get_bankaccount_by_s_id(s_id)
-        if not row:
-            return jsonify(Error="Bank Info Not Found"), 404
-        else:
-            result = self.build_bankinfo_attributes(row)
-            return jsonify(Bank_info_by_SID=result)
+        ba_list = dao.get_bankaccount_by_s_id(s_id)
+        result_list = []
+        for row in ba_list:
+            result = self.build_bankinfo_dict(row)
+            result_list.append(result)
+        return jsonify(BANKINFO=result_list)
+
 
 
     def view_creditcard_by_PIN(self, pin_id):
