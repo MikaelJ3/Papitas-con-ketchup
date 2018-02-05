@@ -10,6 +10,7 @@ class peopledao:
                                                                     pg_config['user'],
                                                                     pg_config['passwd'])
         self.conn = psycopg2._connect(connection_url)
+
     def filter_orders(self, args, int):
         cursor = self.conn.cursor()
         query = "select o_id, od_id, od_qty, od_pprice, s_id, ba_id, p_id, p_name, pin_id, pin_fname, pin_lname, c_id, o_date, s_fname, s_lname " \
@@ -747,7 +748,6 @@ class peopledao:
         self.conn.commit()
         return s_id
 
-
     def view_bankinfo_by_SID(self, s_id):
         cursor = self.conn.cursor()
         query = "select * from bankinfo where s_id = %s;"
@@ -756,7 +756,6 @@ class peopledao:
         for row in cursor:
             result.append(row)
         return result
-
 
     def get_all_bank_info(self):
         cursor = self.conn.cursor()
@@ -767,14 +766,12 @@ class peopledao:
             result.append(row)
         return result
 
-
     def update_bankinfo(self, ba_id, s_id, ba_accnumber, ba_routingnumber):
         cursor = self.conn.cursor()
         query = "update bankinfo set s_id = %s, ba_accnumber = %s, ba_rountingnumber = %s where ba_id = %s;"
         cursor.execute(query, (s_id, ba_accnumber, ba_routingnumber, ba_id,))
         self.conn.commit()
         return ba_id
-
 
     def insert_bankinfo(self, s_id, ba_accnumber, ba_routingnumber):
         cursor = self.conn.cursor()
@@ -783,7 +780,6 @@ class peopledao:
         ba_id = cursor.fetchone()[0]
         self.conn.commit()
         return ba_id
-
 
     def view_creditcard_by_PIN(self, pin_id):
         cursor = self.conn.cursor()
@@ -803,8 +799,6 @@ class peopledao:
             result.append(row)
         return result
 
-
-
     def get_bankaccount_by_s_id(self, s_id):
         cursor = self.conn.cursor()
         query = "select * from bankinfo where s_id = %s;"
@@ -814,14 +808,12 @@ class peopledao:
             result.append(row)
         return result
 
-
     def search_account_by_a_id(self, a_id):
         cursor = self.conn.cursor()
         query = "select * from account where a_id = %s;"
         cursor.execute(query, (a_id,))
         result = cursor.fetchone()
         return result
-
 
     def get_creditcard(self, c_id):
         cursor = self.conn.cursor()
@@ -830,14 +822,12 @@ class peopledao:
         result = cursor.fetchone()
         return result
 
-
     def check_bankinfo(self, s_id):
         cursor = self.conn.cursor()
         query = "select ba_id from bankinfo where s_id = %s;"
         cursor.execute(query, (s_id,))
         result = cursor.fetchone()[0]
         return result
-
 
     def get_all_accounts(self):
         cursor = self.conn.cursor()
@@ -848,7 +838,6 @@ class peopledao:
             result.append(row)
         return result
 
-
     def update_creditcard(self, c_id, c_cardtype, c_cardnumber, c_cardname, pin_id, address_id):
         cursor = self.conn.cursor()
         query = "update creditcard set c_cardtype = %s, c_cardnumber = %s, c_cardname = %s, pin_id = %s, " \
@@ -856,7 +845,6 @@ class peopledao:
         cursor.execute(query, (c_cardtype, c_cardnumber, c_cardname, pin_id, address_id, c_id,))
         self.conn.commit()
         return c_id
-
 
     def insert_creditcard(self, c_cardtype, c_cardname, pin_id, address_id, c_cardnumber):
         cursor = self.conn.cursor()
