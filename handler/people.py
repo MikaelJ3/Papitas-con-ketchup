@@ -606,11 +606,12 @@ class peopleHandler:
 
 
 
-    def insert_creditcard(self, pin_id, form):
-        dao = peopledao
+    def insert_creditcard(self, form):
+
         if len(form) != 5:
             return jsonify(Error="Malformed post request"), 400
         else:
+            dao = peopledao
             pin_id = form['pin_id']
             c_cardtype = form['c_cardtype']
             c_cardnumber = form['c_cardnumber']
@@ -633,7 +634,7 @@ class peopleHandler:
         if not dao.get_creditcard(c_id):
             return jsonify(Error="Credit Card not found."), 404
         else:
-            if len(form) != 4:
+            if len(form) != 5:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 c_cardtype = form['c_cardtype']
